@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Views.Adherent"
+             Title="Adhérents">
+
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.2" />
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*,Auto">
+                <!-- En-tête -->
+                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Gestion des Adhérents"
+                               Style="{StaticResource HeaderLabel}" />
+                        <Label Text="Suivez vos membres et leurs emprunts"
+                               Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Recherche -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
+                    <Border Stroke="{StaticResource PrimaryBlue}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 24"
+                            BackgroundColor="White"
+                            HeightRequest="50"
+                            WidthRequest="600"
+                            HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry Placeholder="Rechercher par nom ou email..."
+                                   Style="{StaticResource TextZone}" />
+                            <Button Style="{StaticResource SearchIconButton}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Color="White"
+                                                     Size="22" />
+                                </Button.ImageSource>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- Liste des adhérents -->
+                <CollectionView Grid.Row="2"
+                                ItemsSource="{Binding Adherents}"
+                                Margin="20,0">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="2*,2*,2*,1.5*,1*"
+                              Style="{StaticResource TabHead}">
+                            <Label Text="Nom" Style="{StaticResource TableHeader}" />
+                            <Label Text="Prenom" Style="{StaticResource TableHeader}" Grid.Column="1"  />
+                            <Label Text="Email" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                            <Label Text="N° Carte" Style="{StaticResource TableHeader}" Grid.Column="3" />
+                            <Label Text="Amendes" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TabContent}">
+                                <Grid ColumnDefinitions="2*,2*,2*,1.5*,1*" ColumnSpacing="10" Padding="12">
+                                    <Label Text="{Binding Nom}" Style="{StaticResource TableRowData}" />
+                                    <Label Text="{Binding Prenom}" Style="{StaticResource TableRowData}" Grid.Column="1" />
+                                    <Label Text="{Binding Email}" Style="{StaticResource TableRowData}" Grid.Column="2" />
+                                    <Label Text="{Binding NumeroCarte}" Style="{StaticResource TableRowData}" Grid.Column="3" />
+                                    <Label Text="{Binding SoldeAmendes, StringFormat='{}{0:F2} $CAD'}"
+                                           Style="{StaticResource TableRowData}"
+                                           Grid.Column="4"
+                                           HorizontalTextAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Formulaire -->
+                <Border x:Name="FormulaireAdherent"
+                        Grid.Row="3"
+                        IsVisible="False"
+                        StrokeShape="RoundRectangle 20"
+                        BackgroundColor="White"
+                        Padding="20"
+                        Margin="30,15"
+                        Stroke="{StaticResource Gray300}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Ajouter / Modifier un adhérent"
+                               FontFamily="PlaypenSansSemiBold"
+                               FontSize="16"
+                               TextColor="{StaticResource PrimaryBlue}" />
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
+                            <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                <Label Text="Nom *" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtNomAdherent" Style="{StaticResource FormEntry}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                <Label Text="Prenom *" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtPrenomAdherent" Style="{StaticResource FormEntry}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5" Grid.Column="2">
+                                <Label Text="Email *" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtEmailAdherent" Style="{StaticResource FormEntry}" Keyboard="Email" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                            <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                <Label Text="N° Carte *" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtNumeroCarte" Style="{StaticResource FormEntry}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                <Label Text="Solde amendes ($)" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtSoldeAmendes" Style="{StaticResource FormEntry}" Keyboard="Numeric" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
+                            <Button Text="Enregistrer"
+                                    Style="{StaticResource PrimaryButton}" />
+                            <Button Text="Annuler"
+                                    Style="{StaticResource SecondaryButton}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </ScrollView>
+
+        <!-- Bouton flottant -->
+        <Button Text="+"
+                Clicked="OnFloatingAddAdherentClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
+    </Grid>
+</ContentPage>

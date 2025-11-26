@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Views.Categorie"
+             Title="Catégories">
+
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.2" />
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*">
+                <!-- En-tête -->
+                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Gestion des Catégories"
+                               Style="{StaticResource HeaderLabel}" />
+                        <Label Text="Organisez vos livres par catégories"
+                               Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Recherche -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
+                    <Border Stroke="{StaticResource PrimaryBlue}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 24"
+                            BackgroundColor="White"
+                            HeightRequest="50"
+                            WidthRequest="600"
+                            HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry Placeholder="Rechercher une catégorie..."
+                                   Style="{StaticResource TextZone}" />
+                            <Button Style="{StaticResource SearchIconButton}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Color="White"
+                                                     Size="22" />
+                                </Button.ImageSource>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- Grille de cartes de catégories -->
+                <FlexLayout Grid.Row="2"
+                            Wrap="Wrap"
+                            JustifyContent="SpaceAround"
+                            AlignItems="Stretch"
+                            Margin="20,20"
+                            BindableLayout.ItemsSource="{Binding Categories}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeShape="RoundRectangle 20"
+                                    BackgroundColor="White"
+                                    Stroke="{StaticResource Gray200}"
+                                    Padding="20"
+                                    Margin="0,0,0,20"
+                                    HeightRequest="140"
+                                    WidthRequest="160">
+                                <VerticalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <!-- Icône (optionnelle) -->
+                                    <Label Text="📚"
+                                           FontSize="32"
+                                           HorizontalOptions="Center" />
+                                    <!-- Nom de la catégorie -->
+                                    <Label Text="{Binding Nom}"
+                                           FontFamily="PlaypenSansSemiBold"
+                                           FontSize="16"
+                                           TextColor="{StaticResource PrimaryTextColor}"
+                                           HorizontalOptions="Center"
+                                           LineBreakMode="WordWrap" />
+                                    <!-- Nombre de livres -->
+                                    <Label Text="{Binding NombreLivres, StringFormat='{}{0} livres'}"
+                                           FontFamily="PlaypenSansRegular"
+                                           FontSize="13"
+                                           TextColor="{StaticResource Gray600}"
+                                           HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </Grid>
+        </ScrollView>
+
+        <!-- Bouton flottant -->
+        <Button Text="+"
+                Clicked="OnFloatingAddCategorieClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.ActionPage.Retour"
+             Title="Retour">
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+       Aspect="AspectFill"
+       InputTransparent="True"
+       Opacity="0.2" />
+        <ScrollView>
+            <Grid RowDefinitions="Auto,*">
+                <!-- En-tête -->
+                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
+
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Retourner Un livre Emprunté"
+                       Style="{StaticResource HeaderLabel}" />
+                        <Label Text="Partagez la connaissance 📚"
+                       Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <Grid
+                    Grid.Row="1" 
+                    ColumnDefinitions="*,*">
+                    <Grid>
+                        <Image Source="image_emprunt.png"
+                               Aspect="AspectFill"
+                               InputTransparent="True"/>
+
+                        <StackLayout Padding="20">
+                            <Label Text="Retournez vos livres 📦" 
+                                       Style="{StaticResource HeroTitle}"/>
+                            <Label Text="Libérez des ouvrages pour d'autres lecteurs" 
+                                   Style="{StaticResource SectionLabelSubtitle}"
+                                   />
+                        </StackLayout>
+                    </Grid>
+
+                    <StackLayout 
+                     x:Name="RetourContents"
+                     IsVisible="True"
+                    Grid.Column="1"
+                    Style="{StaticResource CadreEmprunt}">
+
+                        <!-- Entrer les identifiants -->
+                        <Image 
+                            Source="return_book.png"
+                            Style="{StaticResource LogoImage}"
+                            Background="Transparent"/>
+
+                        <Label Text="Retourner Un livre Emprunté"
+                       Style="{StaticResource HeroTitle}"/>
+
+                        <!-- ID de l'abonné -->
+                        <StackLayout>
+                            <Label Text="👤 ID de l'abonné" 
+                            Style="{StaticResource SectionLabel}"/>
+                            <Entry x:Name="AbonneIdEntry" 
+                           Placeholder="Entrez l'ID de l'abonné" 
+                           Keyboard="Numeric"
+                           Style="{StaticResource ModernEntry}"/>
+                        </StackLayout>
+
+
+                        <!-- Navigation -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                            <!-- Bouton Confirmer -->
+                            <Button 
+                             Grid.Column="0"
+                            x:Name="ConfirmerButton" 
+                            Text="✅ verifier la liste des Emprunts"
+                            Style="{StaticResource GradientButtonPrimary}"
+                            Clicked="OnConfirmerClicked"/>
+
+                            <Button Grid.Column="1" 
+                                Text="🏠 Accueil" 
+                                Style="{StaticResource GradientButtonSecondary}"
+                                Clicked="OnAccueilClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+
+                <!-- Liste des emprunts de l'abonné -->
+                <Grid Grid.Row="2"
+                        x:Name="ListeEmprunts"
+                        IsVisible="False"
+                        RowDefinitions="Auto,*">
+                    <HorizontalStackLayout Grid.Row="0">
+                        <VerticalStackLayout>
+                            <Label 
+                                x:Name="NomAbonne"
+                                Text="Nom de l'Adherant : " 
+                                Style="{StaticResource SectionLabel}"/>
+                            <Label 
+                                x:Name="PrenomAbonne"
+                                Text="Prenom de l'Adherant : " 
+                                Style="{StaticResource SectionLabel}"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label 
+                                x:Name="IDAbonne"
+                                Text="👤 ID de l'abonné" 
+                                Style="{StaticResource SectionLabel}"/>
+
+                            <Label 
+                                x:Name="NbLivreEmprunter"
+                                Text="Nombre de Livre Emprunter" 
+                                Style="{StaticResource SectionLabel}"/>
+                        </VerticalStackLayout>
+
+                            
+                    </HorizontalStackLayout>
+                    <CollectionView Grid.Row="1"
+                                    ItemsSource="{Binding Adherents}"
+                                    Margin="20,0"
+                                    >
+                        <CollectionView.Header>
+                            <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*"
+                                    Style="{StaticResource TabHead}">
+                                <Label Text="Titre Du Livre" Style="{StaticResource TableHeader}" />
+                                <Label Text="Auteur" Style="{StaticResource TableHeader}" Grid.Column="1"  />
+                                <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                                <Label Text="Date de l'emprunt" Style="{StaticResource TableHeader}" Grid.Column="3" />
+                                <Label Text="Date de retour" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                                <Label Text="ID de l'emprunt" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource TabContent}">
+                                    <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*" 
+                                          ColumnSpacing="10" 
+                                          Padding="12">
+                                        <Label Text="{Binding TitreLivre}" Style="{StaticResource TableRowData}" />
+                                        <Label Text="{Binding Auteur}" Style="{StaticResource TableRowData}" Grid.Column="1" />
+                                        <Label Text="{Binding ISBN}" Style="{StaticResource TableRowData}" Grid.Column="2" />
+                                        <Label Text="{Binding DateEmprunt}" Style="{StaticResource TableRowData}" Grid.Column="3" />
+                                        <Label Text="{Binding DateRetour}" Style="{StaticResource TableRowData}" Grid.Column="4" />
+                                        <Label Text="{Binding IdEmprunt}" Style="{StaticResource TableRowData}" Grid.Column="5" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                
+            </Grid>
+        </ScrollView>
+        <!-- Bouton flottant -->
+        
+        <Button Text="+"
+                Clicked="OnFloatingAddAdherentClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:BibliothequeManager.Models"
+             x:Class="BibliothequeManager.Pages.Views.Books"
+             Title="Books">
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.2" />
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*,Auto">
+                <!-- En-tête -->
+                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Gestion Des Livres"
+                               Style="{StaticResource HeaderLabel}" />
+                        <Label Text="La connaissance s'acquiert par l'expérience..."
+                               Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Recherche -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
+                    <Border Stroke="{StaticResource PrimaryBlue}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 24"
+                            BackgroundColor="White"
+                            HeightRequest="50"
+                            WidthRequest="600"
+                            HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry Text="{Binding SearchQuery}"
+                                   Placeholder="Rechercher un livre..."
+                                   Style="{StaticResource TextZone}" />
+                            <Button Grid.Column="1" Style="{StaticResource SearchIconButton}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Color="White"
+                                                     Size="22" />
+                                </Button.ImageSource>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- Liste des livres -->
+                <CollectionView Grid.Row="2"
+                                ItemsSource="{Binding Livres}"
+                                SelectionMode="None"
+                                Margin="20,0">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*"
+                              Style="{StaticResource TabHead}">
+                            <Label Text="Titre" Style="{StaticResource TableHeader}" />
+                            <Label Text="Auteur" Style="{StaticResource TableHeader}" Grid.Column="1" />
+                            <Label Text="Catégorie" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                            <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="3" />
+                            <Label Text="Pages" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                            <Label Text="Ex. Dispo." Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TabContent}">
+                                <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*" ColumnSpacing="10">
+                                    <Label Text="{Binding Titre}" Style="{StaticResource TableRowData}" />
+                                    <Label Text="{Binding Auteur}" Style="{StaticResource TableRowData}" Grid.Column="1" />
+                                    <Label Text="{Binding Categorie}" Style="{StaticResource TableRowData}" Grid.Column="2" />
+                                    <Label Text="{Binding ISBN}" Style="{StaticResource TableRowData}" Grid.Column="3" />
+                                    <Label Text="{Binding NombrePages}" Style="{StaticResource TableRowData}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding NombreExemplaires}" Style="{StaticResource TableRowData}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Formulaire GESTION LIVRES -->
+                <Border x:Name="FormulaireLivres"
+                        Grid.Row="3"
+                        IsVisible="False"
+                        StrokeShape="RoundRectangle 20"
+                        BackgroundColor="White"
+                        Padding="20"
+                        Margin="30,15"
+                        Stroke="{StaticResource Gray300}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Gérer Les Livres"
+                               FontFamily="PlaypenSansSemiBold"
+                               FontSize="16"
+                               TextColor="{StaticResource PrimaryBlue}" />
+
+                        <Grid ColumnDefinitions="1.2*,1*,Auto,1.1*" ColumnSpacing="20">
+                            <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                <Label Text="Titre" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtTitre"
+                                       Style="{StaticResource FormEntry}" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Style="{StaticResource FormFieldStackPanel}">
+                                <Picker x:Name="PickerAuthorSelect"
+                                        Title="Sélectionner un auteur"
+                                        Style="{StaticResource FormPicker}" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2" Style="{StaticResource FormFieldStackPanel}">
+                                <Label Text="Date de publication" Style="{StaticResource FormLabel}" />
+                                <DatePicker x:Name="DatePickerPublication"
+                                            Style="{StaticResource FormDatePicker}"
+                                            Format="dd/MM/yyyy" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="3" Style="{StaticResource FormFieldStackPanel}">
+                                <Picker x:Name="PickerCathegorieSelect"
+                                        Title="Sélectionner une catégorie"
+                                        Style="{StaticResource FormPicker}" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                <Label Text="ISBN" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtISBN" Style="{StaticResource FormEntry}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                <Label Text="Pages" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtPages"
+                                       Style="{StaticResource FormEntry}"
+                                       Keyboard="Numeric" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5" Grid.Column="2">
+                                <Label Text="Exemplaires" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtExemplaires"
+                                       Style="{StaticResource FormEntry}"
+                                       Keyboard="Numeric" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
+                            <Button Text="Ajouter"
+                                    Style="{StaticResource PrimaryButton}"/>
+                            <Button Text="Modifier"
+                                    Style="{StaticResource WarningButton}" />
+                            <Button Text="Supprimer"
+                                    Style="{StaticResource DangerButton}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </ScrollView>
+
+        <!-- BOUTON FLOTTANT “+” -->
+        <Button Text="+"
+                Clicked="OnFloatingAddClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
+    </Grid>
+</ContentPage>

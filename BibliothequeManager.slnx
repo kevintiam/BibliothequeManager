@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BibliothequeManager.csproj">
+    <Deploy />
+  </Project>
+</Solution>

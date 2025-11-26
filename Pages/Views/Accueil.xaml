@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Views.Accueil"
+             Title="Accueil">
+
+    <!-- Fond d'écran -->
+    <Grid>
+        <Image Source="new_background.png"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.3" />
+
+        <!-- Contenu principal -->
+        <ScrollView>
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <!-- ========== EN-TÊTE ========== -->
+                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="👋 Bienvenue dans LibraNova"
+                               Style="{StaticResource HeaderLabel}" />
+                        <Label Text="La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information"
+                               Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <!-- ========== CARTE DE FONCTIONNALITÉS ========== -->
+                <Grid Grid.Row="1" Style="{StaticResource FeatureCard}"
+                      RowDefinitions="200,200"
+                      ColumnDefinitions="*,*,*"
+                      Padding="15">
+
+                    <!-- Ligne 1 -->
+                    <Button x:Name="EmprunterLivre" 
+                            Text="Emprunter un livre" 
+                            Style="{StaticResource FeatureCardContent}" 
+                            Grid.Row="0" Grid.Column="0"
+                            Clicked="OnEmprunterLivreClicked">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf69c;" 
+                         Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="RetournerLivre" 
+                            Text="Retourner un livre" 
+                            Style="{StaticResource FeatureCardContent}" 
+                            Clicked="OnRetournerLivreClicked"
+                            Grid.Row="0" Grid.Column="1">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf2ea;" 
+                                             Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="ReservationLivre" 
+                            Text="Réserver un livre" 
+                           Clicked="OnReserverLivreClicked"
+                            Style="{StaticResource FeatureCardContent}" 
+                            Grid.Row="0" Grid.Column="2">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf46d;" 
+                                             Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <!-- Ligne 2 -->
+                    <Button x:Name="GestionEmprunt" 
+                            Text="Gestion des emprunts"
+                            Clicked="OnGestionEmpruntsClicked"
+                            Style="{StaticResource FeatureCardContent}" 
+                            Grid.Row="1" Grid.Column="0">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf5da;" 
+                                             Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="GestionReservation" 
+                            Text="Gérer les réservations"
+                            Clicked="OnGestionReservationsClicked"
+                            Style="{StaticResource FeatureCardContent}" 
+                            Grid.Row="1" Grid.Column="1">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf274;" 
+                                             Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="GestionAbonnes" 
+                            Text="Gestion des adhérents" 
+                            Clicked="OnGestionAdherents"
+                            Style="{StaticResource FeatureCardContent}" 
+                            Grid.Row="1" Grid.Column="2">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FontAwesomeSolid" Glyph="&#xf0c0;" 
+                                             Color="{StaticResource PrimaryIconColor}" Size="32" />
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+
+                <!-- ========== SECTION LIVRES DU JOUR ========== -->
+                <StackLayout Grid.Row="2" Style="{StaticResource FooterHome}">
+                    <Label Text="📚 À découvrir aujourd'hui"
+                           Style="{StaticResource SectionTitle}" />
+
+                    <Border Style="{StaticResource FooterHomeContent}">
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
+                            <!-- Livre 1 -->
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
+                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
+                                    <Label Text="Le Petit Prince" Style="{StaticResource SectionTitleBook}" />
+                                    <Label Text="Antoine de Saint-Exupéry" Style="{StaticResource SectionAuthorsName}" />
+                                    <Label Text="Un classique sur l’amitié, l’amour et la solitude." 
+                                           Style="{StaticResource BookDescription}" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <!-- Livre 2 -->
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
+                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
+                                    <Label Text="1984" Style="{StaticResource SectionTitleBook}" />
+                                    <Label Text="George Orwell" Style="{StaticResource SectionAuthorsName}" />
+                                    <Label Text="Une dystopie visionnaire sur la surveillance et la liberté." 
+                                           Style="{StaticResource BookDescription}" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <!-- Livre 3 -->
+                            <Grid Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
+                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
+                                    <Label Text="Beloved" Style="{StaticResource SectionTitleBook}" />
+                                    <Label Text="Toni Morrison" Style="{StaticResource SectionAuthorsName}" />
+                                    <Label Text="Un roman puissant sur la mémoire de l’esclavage." 
+                                           Style="{StaticResource BookDescription}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </StackLayout>
+
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.ActionPage.Emprunt"
+             Title="Emprunt">
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+           Aspect="AspectFill"
+           InputTransparent="True"
+           Opacity="0.2" />
+        <ScrollView>
+            <Grid RowDefinitions="Auto,*">
+                <!-- En-tête -->
+                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Emprunter un nouveau Livre"
+                           Style="{StaticResource HeaderLabel}" />
+                        <Label Text="Partagez la connaissance 📚"
+                           Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <Grid Grid.Row="1" ColumnDefinitions="*,*">
+
+                    <Grid>
+                        <Image Source="image_emprunt.png"
+                               Aspect="AspectFill"
+                               InputTransparent="True"/>
+
+                        <StackLayout Padding="20">
+                            <Label Text="Empruntez dès maintenant 📚" 
+                                       Style="{StaticResource HeroTitle}"/>
+                            <Label Text="Accédez à des milliers de livres gratuitement" 
+                                   Style="{StaticResource SectionLabelSubtitle}"
+                                   />
+                        </StackLayout>
+                    </Grid>
+
+                    <StackLayout 
+                        Grid.Column="1"
+                        Style="{StaticResource CadreEmprunt}">
+
+                        <!-- Entrer les identifiants -->
+                        <Image 
+                                Source="emprunt_book.png"
+                                Style="{StaticResource LogoImage}"
+                                Background="Transparent"/>
+
+                        <Label Text="Enregistrer un emprunt" 
+                           Style="{StaticResource HeroTitle}"/>
+
+                        <!-- ISBN du Livre -->
+                        <StackLayout>
+                            <Label Text="🔍 Rechercher un Livre" 
+                                           Style="{StaticResource SectionLabel}"/>
+
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Entry x:Name="RechercheEntry" 
+                                               Placeholder="Titre, auteur ou ISBN..." 
+                                               Style="{StaticResource ModernEntry}"
+                                               Grid.Column="0"/>
+
+                                <Button Text="🔎"
+                                                Style="{StaticResource GradientButtonPrimary}"
+                                                Clicked="OnRechercherClicked"
+                                                Grid.Column="1"
+                                                WidthRequest="60"/>
+                            </Grid>
+                        </StackLayout>
+                        
+                        <!-- Section Livre Sélectionné -->
+                        <StackLayout x:Name="LivreSection" 
+                                             IsVisible="False">
+                            <Border Stroke="#DDD6FE" 
+                                            StrokeThickness="1" 
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="#FAF5FF"
+                                            Padding="15">
+                                <StackLayout >
+                                    <Label x:Name="TitreLivre" 
+                                                   FontFamily="PlaypenSansBold"
+                                                   FontSize="16"
+                                                   TextColor="#7C3AED"/>
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Label Text="Auteur:" 
+                                                       Style="{StaticResource InfoLabel}"/>
+                                        <Label x:Name="AuteurLivre" 
+                                                       Style="{StaticResource InfoValue}"
+                                                       Grid.Column="1"/>
+                                    </Grid>
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Label Text="ISBN:" 
+                                                       Style="{StaticResource InfoLabel}"/>
+                                        <Label x:Name="IsbnLivre" 
+                                                       Style="{StaticResource InfoValue}"
+                                                       Grid.Column="1"/>
+                                    </Grid>
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Label Text="Disponibilité:" 
+                                                       Style="{StaticResource InfoLabel}"/>
+                                        <Label x:Name="DisponibiliteLivre" 
+                                                       Style="{StaticResource InfoValue}"
+                                                       Grid.Column="1"/>
+                                    </Grid>
+                                </StackLayout>
+                            </Border>
+                        </StackLayout>
+                        <!-- ID de l'abonné -->
+                        <StackLayout>
+                            <Label Text="👤 ID de l'abonné" 
+                                Style="{StaticResource SectionLabel}"/>
+                            <Entry x:Name="AbonneIdEntry" 
+                               Placeholder="Entrez l'ID de l'abonné" 
+                               Keyboard="Numeric"
+                               Style="{StaticResource ModernEntry}"/>
+                        </StackLayout>
+
+                        <!-- Date de Retour -->
+                        <StackLayout>
+                            <Label Text="📅 Date de Retour Prévue" 
+                               Style="{StaticResource SectionLabel}"/>
+
+                            <StackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="Date de fin" 
+                                       FontFamily="PlaypenSansSemiBold"
+                                       FontSize="12"
+                                       TextColor="#64748B"/>
+                                <DatePicker x:Name="DateFinPicker"
+                                            Style="{StaticResource ModernDatePicker}"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Bouton Confirmer -->
+                        <Button x:Name="ConfirmerButton" 
+                                Text="✅ Confirmer l'emprunt"
+                                Style="{StaticResource GradientButtonPrimary}"
+                                Clicked="OnConfirmerClicked"/>
+                        <!-- Navigation -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                            <Button Grid.Column="0" 
+                                    Text="🏠 Accueil" 
+                                    Style="{StaticResource GradientButtonSecondary}"
+                                    Clicked="OnAccueilClicked"/>
+
+                            <Button Grid.Column="1" 
+                                    Text="📋 Liste des emprunts" 
+                                    Style="{StaticResource NextPage}"
+                                    Clicked="OnListeEmpruntsClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

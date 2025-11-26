@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="BibliothequeManager.Pages.HomePage"
+            Title="HomePage"
+            FlyoutLayoutBehavior="Popover">
+
+    <!-- menu latéral -->
+    <FlyoutPage.Flyout>
+        <ContentPage Title="Menu" Style="{StaticResource BackgroundMenu}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- En-tête du menu -->
+                <StackLayout Grid.Row="0">
+                    <Label x:Name="TitleHome"
+                            Text="📚 BiblioTech" 
+                           Style="{StaticResource TitleMenu}"/>
+                </StackLayout>
+
+                <!-- Navigation principale -->
+                <StackLayout Grid.Row="1" 
+                            Style="{StaticResource StackLayoutMenu}">
+                    <Button x:Name="AccueilButton"
+                            Text="🏠 Accueil" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+
+                    <Button x:Name="LivresButton"
+                            Text="📖 Livres" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+
+                    <Button x:Name="AuthorsButton"
+                            Text="👤 Auteurs" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+                    <Button x:Name="CategorieButton"
+                            Text="✒️ Categorie" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+
+                    <Button x:Name="AdherentsButton"
+                            Text="👥 Adhérents" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+
+                    <Button x:Name="ParametresButton"
+                            Text="⚙️ Paramètres" 
+                            Style="{StaticResource ButtonMenu}">
+                    </Button>
+                </StackLayout>
+
+                <!-- Pied de page -->
+                <StackLayout Grid.Row="2" 
+                             Style="{StaticResource StackLayoutFooter}">
+
+                    <Button x:Name="DeconnexionButton"
+                            Text="🚪 Déconnexion" 
+                            Style="{StaticResource ButtonMenuDec}"/>
+
+                    <Label x:Name="version"
+                            Text="Version 1.0.0" 
+                           Style="{StaticResource LabelVersion}"/>
+                </StackLayout>
+            </Grid>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+
+    <!-- contenu principal -->
+    <FlyoutPage.Detail>
+        <ContentPage>
+           
+        </ContentPage>
+    </FlyoutPage.Detail>
+
+</FlyoutPage>

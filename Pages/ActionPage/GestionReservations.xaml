@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.ActionPage.GestionReservations"
+             Title="Gestion des Réservations"
+             BackgroundColor="#F8FAFC">
+    <Grid>
+        <!-- Fond avec dégradé -->
+        <Image Source="new_background.png"
+           Aspect="AspectFill"
+           InputTransparent="True"
+           Opacity="0.2" />
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto, Auto, *">
+
+                <!-- En-tête -->
+                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Gestion des Réservations" 
+                           Style="{StaticResource HeaderLabel}"/>
+                        <Label Text="Suivi et gestion des réservations en attente" 
+                           Style="{StaticResource SubHeaderLabel}"/>
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+
+                <!-- Barre d'outils et statistiques -->
+                <Border Grid.Row="1" 
+                       Style="{StaticResource ModernCard}">
+                    <StackLayout Spacing="15">
+
+                        <!-- Barre de recherche et filtres -->
+                        <Grid ColumnDefinitions="Auto, *, Auto, Auto" 
+                              ColumnSpacing="10">
+                            <Button Grid.Column="0" 
+                                    Text="🏠 Accueil" 
+                                    Style="{StaticResource GradientButtonSecondary}"
+                                    Clicked="OnAccueilClicked"/>
+                            <Entry x:Name="SearchEntry"
+                                    Placeholder="🔍 Rechercher par livre, adhérent..."
+                                    Style="{StaticResource ModernEntry}"
+                                    Grid.Column="1"/>
+
+                            <Picker x:Name="StatutPicker"
+                                    Title="Statut"
+                                    Style="{StaticResource ModernPicker}"
+                                    Grid.Column="2"
+                                    WidthRequest="140">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Toutes</x:String>
+                                        <x:String>En attente</x:String>
+                                        <x:String>Confirmée</x:String>
+                                        <x:String>En cours</x:String>
+                                        <x:String>Terminée</x:String>
+                                        <x:String>Annulée</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Button Grid.Column="3"
+                                     Text="➕ Nouvelle"
+                                     Style="{StaticResource GradientButtonPrimary}"
+                                    Clicked="OnNewReservation"/>
+                        </Grid>
+
+                        <!-- Statistiques rapides -->
+                        <Border Style="{StaticResource BorderLivreSelectionne}"
+                                Margin="10">
+                            <Grid ColumnDefinitions="*, *, *, *, *" 
+                                   ColumnSpacing="10"
+                                   Padding="15">
+
+                                <StackLayout Grid.Column="0" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding TotalReservations}" 
+                                            FontFamily="PlaypenSansBold"
+                                            FontSize="20"
+                                            TextColor="#1E293B"
+                                            HorizontalOptions="Center"/>
+                                    <Label Text="Total" 
+                                        Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding ReservationsEnAttente}" 
+                                            FontFamily="PlaypenSansBold"
+                                            FontSize="20"
+                                            TextColor="#F59E0B"
+                                            HorizontalOptions="Center"/>
+                                    <Label Text="En attente" 
+                                        Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding ReservationsConfirmees}" 
+                                        FontFamily="PlaypenSansBold"
+                                        FontSize="20"
+                                        TextColor="#10B981"
+                                        HorizontalOptions="Center"/>
+                                    <Label Text="Confirmées" 
+                                        Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding ReservationsConfirmees}" 
+                                FontFamily="PlaypenSansBold"
+                                FontSize="20"
+                                TextColor="#10B981"
+                                HorizontalOptions="Center"/>
+                                    <Label Text="Confirmées" 
+                                            Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="3" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding ReservationsEnCours}" 
+                                            FontFamily="PlaypenSansBold"
+                                            FontSize="20"
+                                            TextColor="#3B82F6"
+                                            HorizontalOptions="Center"/>
+                                    <Label Text="En cours" 
+                                            Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="4" Spacing="5" HorizontalOptions="Center">
+                                    <Label Text="{Binding ReservationsExpirees}" 
+                                            FontFamily="PlaypenSansBold"
+                                            FontSize="20"
+                                            TextColor="#EF4444"
+                                            HorizontalOptions="Center"/>
+                                    <Label Text="Expirées" 
+                                            Style="{StaticResource LabelEmprunt}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Border>
+                    </StackLayout>
+                </Border>
+
+                <!-- Liste des réservations -->
+                <Border Grid.Row="2" Style="{StaticResource ModernCard}" >
+                    <Grid RowDefinitions="Auto, *">
+
+                        <!-- En-tête du tableau -->
+                        <Border Grid.Row="0" 
+                                BackgroundColor="#F1F5F9"
+                                Padding="15,12">
+                            <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1*,1.2*"
+                       ColumnSpacing="10">
+                                <Label Text="Livre et Adhérent" Style="{StaticResource TableHeader}" />
+                                <Label Text="Date Réservation" Style="{StaticResource TableHeader}" Grid.Column="1"/>
+                                <Label Text="Date Début" Style="{StaticResource TableHeader}" Grid.Column="2"/>
+                                <Label Text="Date Fin" Style="{StaticResource TableHeader}" Grid.Column="3"/>
+                                <Label Text="Jours restants" Style="{StaticResource TableHeader}" Grid.Column="4"/>
+                                <Label Text="Priorité" Style="{StaticResource TableHeader}" Grid.Column="5"/>
+                                <Label Text="Actions" Style="{StaticResource TableHeader}" Grid.Column="6" HorizontalTextAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Liste -->
+                        <CollectionView Grid.Row="1"
+                             ItemsSource="{Binding Reservations}"
+                             SelectionMode="Single"
+                             EmptyView="Aucune réservation trouvée">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource TabContent}">
+                                        <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1*,1.2*" 
+                                            Padding="15,12"
+                                            ColumnSpacing="10">
+
+                                            <!-- Colonne Livre & Adhérent -->
+                                            <StackLayout Grid.Column="0" Spacing="4">
+                                                <Label Text="{Binding TitreLivre}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding NomAdherent}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding EmailAdherent}" Style="{StaticResource TableRowData}"/>
+                                            </StackLayout>
+
+                                            <!-- Date Réservation -->
+                                            <Label Grid.Column="1"  Text="{Binding DateReservation, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+
+                                            <!-- Date Début -->
+                                            <Label Grid.Column="2" Text="{Binding DateDebut, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+
+                                            <!-- Date Fin -->
+                                            <Label Grid.Column="3"  Text="{Binding DateFin, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+
+                                            <!-- Jours restants -->
+                                            <Label Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}"/>
+
+
+                                            <!-- Priorité et Statut -->
+                                            <StackLayout Grid.Column="5" Spacing="2">
+                                              <Label Text="{Binding Statut}" Style="{StaticResource TableRowData}"/>
+                                              <Label Text="{Binding Priorite}" Style="{StaticResource TableRowData}"/>
+                                            </StackLayout>
+
+                                            <!-- Actions -->
+                                            <StackLayout Grid.Column="6" 
+                                              Orientation="Horizontal" 
+                                              Spacing="5"
+                                              HorizontalOptions="Center">
+
+                                                <Button Text="✓"
+                                             BackgroundColor="#10B981"
+                                             TextColor="White"
+                                             FontSize="10"
+                                             CornerRadius="6"
+                                             WidthRequest="28"
+                                             HeightRequest="28"/>
+
+                                                <Button Text="↻"
+                                             BackgroundColor="#3B82F6"
+                                             TextColor="White"
+                                             FontSize="10"
+                                             CornerRadius="6"
+                                             WidthRequest="28"
+                                             HeightRequest="28"/>
+
+                                                <Button Text="✎"
+                                             BackgroundColor="#F59E0B"
+                                             TextColor="White"
+                                             FontSize="10"
+                                             CornerRadius="6"
+                                             WidthRequest="28"
+                                             HeightRequest="28"/>
+
+                                                <Button Text="📧"
+                                             BackgroundColor="#8B5CF6"
+                                             TextColor="White"
+                                             FontSize="10"
+                                             CornerRadius="6"
+                                             WidthRequest="28"
+                                             HeightRequest="28"/>
+
+                                                <Button Text="✕"
+                                             BackgroundColor="#EF4444"
+                                             TextColor="White"
+                                             FontSize="10"
+                                             CornerRadius="6"
+                                             WidthRequest="28"
+                                             HeightRequest="28"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

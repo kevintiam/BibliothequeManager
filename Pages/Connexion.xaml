@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Connexion"
+             Title="Connexion">
+
+    <Grid>
+        <!-- Arrière-plan : image personnalisée -->
+        <Image Source="background.jpg"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.7" />
+
+        <ScrollView>
+            <VerticalStackLayout Style="{StaticResource Form}">
+
+                <!-- Header -->
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Image Source="library_icon.png"  
+                           HorizontalOptions="Center"/>
+                    <Label Text="BIBLIOTECH" 
+                           Style="{StaticResource MainTitleLabel}"/>
+                    <Label Text="Système de gestion" 
+                           Style="{StaticResource SubtitleLabel}"/>
+                </VerticalStackLayout>
+
+                <!-- Formulaire -->
+                <Border Style="{StaticResource LoginFormBorder}">
+                    <VerticalStackLayout 
+                        Style="{StaticResource FormContent}">
+                        <HorizontalStackLayout Style="{StaticResource FormHori}">
+                            <Image Source="account.png"
+                                   HorizontalOptions="Center"
+                                   Style="{StaticResource ImageStyleHeader}"/>
+                            <Label Text="Se Connecter" 
+                               Style="{StaticResource FormTitleLabel}"/>
+                        </HorizontalStackLayout>
+
+                        <VerticalStackLayout Style="{StaticResource FormChamp}">
+                            <!-- Champ Email avec icône -->
+                            <Border Style="{StaticResource InputFieldBorder}">
+                                <Grid ColumnDefinitions="Auto,*" 
+                                      ColumnSpacing="10">
+                                    <Image Source="email_outline.png" 
+                                           Grid.Column="0"
+                                           Style="{StaticResource ImageStyle}"/>
+                                    <Entry x:Name="EmailEntry" 
+                                           Grid.Column="1"
+                                           Placeholder="Adresse email"
+                                           Text="{Binding Email}"
+                                           Keyboard="Email"
+                                           Style="{StaticResource FormEntry}"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Champ Mot de passe avec icône -->
+                            <Border Style="{StaticResource InputFieldBorder}">
+                                <Grid ColumnDefinitions="Auto,*" 
+                                      ColumnSpacing="10">
+                                    <Image Source="lock_outline.png" 
+                                           Grid.Column="0"
+                                           Style="{StaticResource ImageStyle}"/>
+                                    <Entry x:Name="PasswordEntry" 
+                                           Grid.Column="1"
+                                           Placeholder="Mot de passe"
+                                           Text="{Binding MotDePasse}"
+                                           IsPassword="True"
+                                           Style="{StaticResource FormEntry}"/>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Message d'erreur -->
+                        <Border Style="{StaticResource ErrorBorder}"
+                               IsVisible="Hidden">
+                            <HorizontalStackLayout>
+                                <Image Source="error_icon.png" 
+                                       HeightRequest="16"
+                                       WidthRequest="16"
+                                       VerticalOptions="Center"/>
+                                <Label Text="{Binding MessageErreur}"
+                                       Style="{StaticResource ErrorLabel}"
+                                       VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <VerticalStackLayout>
+                            <!-- Bouton connexion avec icône -->
+                            <Button 
+                                Text="Se connecter"
+                                Command="{Binding LoginCommand}"
+                                Style="{StaticResource LoginButton}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="login"
+                                                     Color="White"
+                                                     Size="30"/>
+                                </Button.ImageSource>
+                            </Button>
+                            <!-- Lien mot de passe oublié avec icône -->
+                            <HorizontalStackLayout Style="{StaticResource FormHoriFoot}">
+                                <Image Source="help_icon.png" 
+                                       Style="{StaticResource ImageStyle}"/>
+                                <Label Text="Mot de passe oublié ?" 
+                                       Style="{StaticResource ForgotPasswordLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
