@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BibliothequeManager.Models
 {
@@ -11,13 +8,16 @@ namespace BibliothequeManager.Models
         public int Id { get; set; }
         public int AdherentId { get; set; }
         public int LivreId { get; set; }
-        public int BibliothequaireId { get; set; }
-        public DateTime DateReservation { get; set; } = DateTime.Now;
+        public int BibliothecaireId { get; set; }
+        public DateTime DateReservation { get; set; } = DateTime.UtcNow;
+
+        [ForeignKey(nameof(ExemplaireAttribue))]
         public int? ExemplaireAttribueId { get; set; } // Quand le livre devient disponible
 
         // Navigation
         public Adherent? Adherent { get; set; }
         public Livres? Livre { get; set; }
-        public Bibliothecaire? Bibliothequaire { get; set; }
+        public Bibliothecaire? Bibliothecaire { get; set; }
+        public Exemplaire? ExemplaireAttribue { get; set; }
     }
 }
