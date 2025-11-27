@@ -1,24 +1,30 @@
-﻿namespace BibliothequeManager
+﻿using System.Globalization;
+using Microsoft.Maui.Controls;
+
+namespace BibliothequeManager
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnSwitchLanguageClicked(object sender, EventArgs e)
         {
-            count++;
+            // Détecte la langue actuelle
+            string currentLang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            string newLang = currentLang == "fr" ? "en" : "fr";
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            // Change la culture
+            var culture = new CultureInfo(newLang);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Recharge la page pour appliquer les traductions
+            // On utilise une petite astuce : on navigue vers la même page
+            string route = Shell.Current?.CurrentState?.Location?.ToString() ?? "//MainPage";
+            _ = Shell.Current?.GoToAsync($"//{route}");
         }
     }
 }

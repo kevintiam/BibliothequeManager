@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:BibliothequeManager.Properties"
              x:Class="BibliothequeManager.Pages.Views.Accueil"
-             Title="Accueil">
+              xmlns:localApp="clr-namespace:BibliothequeManager"
+             Title="Accueil"          
+             NavigationPage.HasNavigationBar="False">
 
     <!-- Fond d'écran -->
     <Grid>
+        
+      
         <Image Source="new_background.png"
                Aspect="AspectFill"
                InputTransparent="True"
                Opacity="0.3" />
+        
 
         <!-- Contenu principal -->
         <ScrollView>
             <Grid RowDefinitions="Auto,*,Auto">
 
                 <!-- ========== EN-TÊTE ========== -->
-                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
+                <Grid Style="{StaticResource StackLayoutAcc}" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                    <!-- Logo à gauche -->
                     <Border Style="{StaticResource RoundedImageBorder}">
                         <Image Source="logo.png" Style="{StaticResource Logo}" />
                     </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="👋 Bienvenue dans LibraNova"
-                               Style="{StaticResource HeaderLabel}" />
-                        <Label Text="La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information"
-                               Style="{StaticResource SubHeaderLabel}" />
+
+                    <!-- Texte de bienvenue (occupe tout l'espace central) -->
+                    <StackLayout Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center">
+                        <Label  
+                       Text="{Binding [WelcomToLibraNova], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource HeaderLabel}" />
+                        <Label Text="{Binding [TextWelcom], Source={x:Static localApp:App.Localized}}"
+                         Style="{StaticResource SubHeaderLabel}" />
                     </StackLayout>
-                </HorizontalStackLayout>
+
+                    <!-- Bouton de changement de langue  -->
+                    <Button Grid.Column="3" Grid.Row="0"
+                        Text="🌐FR/EN"                          
+                        Style="{StaticResource LangageBouton}"
+                        x:Name="LangButton"                            
+                        Clicked="OnSwitchLanguageClicked"
+                        HorizontalOptions="Center"/>     
+                </Grid>
 
                 <!-- ========== CARTE DE FONCTIONNALITÉS ========== -->
                 <Grid Grid.Row="1" Style="{StaticResource FeatureCard}"
@@ -36,7 +54,7 @@
 
                     <!-- Ligne 1 -->
                     <Button x:Name="EmprunterLivre" 
-                            Text="Emprunter un livre" 
+                            Text="{Binding [BorrowABook], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="0" Grid.Column="0"
                             Clicked="OnEmprunterLivreClicked">
@@ -47,7 +65,7 @@
                     </Button>
 
                     <Button x:Name="RetournerLivre" 
-                            Text="Retourner un livre" 
+                            Text="{Binding [ReturnABook], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource FeatureCardContent}" 
                             Clicked="OnRetournerLivreClicked"
                             Grid.Row="0" Grid.Column="1">
@@ -58,7 +76,7 @@
                     </Button>
 
                     <Button x:Name="ReservationLivre" 
-                            Text="Réserver un livre" 
+                            Text="{Binding [ReserveABook], Source={x:Static localApp:App.Localized}}"
                            Clicked="OnReserverLivreClicked"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="0" Grid.Column="2">
@@ -70,7 +88,7 @@
 
                     <!-- Ligne 2 -->
                     <Button x:Name="GestionEmprunt" 
-                            Text="Gestion des emprunts"
+                             Text="{Binding [LoansManagement], Source={x:Static localApp:App.Localized}}"
                             Clicked="OnGestionEmpruntsClicked"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="1" Grid.Column="0">
@@ -81,7 +99,7 @@
                     </Button>
 
                     <Button x:Name="GestionReservation" 
-                            Text="Gérer les réservations"
+                            Text="{Binding [ManageReservation], Source={x:Static localApp:App.Localized}}"
                             Clicked="OnGestionReservationsClicked"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="1" Grid.Column="1">
@@ -92,7 +110,7 @@
                     </Button>
 
                     <Button x:Name="GestionAbonnes" 
-                            Text="Gestion des adhérents" 
+                            Text="{Binding [MembersManagement], Source={x:Static localApp:App.Localized}}" 
                             Clicked="OnGestionAdherents"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="1" Grid.Column="2">
@@ -105,7 +123,7 @@
 
                 <!-- ========== SECTION LIVRES DU JOUR ========== -->
                 <StackLayout Grid.Row="2" Style="{StaticResource FooterHome}">
-                    <Label Text="📚 À découvrir aujourd'hui"
+                    <Label Text="{Binding [ToDiscoverToday], Source={x:Static localApp:App.Localized}}" 
                            Style="{StaticResource SectionTitle}" />
 
                     <Border Style="{StaticResource FooterHomeContent}">

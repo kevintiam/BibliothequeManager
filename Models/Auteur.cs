@@ -15,6 +15,7 @@ namespace BibliothequeManager.Models
         [MaxLength(100)]
         public string Prenom { get; set; } = string.Empty;
 
+
         public ICollection<Livres> Livres { get; } = new List<Livres>();
     }
 }

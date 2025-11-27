@@ -1,0 +1,373 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace BibliothequeManager.Migrations
+{
+    /// <inheritdoc />
+    public partial class ChargerDonnees : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            // AUTEURS (ajout 51-53 requis par Livres 44-46)
+            migrationBuilder.InsertData(
+                table: "Auteurs",
+                columns: new[] { "Id", "Nom", "Prenom" },
+                values: new object[,]
+                {
+                    { 1, "Hugo", "Victor" },
+                    { 2, "Dumas", "Alexandre" },
+                    { 3, "Orwell", "George" },
+                    { 4, "Zola", "Émile" },
+                    { 5, "Flaubert", "Gustave" },
+                    { 6, "Balzac", "Honoré de" },
+                    { 7, "Maupassant", "Guy de" },
+                    { 8, "Verne", "Jules" },
+                    { 9, "Camus", "Albert" },
+                    { 10, "Sartre", "Jean-Paul" },
+                    { 11, "De Beauvoir", "Simone" },
+                    { 12, "Proust", "Marcel" },
+                    { 13, "Saint-Exupéry", "Antoine de" },
+                    { 14, "Duras", "Marguerite" },
+                    { 15, "Yourcenar", "Marguerite" },
+                    { 16, "Rowling", "J.K." },
+                    { 17, "Tolkien", "J.R.R." },
+                    { 18, "Martin", "George R.R." },
+                    { 19, "Herbert", "Frank" },
+                    { 20, "Asimov", "Isaac" },
+                    { 21, "Bradbury", "Ray" },
+                    { 22, "King", "Stephen" },
+                    { 23, "Christie", "Agatha" },
+                    { 24, "Conan Doyle", "Arthur" },
+                    { 25, "Austen", "Jane" },
+                    { 26, "Brontë", "Charlotte" },
+                    { 27, "Dickens", "Charles" },
+                    { 28, "Tolstoi", "Léon" },
+                    { 29, "Dostoïevski", "Fiodor" },
+                    { 30, "Garcia Marquez", "Gabriel" },
+                    { 31, "Ndiaye", "Marie" },
+                    { 32, "Mabanckou", "Alain" },
+                    { 33, "Adichie", "Chimamanda Ngozi" },
+                    { 34, "Coelho", "Paulo" },
+                    { 35, "Lahiri", "Jhumpa" },
+                    { 36, "Le Clézio", "J.M.G." },
+                    { 37, "Modiano", "Patrick" },
+                    { 38, "Houellebecq", "Michel" },
+                    { 39, "Schmitt", "Eric-Emmanuel" },
+                    { 40, "Musso", "Guillaume" },
+                    { 41, "Levy", "Marc" },
+                    { 42, "Barbery", "Muriel" },
+                    { 43, "Nothomb", "Amélie" },
+                    { 44, "Pennac", "Daniel" },
+                    { 45, "Rufin", "Jean-Christophe" },
+                    { 46, "Carrère", "Emmanuel" },
+                    { 47, "Foenkinos", "David" },
+                    { 48, "Gavalda", "Anna" },
+                    { 49, "Slimani", "Leïla" },
+                    { 50, "Mendelsohn", "Daniel" },
+                    { 51, "Baudelaire", "Charles" },
+                    { 52, "Rostand", "Edmond" },
+                    { 53, "Sun", "Tzu" }
+                });
+
+            // CATEGORIES
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Nom", "Description" },
+                values: new object[,]
+                {
+                    { 1, "Roman", "Romans contemporains et classiques" },
+                    { 2, "Science-Fiction", "Anticipation et dystopie" },
+                    { 3, "Historique", "Œuvres à contexte historique" },
+                    { 4, "Policier/Thriller", "Romans policiers, thrillers et enquêtes" },
+                    { 5, "Fantasy", "Héroic fantasy, médiéval fantastique" },
+                    { 6, "Biographie", "Récits de vie et autobiographies" },
+                    { 7, "Poésie", "Recueils poétiques et vers" },
+                    { 8, "Théâtre", "Pièces de théâtre et tragédies" },
+                    { 9, "Philosophie", "Ouvrages philosophiques et essais" },
+                    { 10, "Psychologie", "Développement personnel et psychologie" },
+                    { 11, "Science", "Ouvrages scientifiques et techniques" },
+                    { 12, "Informatique", "Programmation et technologies" },
+                    { 13, "Art/Culture", "Beaux-arts, musique et culture" },
+                    { 14, "Cuisine", "Recettes et gastronomie" },
+                    { 15, "Voyage/Aventure", "Récits de voyage et aventures" },
+                    { 16, "Jeunesse", "Livres pour enfants et adolescents" },
+                    { 17, "BD/Manga", "Bandes dessinées et mangas" },
+                    { 18, "Horreur", "Romans d'épouvante et fantastique" },
+                    { 19, "Romance", "Histoires d'amour et sentiments" },
+                    { 20, "Économie/Gestion", "Économie, finance et management" },
+                    { 21, "Droit/Politique", "Droit, sciences politiques" },
+                    { 22, "Santé/Bien-être", "Médecine, nutrition et bien-être" },
+                    { 23, "Environnement", "Écologie et développement durable" },
+                    { 24, "Sport", "Sports et activités physiques" },
+                    { 25, "Religion/Spiritualité", "Textes sacrés et spiritualité" },
+                    { 26, "Éducation/Pédagogie", "Méthodes pédagogiques et éducation" },
+                    { 27, "Langues", "Apprentissage des langues étrangères" },
+                    { 28, "Littérature Africaine", "Œuvres d'auteurs africains" },
+                    { 29, "Littérature Asiatique", "Œuvres d'auteurs asiatiques" },
+                    { 30, "Nouvelle", "Recueils de nouvelles et contes" }
+                });
+
+            // LIVRES
+            migrationBuilder.InsertData(
+                table: "Livres",
+                columns: new[] { "Id", "Titre", "ISBN", "AuteurId" },
+                values: new object[,]
+                {
+                    { 1, "Les Misérables", "9782261018751", 1 },
+                    { 2, "Le Comte de Monte-Cristo", "9782253004226", 2 },
+                    { 3, "1984", "9780451524935", 3 },
+                    { 4, "Germinal", "9782253010678", 4 },
+                    { 5, "Madame Bovary", "9782070360012", 5 },
+                    { 6, "Le Père Goriot", "9782253010661", 6 },
+                    { 7, "Bel-Ami", "9782253010685", 7 },
+                    { 8, "Vingt mille lieues sous les mers", "9782253010692", 8 },
+                    { 9, "L'Étranger", "9782070360029", 9 },
+                    { 10, "La Nausée", "9782070367813", 10 },
+
+                    { 11, "Harry Potter à l'école des sorciers", "9782070541274", 16 },
+                    { 12, "Le Seigneur des Anneaux", "9782266147202", 17 },
+                    { 13, "Le Trône de Fer", "9782253172246", 18 },
+                    { 14, "Dune", "9782253172253", 19 },
+                    { 15, "Fondation", "9782253172260", 20 },
+                    { 16, "Fahrenheit 451", "9782253172277", 21 },
+                    { 17, "Shining", "9782253172284", 22 },
+                    { 18, "Le Meurtre de Roger Ackroyd", "9782253172291", 23 },
+                    { 19, "Sherlock Holmes", "9782253172307", 24 },
+                    { 20, "Orgueil et Préjugés", "9782253172314", 25 },
+
+                    { 21, "L'Amour au temps du choléra", "9782253172321", 30 },
+                    { 22, "La Femme de l'hôtel", "9782253172338", 31 },
+                    { 23, "Black Bazar", "9782253172345", 32 },
+                    { 24, "L'hibiscus pourpre", "9782253172352", 33 },
+                    { 25, "L'Alchimiste", "9782253172369", 34 },
+                    { 26, "Désorientale", "9782253172376", 35 },
+                    { 27, "Désert", "9782253172383", 36 },
+                    { 28, "Rue des Boutiques Obscures", "9782253172390", 37 },
+                    { 29, "Les Particules élémentaires", "9782253172406", 38 },
+                    { 30, "Monsieur Ibrahim et les Fleurs du Coran", "9782253172413", 39 },
+
+                    { 31, "Et après...", "9782253172420", 40 },
+                    { 32, "Et si c'était vrai...", "9782253172437", 41 },
+                    { 33, "L'Élégance du hérisson", "9782253172444", 42 },
+                    { 34, "Stupeur et Tremblements", "9782253172451", 43 },
+                    { 35, "Au bonheur des ogres", "9782253172468", 44 },
+                    { 36, "L'Abyssin", "9782253172475", 45 },
+                    { 37, "L'Adversaire", "9782253172482", 46 },
+                    { 38, "La Délicatesse", "9782253172499", 47 },
+                    { 39, "Ensemble, c'est tout", "9782253172505", 48 },
+                    { 40, "Chanson douce", "9782253172512", 49 },
+
+                    { 41, "Les Ombres errantes", "9782253172529", 50 },
+                    { 42, "Le Petit Prince", "9782253172536", 13 },
+                    { 43, "Le Deuxième Sexe", "9782253172543", 11 },
+                    { 44, "Les Fleurs du Mal", "9782253172550", 51 },
+                    { 45, "Cyrano de Bergerac", "9782253172567", 52 },
+                    { 46, "L'Art de la guerre", "9782253172574", 53 },
+                    { 47, "Les Misérables Tome 2", "9782253172581", 1 },
+                    { 48, "Les Trois Mousquetaires", "9782253172598", 2 },
+                    { 49, "La Ferme des animaux", "9782253172604", 3 },
+                    { 50, "Thérèse Raquin", "9782253172611", 4 }
+                });
+
+            // LIVRE_CATEGORIE
+            migrationBuilder.InsertData(
+                table: "LivreCategories",
+                columns: new[] { "LivreId", "CategorieId" },
+                values: new object[,]
+                {
+                    { 1, 1 }, { 1, 3 },
+                    { 2, 1 }, { 2, 3 },
+                    { 3, 2 },
+                    { 4, 1 }, { 4, 3 },
+                    { 5, 1 },
+                    { 6, 1 },
+                    { 7, 1 },
+                    { 8, 2 }, { 8, 15 },
+                    { 9, 1 }, { 9, 9 },
+                    { 10, 9 }, { 10, 1 },
+
+                    { 11, 5 }, { 11, 16 },
+                    { 12, 5 },
+                    { 13, 5 },
+                    { 14, 2 },
+                    { 15, 2 },
+                    { 16, 2 },
+                    { 17, 18 },
+                    { 18, 4 },
+                    { 19, 4 },
+                    { 20, 1 }, { 20, 19 },
+
+                    { 21, 1 }, { 21, 19 },
+                    { 22, 1 },
+                    { 23, 1 },
+                    { 24, 1 },
+                    { 25, 9 },
+                    { 26, 1 },
+                    { 27, 1 },
+                    { 28, 1 },
+                    { 29, 1 },
+                    { 30, 8 },
+
+                    { 31, 1 },
+                    { 32, 19 },
+                    { 33, 1 },
+                    { 34, 1 },
+                    { 35, 4 },
+                    { 36, 3 },
+                    { 37, 1 },
+                    { 38, 1 },
+                    { 39, 1 },
+                    { 40, 1 },
+
+                    { 41, 1 },
+                    { 42, 16 }, { 42, 7 },
+                    { 43, 9 },
+                    { 44, 7 },
+                    { 45, 8 },
+                    { 46, 20 },
+                    { 47, 1 }, { 47, 3 },
+                    { 48, 1 }, { 48, 3 },
+                    { 49, 2 },
+                    { 50, 1 }
+                });
+
+            // EXEMPLAIRES (ATTENTION: table = "Exemplaire" singulier)
+            migrationBuilder.InsertData(
+                table: "Exemplaires",
+                columns: new[] { "Id", "LivreId", "NombrePage", "CodeBarre", "EstDisponible", "Etat" },
+                values: new object[,]
+                {
+                    { 1, 1, 1232, "EXEMP001001", true, "Neuf" },
+                    { 2, 1, 1232, "EXEMP001002", true, "Bon" },
+                    { 3, 1, 1232, "EXEMP001003", true, "Neuf" },
+                    { 4, 2, 1312, "EXEMP002001", true, "Neuf" },
+                    { 5, 2, 1312, "EXEMP002002", true, "Très bon" },
+                    { 6, 3, 328, "EXEMP003001", true, "Neuf" },
+                    { 7, 3, 328, "EXEMP003002", false, "Bon" },
+                    { 8, 3, 328, "EXEMP003003", true, "Très bon" },
+                    { 9, 4, 554, "EXEMP004001", true, "Bon" },
+                    { 10, 4, 554, "EXEMP004002", true, "Neuf" },
+                    { 11, 5, 448, "EXEMP005001", true, "Très bon" },
+                    { 12, 5, 448, "EXEMP005002", false, "Abîmé" },
+                    { 13, 6, 374, "EXEMP006001", true, "Bon" },
+                    { 14, 6, 374, "EXEMP006002", true, "Très bon" },
+                    { 15, 7, 432, "EXEMP007001", true, "Neuf" },
+                    { 16, 7, 432, "EXEMP007002", true, "Bon" },
+                    { 17, 8, 448, "EXEMP008001", true, "Bon" },
+                    { 18, 8, 448, "EXEMP008002", true, "Très bon" },
+                    { 19, 9, 184, "EXEMP009001", true, "Neuf" },
+                    { 20, 9, 184, "EXEMP009002", true, "Très bon" },
+                    { 21, 9, 184, "EXEMP009003", false, "Bon" },
+                    { 22, 10, 248, "EXEMP010001", true, "Bon" },
+                    { 23, 10, 248, "EXEMP010002", true, "Très bon" },
+
+                    { 24, 11, 320, "EXEMP011001", true, "Neuf" },
+                    { 25, 11, 320, "EXEMP011002", true, "Très bon" },
+                    { 26, 11, 320, "EXEMP011003", false, "Bon" },
+                    { 27, 11, 320, "EXEMP011004", true, "Neuf" },
+                    { 28, 12, 576, "EXEMP012001", true, "Très bon" },
+                    { 29, 12, 576, "EXEMP012002", true, "Bon" },
+                    { 30, 13, 864, "EXEMP013001", true, "Neuf" },
+                    { 31, 13, 864, "EXEMP013002", true, "Très bon" },
+                    { 32, 14, 512, "EXEMP014001", true, "Neuf" },
+                    { 33, 14, 512, "EXEMP014002", false, "Très bon" },
+                    { 34, 14, 512, "EXEMP014003", true, "Bon" },
+                    { 35, 15, 320, "EXEMP015001", true, "Très bon" },
+                    { 36, 15, 320, "EXEMP015002", true, "Bon" },
+                    { 37, 16, 256, "EXEMP016001", true, "Très bon" },
+                    { 38, 16, 256, "EXEMP016002", true, "Neuf" },
+                    { 39, 17, 512, "EXEMP017001", true, "Bon" },
+                    { 40, 17, 512, "EXEMP017002", true, "Très bon" },
+                    { 41, 18, 288, "EXEMP018001", true, "Neuf" },
+                    { 42, 18, 288, "EXEMP018002", true, "Bon" },
+                    { 43, 19, 384, "EXEMP019001", true, "Bon" },
+                    { 44, 19, 384, "EXEMP019002", true, "Très bon" },
+                    { 45, 19, 384, "EXEMP019003", false, "Abîmé" },
+                    { 46, 20, 432, "EXEMP020001", true, "Neuf" },
+                    { 47, 20, 432, "EXEMP020002", true, "Très bon" },
+
+                    { 48, 21, 464, "EXEMP021001", true, "Bon" },
+                    { 49, 21, 464, "EXEMP021002", true, "Très bon" },
+                    { 50, 22, 288, "EXEMP022001", true, "Neuf" },
+                    { 51, 22, 288, "EXEMP022002", true, "Bon" },
+                    { 52, 23, 256, "EXEMP023001", true, "Très bon" },
+                    { 53, 23, 256, "EXEMP023002", true, "Neuf" },
+                    { 54, 24, 384, "EXEMP024001", true, "Bon" },
+                    { 55, 24, 384, "EXEMP024002", true, "Très bon" },
+                    { 56, 25, 224, "EXEMP025001", true, "Neuf" },
+                    { 57, 25, 224, "EXEMP025002", true, "Bon" },
+                    { 58, 25, 224, "EXEMP025003", false, "Très bon" },
+                    { 59, 26, 432, "EXEMP026001", true, "Très bon" },
+                    { 60, 26, 432, "EXEMP026002", true, "Neuf" },
+                    { 61, 27, 416, "EXEMP027001", true, "Bon" },
+                    { 62, 27, 416, "EXEMP027002", true, "Très bon" },
+                    { 63, 28, 224, "EXEMP028001", true, "Neuf" },
+                    { 64, 28, 224, "EXEMP028002", true, "Bon" },
+                    { 65, 29, 384, "EXEMP029001", true, "Très bon" },
+                    { 66, 29, 384, "EXEMP029002", true, "Neuf" },
+                    { 67, 30, 96, "EXEMP030001", true, "Bon" },
+                    { 68, 30, 96, "EXEMP030002", true, "Très bon" },
+
+                    { 69, 31, 384, "EXEMP031001", true, "Très bon" },
+                    { 70, 31, 384, "EXEMP031002", true, "Neuf" },
+                    { 71, 32, 288, "EXEMP032001", true, "Bon" },
+                    { 72, 32, 288, "EXEMP032002", true, "Très bon" },
+                    { 73, 33, 360, "EXEMP033001", true, "Bon" },
+                    { 74, 33, 360, "EXEMP033002", true, "Très bon" },
+                    { 75, 34, 192, "EXEMP034001", true, "Neuf" },
+                    { 76, 34, 192, "EXEMP034002", true, "Bon" },
+                    { 77, 35, 288, "EXEMP035001", true, "Très bon" },
+                    { 78, 35, 288, "EXEMP035002", true, "Neuf" },
+                    { 79, 36, 512, "EXEMP036001", true, "Bon" },
+                    { 80, 36, 512, "EXEMP036002", true, "Très bon" },
+                    { 81, 37, 192, "EXEMP037001", true, "Neuf" },
+                    { 82, 37, 192, "EXEMP037002", true, "Bon" },
+                    { 83, 38, 224, "EXEMP038001", true, "Très bon" },
+                    { 84, 38, 224, "EXEMP038002", true, "Neuf" },
+                    { 85, 39, 568, "EXEMP039001", true, "Bon" },
+                    { 86, 39, 568, "EXEMP039002", true, "Très bon" },
+                    { 87, 40, 224, "EXEMP040001", true, "Neuf" },
+                    { 88, 40, 224, "EXEMP040002", true, "Bon" },
+
+                    { 89, 41, 288, "EXEMP041001", true, "Très bon" },
+                    { 90, 41, 288, "EXEMP041002", true, "Neuf" },
+                    { 91, 42, 96, "EXEMP042001", true, "Neuf" },
+                    { 92, 42, 96, "EXEMP042002", true, "Très bon" },
+                    { 93, 42, 96, "EXEMP042003", true, "Bon" },
+                    { 94, 42, 96, "EXEMP042004", false, "Abîmé" },
+                    { 95, 42, 96, "EXEMP042005", true, "Neuf" },
+                    { 96, 43, 408, "EXEMP043001", true, "Bon" },
+                    { 97, 43, 408, "EXEMP043002", true, "Très bon" },
+                    { 98, 44, 320, "EXEMP044001", true, "Neuf" },
+                    { 99, 44, 320, "EXEMP044002", true, "Bon" },
+                    { 100, 45, 192, "EXEMP045001", true, "Très bon" },
+                    { 101, 45, 192, "EXEMP045002", true, "Neuf" },
+                    { 102, 46, 128, "EXEMP046001", true, "Bon" },
+                    { 103, 46, 128, "EXEMP046002", true, "Très bon" },
+                    { 104, 47, 600, "EXEMP047001", true, "Neuf" },
+                    { 105, 47, 600, "EXEMP047002", true, "Bon" },
+                    { 106, 48, 768, "EXEMP048001", true, "Très bon" },
+                    { 107, 48, 768, "EXEMP048002", true, "Neuf" },
+                    { 108, 49, 144, "EXEMP049001", true, "Neuf" },
+                    { 109, 49, 144, "EXEMP049002", true, "Très bon" },
+                    { 110, 49, 144, "EXEMP049003", false, "Bon" },
+                    { 111, 50, 256, "EXEMP050001", true, "Bon" },
+                    { 112, 50, 256, "EXEMP050002", true, "Très bon" }
+                }
+            );
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            // Suppressions en ordre inverse via SQL pour rester concis et couvrir tout le jeu seedé
+            migrationBuilder.Sql("DELETE FROM [Exemplaire] WHERE [Id] BETWEEN 1 AND 112;");
+            migrationBuilder.Sql("DELETE FROM [LivreCategorie] WHERE [LivreId] BETWEEN 1 AND 50;");
+            migrationBuilder.Sql("DELETE FROM [Livres] WHERE [Id] BETWEEN 1 AND 50;");
+            migrationBuilder.Sql("DELETE FROM [Categorie] WHERE [Id] BETWEEN 1 AND 30;");
+            migrationBuilder.Sql("DELETE FROM [Auteur] WHERE [Id] BETWEEN 1 AND 53;");
+        }
+    }
+}

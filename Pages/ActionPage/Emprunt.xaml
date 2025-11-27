@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.ActionPage.Emprunt"
+              xmlns:localApp="clr-namespace:BibliothequeManager"
+             NavigationPage.HasNavigationBar="False"
              Title="Emprunt">
     <Grid>
         <!-- Fond -->
@@ -17,9 +19,9 @@
                         <Image Source="logo.png" Style="{StaticResource Logo}" />
                     </Border>
                     <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Emprunter un nouveau Livre"
+                        <Label Text="{Binding [BorrowANewBook], Source={x:Static localApp:App.Localized}}" 
                            Style="{StaticResource HeaderLabel}" />
-                        <Label Text="Partagez la connaissance 📚"
+                        <Label  Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}"  
                            Style="{StaticResource SubHeaderLabel}" />
                     </StackLayout>
                 </HorizontalStackLayout>
@@ -32,9 +34,9 @@
                                InputTransparent="True"/>
 
                         <StackLayout Padding="20">
-                            <Label Text="Empruntez dès maintenant 📚" 
+                           <Label Text="{Binding [BorrowNow], Source={x:Static localApp:App.Localized}}" 
                                        Style="{StaticResource HeroTitle}"/>
-                            <Label Text="Accédez à des milliers de livres gratuitement" 
+                            <Label Text="{Binding [AccessThousandsOfBooks], Source={x:Static localApp:App.Localized}}"                             
                                    Style="{StaticResource SectionLabelSubtitle}"
                                    />
                         </StackLayout>
@@ -49,18 +51,17 @@
                                 Source="emprunt_book.png"
                                 Style="{StaticResource LogoImage}"
                                 Background="Transparent"/>
-
-                        <Label Text="Enregistrer un emprunt" 
+                        <Label Text="{Binding [RecordALoan], Source={x:Static localApp:App.Localized}}"                             
                            Style="{StaticResource HeroTitle}"/>
 
                         <!-- ISBN du Livre -->
                         <StackLayout>
-                            <Label Text="🔍 Rechercher un Livre" 
+                            <Label Text="{Binding [SearchABook], Source={x:Static localApp:App.Localized}}" 
                                            Style="{StaticResource SectionLabel}"/>
 
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                 <Entry x:Name="RechercheEntry" 
-                                               Placeholder="Titre, auteur ou ISBN..." 
+                                               Placeholder="{Binding [TitleIsbn], Source={x:Static localApp:App.Localized}}"                                                
                                                Style="{StaticResource ModernEntry}"
                                                Grid.Column="0"/>
 
@@ -111,10 +112,13 @@
                         </StackLayout>
                         <!-- ID de l'abonné -->
                         <StackLayout>
-                            <Label Text="👤 ID de l'abonné" 
+
+                            <Label Text="{Binding [IdMember], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                             <Entry x:Name="AbonneIdEntry" 
-                               Placeholder="Entrez l'ID de l'abonné" 
+                               Placeholder="{Binding [MakeIdMember], Source={x:Static localApp:App.Localized}}"                                             
+    
+                            
                                Keyboard="Numeric"
                                Style="{StaticResource ModernEntry}"/>
                         </StackLayout>
