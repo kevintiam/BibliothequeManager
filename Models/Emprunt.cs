@@ -17,6 +17,7 @@ namespace BibliothequeManager.Models
         public DateTime DateRetourPrevu { get; set; } = DateTime.UtcNow.AddDays(14);
         public DateTime? DateRetourReel { get; set; }
         public int? BibliothecaireRetourId { get; set; }
+ 
 
         // Navigation (optionnelles)
         public Adherent? Adherent { get; set; }

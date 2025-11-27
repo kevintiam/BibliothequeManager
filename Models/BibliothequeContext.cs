@@ -4,7 +4,7 @@ using BibliothequeManager.Models;
 namespace BibliothequeManager.Models
 {
     public class BibliothequeContext : DbContext
-    {
+    { 
         public BibliothequeContext()
         {
         }
@@ -36,7 +36,6 @@ namespace BibliothequeManager.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             // Livres → Auteur (many-to-one)
             modelBuilder.Entity<Livres>()
                 .HasOne(l => l.Auteur)

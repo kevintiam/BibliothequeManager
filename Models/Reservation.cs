@@ -12,7 +12,7 @@ namespace BibliothequeManager.Models
         public DateTime DateReservation { get; set; } = DateTime.UtcNow;
 
         [ForeignKey(nameof(ExemplaireAttribue))]
-        public int? ExemplaireAttribueId { get; set; } // Quand le livre devient disponible
+        public int? ExemplaireAttribueId { get; set; } 
 
         // Navigation
         public Adherent? Adherent { get; set; }

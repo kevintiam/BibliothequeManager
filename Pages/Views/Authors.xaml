@@ -75,8 +75,7 @@
                 <!-- ========== LISTE DES AUTEURS ========== -->
                 <CollectionView x:Name="AuthorsCollectionView"
                                 Grid.Row="2"
-                                ItemsSource="{Binding Livres}"
-                                SelectionMode="None"
+                                SelectionMode="Single"
                                 Margin="20,0">
 
                     <CollectionView.Header>
@@ -102,14 +101,14 @@
                             <Border Style="{StaticResource TabContent}">
                                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
                                     <Label x:Name="LastNameLabel"
-                                           Text="{Binding LastName}" 
+                                           Text="{Binding Prenom}" 
                                            Style="{StaticResource TableRowData}" />
                                     <Label x:Name="NameLabel"
-                                           Text="{Binding Name}" 
+                                           Text="{Binding Nom}" 
                                            Style="{StaticResource TableRowData}" 
                                            Grid.Column="1" />
                                     <Label x:Name="NomberBooksLabel"
-                                           Text="{Binding NomberBooks}" 
+                                           Text="{Binding NombreLivres}" 
                                            Style="{StaticResource TableRowData}" 
                                            Grid.Column="2" />
                                 </Grid>

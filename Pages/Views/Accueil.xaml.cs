@@ -11,7 +11,7 @@ public partial class Accueil : ContentPage
 
     private async void OnEmprunterLivreClicked(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new Emprunt());
+        await Navigation.PushAsync(new Emprunt());
     }
     private async void OnRetournerLivreClicked(object sender, EventArgs e)
     {
