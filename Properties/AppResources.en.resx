@@ -222,9 +222,6 @@
   <data name="ManageReservations" xml:space="preserve">
     <value>Manage reservations</value>
   </data>
-  <data name="MemberManagement" xml:space="preserve">
-    <value>Member management</value>
-  </data>
   <data name="MemberManagementTitle" xml:space="preserve">
     <value>Member Management</value>
   </data>
@@ -353,5 +350,26 @@
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="Book" xml:space="preserve">
+    <value>📖 Books</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>👤 Authors</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>🏷️ Category</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>👥 Members</value>
+  </data>
+  <data name="SwichLanguage" xml:space="preserve">
+    <value>🇬🇧 English</value>
+  </data>
+  <data name="MemberManagement" xml:space="preserve">
+    <value>Member Management</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
   </data>
 </root>

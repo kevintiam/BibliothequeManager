@@ -115,6 +115,24 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à 👤 Auteurs.
+        /// </summary>
+        public static string Authors {
+            get {
+                return ResourceManager.GetString("Authors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 📖 Livres.
+        /// </summary>
+        public static string Book {
+            get {
+                return ResourceManager.GetString("Book", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Livre et Adhérent.
         /// </summary>
         public static string BookAndMember {
@@ -174,6 +192,15 @@ namespace BibliothequeManager.Properties {
         public static string CardNumber {
             get {
                 return ResourceManager.GetString("CardNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 🏷️ Categorie.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
             }
         }
         
@@ -484,6 +511,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à 👥 Adherants.
+        /// </summary>
+        public static string Members {
+            get {
+                return ResourceManager.GetString("Members", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Aucun emprunt trouvé.
         /// </summary>
         public static string NoLoansFound {
@@ -700,6 +736,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Deconnexion.
+        /// </summary>
+        public static string SignOut {
+            get {
+                return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Date Début.
         /// </summary>
         public static string StartDate {
@@ -723,6 +768,15 @@ namespace BibliothequeManager.Properties {
         public static string SubscriberID {
             get {
                 return ResourceManager.GetString("SubscriberID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 🇫🇷 Français.
+        /// </summary>
+        public static string SwichLanguage {
+            get {
+                return ResourceManager.GetString("SwichLanguage", resourceCulture);
             }
         }
         
