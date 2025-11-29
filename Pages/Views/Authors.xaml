@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.Views.Authors"
-             Title="Authors">
+             Title="Authors"
+             NavigationPage.HasBackButton="False">
     <Grid>
         <!-- Fond léger optionnel -->
         <Image x:Name="BackgroundImage"
@@ -76,41 +77,48 @@
                 <CollectionView x:Name="AuthorsCollectionView"
                                 Grid.Row="2"
                                 SelectionMode="Single"
-                                Margin="20,0">
+                                Margin="50,0">
 
-                    <CollectionView.Header>
-                        <Grid ColumnDefinitions="*,*,*"
-                              Style="{StaticResource TabHead}"
-                              x:Name="AuthorsHeaderGrid">
-                            <Label x:Name="PrenomHeader"
-                                   Text="Prenom" 
-                                   Style="{StaticResource TableHeader}" />
-                            <Label x:Name="NomHeader"
-                                   Text="Nom" 
-                                   Style="{StaticResource TableHeader}" 
-                                   Grid.Column="1" />
-                            <Label x:Name="NombreLivreHeader"
-                                   Text="Nombre de Livre" 
-                                   Style="{StaticResource TableHeader}" 
-                                   Grid.Column="2" />
-                        </Grid>
-                    </CollectionView.Header>
+                    <!-- Changer le layout pour grid avec 3 colonnes -->
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout 
+                            Orientation="Vertical"
+                            Span="{OnIdiom Phone=2, Tablet=4, Desktop=6, Default=3}"
+                         VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border Style="{StaticResource TabContent}">
-                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                                    <Label x:Name="LastNameLabel"
-                                           Text="{Binding Prenom}" 
-                                           Style="{StaticResource TableRowData}" />
-                                    <Label x:Name="NameLabel"
-                                           Text="{Binding Nom}" 
-                                           Style="{StaticResource TableRowData}" 
-                                           Grid.Column="1" />
-                                    <Label x:Name="NomberBooksLabel"
-                                           Text="{Binding NombreLivres}" 
-                                           Style="{StaticResource TableRowData}" 
-                                           Grid.Column="2" />
+                            <!-- Carte auteur -->
+                            <Border Style="{StaticResource AuthorCard}">
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" 
+                                      RowSpacing="8"
+                                      Padding="15">
+
+                                    <!-- Avatar/Initiales -->
+
+                                    <Border Grid.Row="0"
+                                        Style="{StaticResource AuthorAvatar}">
+                                        <Label Text="{Binding Initiales}"
+                                               Style="{StaticResource AvatarText}"/>
+                                    </Border>
+
+                                    <!-- Prénom -->
+                                    <Label Grid.Row="1"
+                                            Text="{Binding Prenom}"
+                                            Style="{StaticResource AuthorPrenom}"/>
+
+                                    <!-- Nom -->
+                                    <Label Grid.Row="2"
+                                           Text="{Binding Nom}"
+                                           Style="{StaticResource AuthorNom}"/>
+
+                                    <!-- Nombre de livres -->
+                                    <Border Grid.Row="3"
+                                            Style="{StaticResource BookCountBadge}">
+                                        <Label Text="{Binding NombreLivres, StringFormat='{0} livre(s)'}"
+                                                Style="{StaticResource BookCountText}"/>
+                                    </Border>
                                 </Grid>
                             </Border>
                         </DataTemplate>
