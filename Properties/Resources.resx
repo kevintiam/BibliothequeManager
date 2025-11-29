@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessBooks" xml:space="preserve">
+  <data name="AccessThousandsOfBooks" xml:space="preserve">
     <value>Access thousands of books for free</value>
   </data>
   <data name="Actions" xml:space="preserve">
@@ -126,6 +126,12 @@
   <data name="AddEditMember" xml:space="preserve">
     <value>Add / Edit a Member</value>
   </data>
+  <data name="Auteur" xml:space="preserve">
+    <value>Author :</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Disponibilité :</value>
+  </data>
   <data name="BookAndMember" xml:space="preserve">
     <value>Book and Member</value>
   </data>
@@ -133,7 +139,7 @@
     <value>Borrow a book</value>
   </data>
   <data name="BorrowNewBook" xml:space="preserve">
-    <value>Borrow a New Book</value>
+    <value>✨📘 Borrow a new book</value>
   </data>
   <data name="BorrowNow" xml:space="preserve">
     <value>Borrow Now</value>
