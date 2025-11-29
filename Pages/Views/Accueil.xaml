@@ -22,28 +22,22 @@
             <Grid RowDefinitions="Auto,*,Auto">
 
                 <!-- ========== EN-TÊTE ========== -->
-                <Grid Style="{StaticResource StackLayoutAcc}" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
-                    <!-- Logo à gauche -->
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
 
-                    <!-- Texte de bienvenue (occupe tout l'espace central) -->
-                    <StackLayout Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center">
-                        <Label  
-                       Text="{Binding [WelcomToLibraNova], Source={x:Static localApp:App.Localized}}"
-                       Style="{StaticResource HeaderLabel}" />
-                        <Label Text="{Binding [TextWelcom], Source={x:Static localApp:App.Localized}}"
+                        <!-- Texte de bienvenue (occupe tout l'espace central) -->
+                        <StackLayout VerticalOptions="Center">
+                            <Label  
+                            Text="{Binding [WelcomToLibraNova], Source={x:Static localApp:App.Localized}}"
+                            Style="{StaticResource HeaderLabel}" />
+                            <Label Text="{Binding [TextWelcom], Source={x:Static localApp:App.Localized}}"
                          Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-
-                    <!-- Bouton de changement de langue  -->
-                    <Button Grid.Column="3" Grid.Row="0"
-                        Text="🌐FR/EN"                          
-                        Style="{StaticResource LangageBouton}"
-                        x:Name="LangButton"                            
-                        Clicked="OnSwitchLanguageClicked"
-                        HorizontalOptions="Center"/>     
                 </Grid>
 
                 <!-- ========== CARTE DE FONCTIONNALITÉS ========== -->

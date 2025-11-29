@@ -7,24 +7,29 @@
     <Grid>
         <!-- Fond -->
         <Image Source="new_background.png"
-       Aspect="AspectFill"
-       InputTransparent="True"
-       Opacity="0.2" />
+                       Aspect="AspectFill"
+                       InputTransparent="True"
+                       Opacity="0.2" />
         <ScrollView>
             <Grid RowDefinitions="Auto,*">
                 <!-- En-tête -->
-                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
 
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Retourner Un livre Emprunté"
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <!-- Texte de bienvenue (occupe tout l'espace central) -->
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="Retourner Un livre Emprunté"
                        Style="{StaticResource HeaderLabel}" />
-                        <Label Text="Partagez la connaissance 📚"
+                            <Label Text="Partagez la connaissance 📚"
                        Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
 
                 <Grid
                     Grid.Row="1" 
@@ -32,7 +37,8 @@
                     <Grid>
                         <Image Source="image_emprunt.png"
                                Aspect="AspectFill"
-                               InputTransparent="True"/>
+                               InputTransparent="True"
+                               MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
                             <Label Text="Retournez vos livres 📦" 
