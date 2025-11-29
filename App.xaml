@@ -2,7 +2,8 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BibliothequeManager"
-             x:Class="BibliothequeManager.App">
+             x:Class="BibliothequeManager.App"
+             >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -930,6 +931,89 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#334155"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <!-- ========== STYLES POUR LES CARTES AUTEURS ========== -->
+
+            <!-- Carte auteur principale -->
+            <Style x:Key="AuthorCard" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Stroke" Value="{StaticResource Gray300}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="8" />
+                <Setter Property="WidthRequest" Value="180" />
+                <Setter Property="HeightRequest" Value="180" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
+                                    <Setter Property="Scale" Value="1.02" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!-- Avatar auteur -->
+            <Style x:Key="AuthorAvatar" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBlue}" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 25" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <!-- Texte avatar -->
+            <Style x:Key="AvatarText" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="PlaypenSansSemiBold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <!-- Prénom auteur -->
+            <Style x:Key="AuthorPrenom" TargetType="Label">
+                <Setter Property="FontFamily" Value="PlaypenSansSemiBold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+
+            <!-- Nom auteur -->
+            <Style x:Key="AuthorNom" TargetType="Label">
+                <Setter Property="FontFamily" Value="PlaypenSansBold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryBlue}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+
+            <!-- Badge nombre de livres -->
+            <Style x:Key="BookCountBadge" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <!-- Texte badge -->
+            <Style x:Key="BookCountText" TargetType="Label">
+                <Setter Property="FontFamily" Value="PlaypenSansRegular" />
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryBlue}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
