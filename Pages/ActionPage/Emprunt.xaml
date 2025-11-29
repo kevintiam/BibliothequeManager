@@ -40,9 +40,9 @@
                                MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
-                            <Label Text="{Binding [BorrowNow], Source={x:Static localApp:App.Localized}}" 
+                            <Label Text="{Binding [WelcomeTitle], Source={x:Static localApp:App.Localized}}" 
                                        Style="{StaticResource HeroTitle}"/>
-                            <Label Text="{Binding [AccessThousandsOfBooks], Source={x:Static localApp:App.Localized}}"                             
+                            <Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"                             
                                    Style="{StaticResource SectionLabelSubtitle}"
                                    />
                         </StackLayout>

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.ActionPage.Retour"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
              NavigationPage.HasNavigationBar="False"
              Title="Retour">
     <Grid>
@@ -23,10 +24,10 @@
 
                         <!-- Texte de bienvenue (occupe tout l'espace central) -->
                         <StackLayout Style="{StaticResource StackLayoutAcce}">
-                            <Label Text="Retourner Un livre Emprunté"
-                       Style="{StaticResource HeaderLabel}" />
-                            <Label Text="Partagez la connaissance 📚"
-                       Style="{StaticResource SubHeaderLabel}" />
+                            <Label Text="{Binding [ReturnBorrowedBook], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource HeaderLabel}" />
+                            <Label  Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}" 
+                                    Style="{StaticResource SubHeaderLabel}" />
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -41,9 +42,9 @@
                                MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
-                            <Label Text="Retournez vos livres 📦" 
+                            <Label Text="{Binding [ReturnYourBooks], Source={x:Static localApp:App.Localized}}" 
                                        Style="{StaticResource HeroTitle}"/>
-                            <Label Text="Libérez des ouvrages pour d'autres lecteurs" 
+                            <Label Text="{Binding [FreeUpBooks], Source={x:Static localApp:App.Localized}}" 
                                    Style="{StaticResource SectionLabelSubtitle}"
                                    />
                         </StackLayout>
@@ -61,15 +62,15 @@
                             Style="{StaticResource LogoImage}"
                             Background="Transparent"/>
 
-                        <Label Text="Retourner Un livre Emprunté"
+                        <Label Text="{Binding [ReturnBorrowedBook], Source={x:Static localApp:App.Localized}}" 
                        Style="{StaticResource HeroTitle}"/>
 
                         <!-- ID de l'abonné -->
                         <StackLayout>
-                            <Label Text="👤 ID de l'abonné" 
+                            <Label Text="{Binding [SubscriberID], Source={x:Static localApp:App.Localized}}" 
                             Style="{StaticResource SectionLabel}"/>
                             <Entry x:Name="AbonneIdEntry" 
-                           Placeholder="Entrez l'ID de l'abonné" 
+                           Placeholder="{Binding [EnterSubscriberID], Source={x:Static localApp:App.Localized}}" 
                            Keyboard="Numeric"
                            Style="{StaticResource ModernEntry}"/>
                         </StackLayout>
@@ -81,12 +82,12 @@
                             <Button 
                              Grid.Column="0"
                             x:Name="ConfirmerButton" 
-                            Text="✅ verifier la liste des Emprunts"
+                            Text="{Binding [CheckLoanList], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource GradientButtonPrimary}"
                             Clicked="OnConfirmerClicked"/>
 
                             <Button Grid.Column="1" 
-                                Text="🏠 Accueil" 
+                                Text="{Binding [Home], Source={x:Static localApp:App.Localized}}"
                                 Style="{StaticResource GradientButtonSecondary}"
                                 Clicked="OnAccueilClicked"/>
                         </Grid>
@@ -102,22 +103,22 @@
                         <VerticalStackLayout>
                             <Label 
                                 x:Name="NomAbonne"
-                                Text="Nom de l'Adherant : " 
+                                Text="{Binding [MemberName], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                             <Label 
                                 x:Name="PrenomAbonne"
-                                Text="Prenom de l'Adherant : " 
+                                Text="{Binding [MemberFirstName], Source={x:Static localApp:App.Localized}}"
                                 Style="{StaticResource SectionLabel}"/>
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label 
                                 x:Name="IDAbonne"
-                                Text="👤 ID de l'abonné" 
+                                Text="{Binding [SubscriberID], Source={x:Static localApp:App.Localized}}"
                                 Style="{StaticResource SectionLabel}"/>
 
                             <Label 
                                 x:Name="NbLivreEmprunter"
-                                Text="Nombre de Livre Emprunter" 
+                                Text="{Binding [NumberBorrowedBooks], Source={x:Static localApp:App.Localized}}"
                                 Style="{StaticResource SectionLabel}"/>
                         </VerticalStackLayout>
 
@@ -130,12 +131,12 @@
                         <CollectionView.Header>
                             <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*"
                                     Style="{StaticResource TabHead}">
-                                <Label Text="Titre Du Livre" Style="{StaticResource TableHeader}" />
-                                <Label Text="Auteur" Style="{StaticResource TableHeader}" Grid.Column="1"  />
-                                <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="2" />
-                                <Label Text="Date de l'emprunt" Style="{StaticResource TableHeader}" Grid.Column="3" />
-                                <Label Text="Date de retour" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
-                                <Label Text="ID de l'emprunt" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding [BookTitle], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" />
+                                <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="1"  />
+                                <Label Text="{Binding [ISBN], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                                <Label Text="{Binding [LoanDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3" />
+                                <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding [LoanID], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
 
                             </Grid>
                         </CollectionView.Header>

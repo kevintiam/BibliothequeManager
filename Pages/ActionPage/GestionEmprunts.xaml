@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.ActionPage.GestionEmprunts"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
              NavigationPage.HasNavigationBar="False"
              Title="Gestion des Emprunts">
     <Grid>
@@ -22,7 +23,7 @@
                         </Border>
 
                         <StackLayout Style="{StaticResource StackLayoutAcce}">
-                            <Label Text="Gestion des Emprunts" 
+                            <Label Text="{Binding [LoanManagement], Source={x:Static localApp:App.Localized}}"
                            Style="{StaticResource HeaderLabel}"/>
                             <Label Text="Suivi complet des emprunts en cours et historiques" 
                            Style="{StaticResource SubHeaderLabel}"/>

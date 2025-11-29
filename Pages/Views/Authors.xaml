@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.Views.Authors"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
              Title="Authors"
              NavigationPage.HasNavigationBar="False">
     <Grid>
@@ -14,7 +15,7 @@
 
         <ScrollView>
             <Grid RowDefinitions="Auto,Auto,*,Auto">
-
+                
                 <!-- ========== EN-TÊTE ========== -->
                 <Grid Style="{StaticResource StackLayoutAcc}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
@@ -26,10 +27,11 @@
                         <StackLayout Style="{StaticResource StackLayoutAcce}"
                                  x:Name="HeaderTextLayout">
                             <Label x:Name="HeaderTitle"
-                               Text="Gestion Des Auteurs"
+                               Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
+                                   
                                Style="{StaticResource HeaderLabel}" />
                             <Label x:Name="HeaderSubtitle"
-                               Text="La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information"
+                               Text="{Binding [Knowledge], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource SubHeaderLabel}" />
                         </StackLayout>
                     </StackLayout>
@@ -54,7 +56,7 @@
                             <!-- Champ de saisie -->
                             <Entry x:Name="SearchEntry"
                                    Text="{Binding SearchQuery}"
-                                   Placeholder="Rechercher un auteur ..."
+                                   Placeholder="{Binding [SearchAuthor], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TextZone}"/>
 
                             <!-- Bouton de recherche (icône intégrée) -->
@@ -136,7 +138,7 @@
                         Stroke="{StaticResource Gray300}">
                     <VerticalStackLayout Spacing="15">
                         <Label x:Name="FormTitle"
-                               Text="Gerer Les Livres"
+                               Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
                                FontFamily="PlaypenSansSemiBold"
                                FontSize="16"
                                TextColor="{StaticResource PrimaryBlue}" />
@@ -144,7 +146,7 @@
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
                             <VerticalStackLayout Spacing="5" Grid.Column="0">
                                 <Label x:Name="PrenomFormLabel"
-                                       Text="Prenom" 
+                                       Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}"
                                        Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="PrenomEntry"
                                        Text="{Binding LivreEnCours.Titre}" 
@@ -152,7 +154,7 @@
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="5" Grid.Column="1">
                                 <Label x:Name="NomFormLabel"
-                                       Text="Nom" 
+                                       Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}"
                                        Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="NomEntry"
                                        Text="{Binding LivreEnCours.ISBN}" 
@@ -162,7 +164,7 @@
 
                         <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
                             <Button x:Name="AjouterButton"
-                                    Text="Ajouter"
+                                    Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource PrimaryButton}"
                                     Command="{Binding ToggleFormCommand}">
                                 <Button.ImageSource>
@@ -174,7 +176,7 @@
                             </Button>
 
                             <Button x:Name="ModifierButton"
-                                    Text="Modifier"
+                                    Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource WarningButton}"
                                     Command="{Binding ModifierCommand}">
                                 <Button.ImageSource>
@@ -187,7 +189,7 @@
                             </Button>
 
                             <Button x:Name="SupprimerButton"
-                                    Text="Supprimer"
+                                    Text="{Binding [Delete], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource DangerButton}"
                                     Command="{Binding SupprimerCommand}">
                                 <Button.ImageSource>
