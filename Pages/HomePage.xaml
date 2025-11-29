@@ -48,10 +48,12 @@
                             Style="{StaticResource ButtonMenu}">
                     </Button>
 
-                    <Button x:Name="ParametresButton"
-                            Text="⚙️ Paramètres" 
-                            Style="{StaticResource ButtonMenu}">
-                    </Button>
+                    <!-- Bouton de changement de langue  -->
+                    <Button Text="🌐FR/EN"                          
+                        Style="{StaticResource ButtonMenu}"
+                        x:Name="LangButton"                            
+                        Clicked="OnSwitchLanguageClicked"
+                        HorizontalOptions="Center"/>
                 </StackLayout>
 
                 <!-- Pied de page -->
