@@ -79,6 +79,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ajouter / Modifier un adhérent.
         /// </summary>
         public static string AddEditMember {
@@ -88,20 +97,20 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Auteur : .
+        ///   Recherche une chaîne localisée semblable à Auteur.
         /// </summary>
-        public static string Auteur {
+        public static string Author {
             get {
-                return ResourceManager.GetString("Auteur", resourceCulture);
+                return ResourceManager.GetString("Author", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Disponibilité :.
+        ///   Recherche une chaîne localisée semblable à Gestion Des Auteurs.
         /// </summary>
-        public static string Availability {
+        public static string AuthorManagement {
             get {
-                return ResourceManager.GetString("Availability", resourceCulture);
+                return ResourceManager.GetString("AuthorManagement", resourceCulture);
             }
         }
         
@@ -111,6 +120,15 @@ namespace BibliothequeManager.Properties {
         public static string BookAndMember {
             get {
                 return ResourceManager.GetString("BookAndMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Titre Du Livre.
+        /// </summary>
+        public static string BookTitle {
+            get {
+                return ResourceManager.GetString("BookTitle", resourceCulture);
             }
         }
         
@@ -160,7 +178,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à verifier la liste des Emprunts.
+        ///   Recherche une chaîne localisée semblable à ✅ verifier la liste des Emprunts.
         /// </summary>
         public static string CheckLoanList {
             get {
@@ -210,6 +228,33 @@ namespace BibliothequeManager.Properties {
         public static string DaysRemaining {
             get {
                 return ResourceManager.GetString("DaysRemaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supprimer.
+        /// </summary>
+        public static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à A découvrir aujourd&apos;hui.
+        /// </summary>
+        public static string DiscoverToday {
+            get {
+                return ResourceManager.GetString("DiscoverToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -304,20 +349,11 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 🏠  Accueil.
+        ///   Recherche une chaîne localisée semblable à 🏠 Accueil.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à ID de l&apos;abonné.
-        /// </summary>
-        public static string IdMember {
-            get {
-                return ResourceManager.GetString("IdMember", resourceCulture);
             }
         }
         
@@ -327,6 +363,24 @@ namespace BibliothequeManager.Properties {
         public static string InProgress {
             get {
                 return ResourceManager.GetString("InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ISBN.
+        /// </summary>
+        public static string ISBN {
+            get {
+                return ResourceManager.GetString("ISBN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La connaissance s&apos;acquiert par l&apos;expérience, tout le reste n&apos;est que de l&apos;information.
+        /// </summary>
+        public static string Knowledge {
+            get {
+                return ResourceManager.GetString("Knowledge", resourceCulture);
             }
         }
         
@@ -358,7 +412,16 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 📋  Liste des emprunts.
+        ///   Recherche une chaîne localisée semblable à ID de l&apos;emprunt.
+        /// </summary>
+        public static string LoanID {
+            get {
+                return ResourceManager.GetString("LoanID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des emprunts.
         /// </summary>
         public static string LoanList {
             get {
@@ -385,16 +448,16 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ID de l&apos;abonné.
+        ///   Recherche une chaîne localisée semblable à Prenom de l&apos;Adherant :.
         /// </summary>
-        public static string MakeIdMember {
+        public static string MemberFirstName {
             get {
-                return ResourceManager.GetString("MakeIdMember", resourceCulture);
+                return ResourceManager.GetString("MemberFirstName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gérer les réservations.
+        ///   Recherche une chaîne localisée semblable à Gestion des adhérents.
         /// </summary>
         public static string ManageReservation {
             get {
@@ -412,11 +475,11 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gestion des adhérents.
+        ///   Recherche une chaîne localisée semblable à Nom de l&apos;Adherant : .
         /// </summary>
-        public static string MembersManagement {
+        public static string MemberName {
             get {
-                return ResourceManager.GetString("MembersManagement", resourceCulture);
+                return ResourceManager.GetString("MemberName", resourceCulture);
             }
         }
         
@@ -435,6 +498,15 @@ namespace BibliothequeManager.Properties {
         public static string NoReservationsFound {
             get {
                 return ResourceManager.GetString("NoReservationsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nombre de Livre Emprunter.
+        /// </summary>
+        public static string NumberBorrowedBooks {
+            get {
+                return ResourceManager.GetString("NumberBorrowedBooks", resourceCulture);
             }
         }
         
@@ -547,7 +619,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Retournez vos livres.
+        ///   Recherche une chaîne localisée semblable à Retournez vos livres 📦.
         /// </summary>
         public static string ReturnYourBooks {
             get {
@@ -561,6 +633,15 @@ namespace BibliothequeManager.Properties {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rechercher un auteur ....
+        /// </summary>
+        public static string SearchAuthor {
+            get {
+                return ResourceManager.GetString("SearchAuthor", resourceCulture);
             }
         }
         
@@ -601,7 +682,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Partagez la connaissance.
+        ///   Recherche une chaîne localisée semblable à Partagez la connaissance 📚.
         /// </summary>
         public static string ShareKnowledge {
             get {
@@ -628,16 +709,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Changer la langue.
-        /// </summary>
-        public static string SwitchLanguage {
-            get {
-                return ResourceManager.GetString("SwitchLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à La connaissance s&apos;acquiert par l&apos;expérience, tout le reste n&apos;est que de l&apos;information.
+        ///   Recherche une chaîne localisée semblable à 👤 ID de l&apos;abonné.
         /// </summary>
         public static string TextWelcom {
             get {

@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessThousandsOfBooks" xml:space="preserve">
+  <data name="BorrowNow" xml:space="preserve">
+    <value>Borrow Now</value>
+  </data>
+  <data name="ShareKnowledge" xml:space="preserve">
+    <value>Share Knowledge  📚</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>Return Date </value>
+  </data>
+  <data name="ConfirmLoan" xml:space="preserve">
+    <value>Confirm Loan</value>
+  </data>
+  <data name="AccessBooks" xml:space="preserve">
     <value>Access thousands of books for free</value>
   </data>
   <data name="Actions" xml:space="preserve">
@@ -126,23 +138,14 @@
   <data name="AddEditMember" xml:space="preserve">
     <value>Add / Edit a Member</value>
   </data>
-  <data name="Auteur" xml:space="preserve">
-    <value>Author :</value>
-  </data>
-  <data name="Availability" xml:space="preserve">
-    <value>Availability :</value>
-  </data>
   <data name="BookAndMember" xml:space="preserve">
     <value>Book and Member</value>
   </data>
-  <data name="BorrowABook" xml:space="preserve">
+  <data name="BorrowBook" xml:space="preserve">
     <value>Borrow a book</value>
   </data>
   <data name="BorrowNewBook" xml:space="preserve">
-    <value>✨📘 Borrow a new book</value>
-  </data>
-  <data name="BorrowNow" xml:space="preserve">
-    <value>⚡ Borrow now</value>
+    <value>Borrow a New Book</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel </value>
@@ -151,7 +154,7 @@
     <value>Card Number</value>
   </data>
   <data name="CheckLoanList" xml:space="preserve">
-    <value>Check Loan List</value>
+    <value>✅ Check Loan List</value>
   </data>
   <data name="ClassicDescription" xml:space="preserve">
     <value>A classic about friendship, love and solitude</value>
@@ -162,14 +165,11 @@
   <data name="Confirmed" xml:space="preserve">
     <value>Confirmed </value>
   </data>
-  <data name="ConfirmLoan" xml:space="preserve">
-    <value>✅ Confirm Loan</value>
-  </data>
   <data name="DaysRemaining" xml:space="preserve">
     <value>Days remaining </value>
   </data>
-  <data name="ToDiscoverToday" xml:space="preserve">
-    <value>🔍 To discover today</value>
+  <data name="DiscoverToday" xml:space="preserve">
+    <value>Discover today</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -201,12 +201,6 @@
   <data name="FreeUpBooks" xml:space="preserve">
     <value>Free up books for other readers</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>🏠 Home</value>
-  </data>
-  <data name="IdMember" xml:space="preserve">
-    <value>Id Member</value>
-  </data>
   <data name="InProgress" xml:space="preserve">
     <value> In Progress</value>
   </data>
@@ -219,20 +213,17 @@
   <data name="LoanDate" xml:space="preserve">
     <value>Loan Date</value>
   </data>
-  <data name="LoanList" xml:space="preserve">
-    <value>📋  Loan List</value>
-  </data>
-  <data name="LoansManagement" xml:space="preserve">
+  <data name="LoanManagement" xml:space="preserve">
     <value>Loan management</value>
   </data>
   <data name="LoanManagementTitle" xml:space="preserve">
     <value> Loan Management</value>
   </data>
-  <data name="ManageReservation" xml:space="preserve">
+  <data name="ManageReservations" xml:space="preserve">
     <value>Manage reservations</value>
   </data>
-  <data name="MembersManagement" xml:space="preserve">
-    <value>Members management</value>
+  <data name="MemberManagement" xml:space="preserve">
+    <value>Member management</value>
   </data>
   <data name="MemberManagementTitle" xml:space="preserve">
     <value>Member Management</value>
@@ -255,7 +246,7 @@
   <data name="Priority" xml:space="preserve">
     <value>Priority</value>
   </data>
-  <data name="RecordALoan" xml:space="preserve">
+  <data name="RecordLoan" xml:space="preserve">
     <value>Record a Loan</value>
   </data>
   <data name="ReservationDate" xml:space="preserve">
@@ -264,28 +255,25 @@
   <data name="ReservationManagement" xml:space="preserve">
     <value>Reservation Management</value>
   </data>
-  <data name="ReserveABook" xml:space="preserve">
+  <data name="ReserveBook" xml:space="preserve">
     <value>Reserve a book</value>
   </data>
-  <data name="ReturnABook" xml:space="preserve">
+  <data name="ReturnBook" xml:space="preserve">
     <value>Return a book</value>
   </data>
   <data name="ReturnBorrowedBook" xml:space="preserve">
     <value>Return a Borrowed Book</value>
   </data>
-  <data name="ReturnDate" xml:space="preserve">
-    <value>📅 Scheduled Return Date</value>
-  </data>
   <data name="Returned" xml:space="preserve">
     <value>Returned</value>
   </data>
   <data name="ReturnYourBooks" xml:space="preserve">
-    <value>Return your books </value>
+    <value>Return your books  📦</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="SearchABook" xml:space="preserve">
+  <data name="SearchBook" xml:space="preserve">
     <value>Search for a Book</value>
   </data>
   <data name="SearchByCriteria" xml:space="preserve">
@@ -294,14 +282,11 @@
   <data name="SearchMembers" xml:space="preserve">
     <value>Search by name or email...</value>
   </data>
-  <data name="TitleIsbn" xml:space="preserve">
+  <data name="SearchPlaceholder" xml:space="preserve">
     <value>Title, author or ISBN... </value>
   </data>
   <data name="SearchReservations" xml:space="preserve">
     <value>Search by book, member...</value>
-  </data>
-  <data name="ShareKnowledge" xml:space="preserve">
-    <value>Share Knowledge </value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start Date</value>
@@ -309,8 +294,8 @@
   <data name="Status" xml:space="preserve">
     <value> Status</value>
   </data>
-  <data name="MakeIdMember" xml:space="preserve">
-    <value>Subscriber ID</value>
+  <data name="SubscriberID" xml:space="preserve">
+    <value>👤 Subscriber ID</value>
   </data>
   <data name="TotalLoans" xml:space="preserve">
     <value>Total</value>
@@ -321,13 +306,52 @@
   <data name="VisionaryDescription" xml:space="preserve">
     <value>A visionary perspective on surveillance and freedom</value>
   </data>
-  <data name="TextWelcom" xml:space="preserve">
+  <data name="WelcomeSubtitle" xml:space="preserve">
     <value>Knowledge comes from experience, everything else is just information</value>
   </data>
-  <data name="WelcomToLibraNova" xml:space="preserve">
-    <value>📖✨ Welcom to LibraNova</value>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value> Welcome to LibraNova</value>
   </data>
-  <data name="SwitchLanguage" xml:space="preserve">
-    <value>Change language</value>
+  <data name="Home" xml:space="preserve">
+    <value>🏠 Home</value>
+  </data>
+  <data name="MemberName" xml:space="preserve">
+    <value>Member's Name :</value>
+  </data>
+  <data name="MemberFirstName" xml:space="preserve">
+    <value>Member's First Name :</value>
+  </data>
+  <data name="NumberBorrowedBooks" xml:space="preserve">
+    <value>Number of Borrowed Books</value>
+  </data>
+  <data name="LoanID" xml:space="preserve">
+    <value>Loan ID</value>
+  </data>
+  <data name="BookTitle" xml:space="preserve">
+    <value>Book Title</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="ISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="AuthorManagement" xml:space="preserve">
+    <value>Author Management</value>
+  </data>
+  <data name="Knowledge" xml:space="preserve">
+    <value>Knowledge is acquired through experience; everything else is just information.</value>
+  </data>
+  <data name="SearchAuthor" xml:space="preserve">
+    <value>Search for an author.....</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
 </root>
