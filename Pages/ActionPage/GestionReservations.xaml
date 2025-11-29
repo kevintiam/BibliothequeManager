@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.ActionPage.GestionReservations"
              Title="Gestion des Réservations"
+             NavigationPage.HasNavigationBar="False"
              BackgroundColor="#F8FAFC">
     <Grid>
         <!-- Fond avec dégradé -->

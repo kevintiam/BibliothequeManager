@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Globalization;
+using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace BibliothequeManager
 {
@@ -9,6 +12,8 @@ namespace BibliothequeManager
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                //Charger le Community Toolkit MAUI
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -32,7 +37,12 @@ namespace BibliothequeManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            // Langue par défaut : français
+            var culture = new CultureInfo("fr");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
             return builder.Build();
         }
     }
