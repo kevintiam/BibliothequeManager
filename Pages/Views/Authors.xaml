@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.Views.Authors"
              Title="Authors"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False">
     <Grid>
         <!-- Fond léger optionnel -->
         <Image x:Name="BackgroundImage"
@@ -16,25 +16,25 @@
             <Grid RowDefinitions="Auto,Auto,*,Auto">
 
                 <!-- ========== EN-TÊTE ========== -->
-                <HorizontalStackLayout Grid.Row="0" 
-                                       Style="{StaticResource StackLayoutAcc}"
-                                       x:Name="HeaderLayout">
-                    <Border Style="{StaticResource RoundedImageBorder}"
-                            x:Name="LogoBorder">
-                        <Image x:Name="LogoImage"
-                               Source="logo.png" 
-                               Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}"
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <StackLayout Style="{StaticResource StackLayoutAcce}"
                                  x:Name="HeaderTextLayout">
-                        <Label x:Name="HeaderTitle"
+                            <Label x:Name="HeaderTitle"
                                Text="Gestion Des Auteurs"
                                Style="{StaticResource HeaderLabel}" />
-                        <Label x:Name="HeaderSubtitle"
+                            <Label x:Name="HeaderSubtitle"
                                Text="La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information"
                                Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
+
 
                 <!-- ======= Zone de recherche ===============-->
                 <HorizontalStackLayout Grid.Row="1" 

@@ -17,27 +17,33 @@
             <Grid RowDefinitions="Auto,*" >
 
                 <!-- En-tête -->
-                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                            <Image Source="logo.png" Style="{StaticResource Logo}"/>
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
                         </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Réservation de Livre" 
+
+                        <!-- Texte de bienvenue (occupe tout l'espace central) -->
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="Réservation de Livre" 
                                    Style="{StaticResource HeaderLabel}"
                                    TextColor="White"/>
-                        <Label Text="Réservez vos livres à l'avance" 
+                            <Label Text="Réservez vos livres à l'avance" 
                                    Style="{StaticResource SubHeaderLabel}"
                                    TextColor="#E0F2FE"/>
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
-
+                </Grid>
+                
                 <!-- Contenu principal -->
                 <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="25">
 
                     <Grid>
                         <Image Source="image_reserver.png"
                                Aspect="AspectFill"
-                               InputTransparent="True"/>
+                               InputTransparent="True"
+                               MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
                             <Label Text="Réservez dès maintenant 📅" 

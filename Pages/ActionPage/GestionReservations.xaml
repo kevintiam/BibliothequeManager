@@ -15,19 +15,23 @@
         <ScrollView>
             <Grid RowDefinitions="Auto, Auto, *">
 
-                <!-- En-tête -->
-                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Gestion des Réservations" 
-                           Style="{StaticResource HeaderLabel}"/>
-                        <Label Text="Suivi et gestion des réservations en attente" 
-                           Style="{StaticResource SubHeaderLabel}"/>
-                    </StackLayout>
-                </HorizontalStackLayout>
 
+                <!-- En-tête -->
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="Gestion des Réservations" 
+                           Style="{StaticResource HeaderLabel}"/>
+                            <Label Text="Suivi et gestion des réservations en attente" 
+                           Style="{StaticResource SubHeaderLabel}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
 
                 <!-- Barre d'outils et statistiques -->
                 <Border Grid.Row="1" 
