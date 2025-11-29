@@ -14,7 +14,7 @@
                Opacity="0.2" />
 
         <ScrollView>
-            <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <Grid RowDefinitions="Auto,Auto,*">
                 
                 <!-- ========== EN-TÊTE ========== -->
                 <Grid Style="{StaticResource StackLayoutAcc}">
@@ -126,94 +126,69 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-                <!-- ========= GESTION DES AUTEURS ========= -->
-                <Border Grid.Row="3"
-                        x:Name="FormulaireLivres"
-                        IsVisible="Hidden"
-                        StrokeShape="RoundRectangle 20"
-                        BackgroundColor="White"
-                        Padding="20"
-                        Margin="30,15"
-                        Stroke="{StaticResource Gray300}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label x:Name="FormTitle"
-                               Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
-                               FontFamily="PlaypenSansSemiBold"
-                               FontSize="16"
-                               TextColor="{StaticResource PrimaryBlue}" />
-
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
-                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                <Label x:Name="PrenomFormLabel"
-                                       Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}"
-                                       Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="PrenomEntry"
-                                       Text="{Binding LivreEnCours.Titre}" 
-                                       Style="{StaticResource FormEntry}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                <Label x:Name="NomFormLabel"
-                                       Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}"
-                                       Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="NomEntry"
-                                       Text="{Binding LivreEnCours.ISBN}" 
-                                       Style="{StaticResource FormEntry}" />
-                            </VerticalStackLayout>
-                        </Grid>
-
-                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
-                            <Button x:Name="AjouterButton"
-                                    Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
-                                    Style="{StaticResource PrimaryButton}"
-                                    Command="{Binding ToggleFormCommand}">
-                                <Button.ImageSource>
-                                    <FontImageSource FontFamily="MaterialIcons"
-                                                     Glyph="&#xe145;"   
-                                                     Color="White"
-                                                     Size="18" />
-                                </Button.ImageSource>
-                            </Button>
-
-                            <Button x:Name="ModifierButton"
-                                    Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
-                                    Style="{StaticResource WarningButton}"
-                                    Command="{Binding ModifierCommand}">
-                                <Button.ImageSource>
-                                    <FontImageSource 
-                                        FontFamily="MaterialIcons"
-                                        Glyph="&#xe3c9;"   
-                                        Color="White"
-                                        Size="18" />
-                                </Button.ImageSource>
-                            </Button>
-
-                            <Button x:Name="SupprimerButton"
-                                    Text="{Binding [Delete], Source={x:Static localApp:App.Localized}}"
-                                    Style="{StaticResource DangerButton}"
-                                    Command="{Binding SupprimerCommand}">
-                                <Button.ImageSource>
-                                    <FontImageSource 
-                                        FontFamily="MaterialIcons"
-                                        Glyph="&#xe872;"   
-                                        Color="White"
-                                        Size="18" />
-                                </Button.ImageSource>
-                            </Button>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
             </Grid>
         </ScrollView>
+        <Border Grid.Row="2"
+                x:Name="FormulaireLivres"
+                IsVisible="False"
+                Style="{StaticResource FormulaireAuteur}">
+            <VerticalStackLayout Spacing="15">
+                <Label x:Name="FormTitle"
+                       Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormulaireTitle}"/>
 
+                <Grid RowDefinitions="*,*" RowSpacing="50">
+                    <VerticalStackLayout Spacing="5" >
+                        <Label x:Name="PrenomFormLabel" Grid.Row="0"
+                               Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="PrenomEntry"
+                               Text="{Binding AuteurEnCours.FirstName}" 
+                               Style="{StaticResource FormEntry}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5" Grid.Row="1">
+                        <Label x:Name="NomFormLabel"
+                               Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="NomEntry"
+                               Text="{Binding AuteurEnCours.LastName}"
+                               Style="{StaticResource FormEntry}" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
+                    <Button x:Name="AjouterButton"
+                            Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
+                            Style="{StaticResource PrimaryButton}"
+                            Command="{Binding ToggleFormCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="MaterialIcons"
+                                     Glyph="&#xe145;"   
+                                     Color="White"
+                                     Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="ModifierButton"
+                            Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
+                            Style="{StaticResource WarningButton}"
+                            Command="{Binding ModifierCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                                FontFamily="MaterialIcons"
+                                Glyph="&#xe3c9;"   
+                                Color="White"
+                                Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
         <!-- ========== BOUTON FLOTTANT “+” ========== -->
         <Button x:Name="FloatingAddButton"
                 Text="+"
                 Clicked="OnFloatingAddClicked"
                 Command="{Binding ToggleFormCommand}"
-                Style="{StaticResource FloatingAddButton}"
-                HorizontalOptions="End"
-                VerticalOptions="End"
-                Margin="0,0,20,20" />
+                Style="{StaticResource FloatingAddButton}"/>
     </Grid>
 </ContentPage>
