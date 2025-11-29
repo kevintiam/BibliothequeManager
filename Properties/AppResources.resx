@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,257 +59,275 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="AccessBooks" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessThousandsOfBooks" xml:space="preserve">
     <value>Accédez à des milliers de livres gratuitemen</value>
   </data>
-	<data name="Actions" xml:space="preserve">
+  <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>
-	<data name="AddEditMember" xml:space="preserve">
+  <data name="AddEditMember" xml:space="preserve">
     <value>Ajouter / Modifier un adhérent</value>
   </data>
-	<data name="BookAndMember" xml:space="preserve">
+  <data name="Auteur" xml:space="preserve">
+    <value>Auteur : </value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Disponibilité :</value>
+  </data>
+  <data name="BookAndMember" xml:space="preserve">
     <value>Livre et Adhérent</value>
   </data>
-	<data name="BorrowBook" xml:space="preserve">
+  <data name="BorrowABook" xml:space="preserve">
     <value>Emprunter un livre</value>
   </data>
-	<data name="BorrowNewBook" xml:space="preserve">
-    <value>Emprunter un nouveau Livre</value>
+  <data name="BorrowNewBook" xml:space="preserve">
+    <value>✨📘 Emprunter un nouveau livre</value>
   </data>
-	<data name="BorrowNow" xml:space="preserve">
-    <value>Empruntez dès maintenant</value>
+  <data name="BorrowNow" xml:space="preserve">
+    <value>⚡ Emprunter maintenant</value>
   </data>
-	<data name="Cancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Annuler </value>
   </data>
-	<data name="CardNumber" xml:space="preserve">
+  <data name="CardNumber" xml:space="preserve">
     <value>N° Carte</value>
   </data>
-	<data name="CheckLoanList" xml:space="preserve">
+  <data name="CheckLoanList" xml:space="preserve">
     <value>verifier la liste des Emprunts</value>
   </data>
-	<data name="ClassicDescription" xml:space="preserve">
+  <data name="ClassicDescription" xml:space="preserve">
     <value>Un classique sur l'amitié, l'amour et la solitude</value>
   </data>
-	<data name="CompleteTracking" xml:space="preserve">
+  <data name="CompleteTracking" xml:space="preserve">
     <value>Suivi complet des emprunts en cours et historiques</value>
   </data>
-	<data name="Confirmed" xml:space="preserve">
+  <data name="Confirmed" xml:space="preserve">
     <value>Confirmées</value>
   </data>
-	<data name="ConfirmLoan" xml:space="preserve">
-    <value>Confirmer l'emprunt</value>
+  <data name="ConfirmLoan" xml:space="preserve">
+    <value>✅ Confirmer l'emprunt</value>
   </data>
-	<data name="DaysRemaining" xml:space="preserve">
+  <data name="DaysRemaining" xml:space="preserve">
     <value>Jours restants</value>
   </data>
-	<data name="DiscoverToday" xml:space="preserve">
-    <value>A découvrir aujourd'hui</value>
+  <data name="ToDiscoverToday" xml:space="preserve">
+    <value>🔍 À découvrir aujourd'hui</value>
   </data>
-	<data name="Email" xml:space="preserve">
+  <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
-	<data name="EndDate" xml:space="preserve">
+  <data name="EndDate" xml:space="preserve">
     <value>Date de fin</value>
   </data>
-	<data name="EnterSubscriberID" xml:space="preserve">
+  <data name="EnterSubscriberID" xml:space="preserve">
     <value> Entrez l'ID de l'abonné</value>
   </data>
-	<data name="ExpectedReturnDate" xml:space="preserve">
+  <data name="ExpectedReturnDate" xml:space="preserve">
     <value>Date de Retour Prévue</value>
   </data>
-	<data name="Expired" xml:space="preserve">
+  <data name="Expired" xml:space="preserve">
     <value>Expirées</value>
   </data>
-	<data name="FilterByStatus" xml:space="preserve">
+  <data name="FilterByStatus" xml:space="preserve">
     <value>Filtrer par statut</value>
   </data>
-	<data name="FineAmount" xml:space="preserve">
+  <data name="FineAmount" xml:space="preserve">
     <value>Montant amendes ($)</value>
   </data>
-	<data name="Fines" xml:space="preserve">
+  <data name="Fines" xml:space="preserve">
     <value>Amendes</value>
   </data>
-	<data name="FirstName" xml:space="preserve">
+  <data name="FirstName" xml:space="preserve">
     <value>Prénom</value>
   </data>
-	<data name="FreeUpBooks" xml:space="preserve">
+  <data name="FreeUpBooks" xml:space="preserve">
     <value>Libérez des ouvrages pour d'autres lecteurs</value>
   </data>
-	<data name="InProgress" xml:space="preserve">
-    <value>En cours</value>
+  <data name="Home" xml:space="preserve">
+    <value>🏠  Accueil</value>
   </data>
-	<data name="LastName" xml:space="preserve">
-    <value> Nom</value>
-  </data>
-	<data name="Late" xml:space="preserve">
-    <value>Retard</value>
-  </data>
-	<data name="LoanDate" xml:space="preserve">
-    <value>Date Emprunt</value>
-  </data>
-	<data name="LoanManagement" xml:space="preserve">
-    <value>Gestion des emprunts</value>
-  </data>
-	<data name="LoanManagementTitle" xml:space="preserve">
-    <value>Gestion des Emprunts</value>
-  </data>
-	<data name="ManageReservations" xml:space="preserve">
-    <value>Gérer les réservations</value>
-  </data>
-	<data name="MemberManagement" xml:space="preserve">
-    <value>Gestion des adhérents</value>
-  </data>
-	<data name="MemberManagementTitle" xml:space="preserve">
-    <value>Gestion des Adhérents</value>
-  </data>
-	<data name="NoLoansFound" xml:space="preserve">
-    <value>Aucun emprunt trouvé</value>
-  </data>
-	<data name="NoReservationsFound" xml:space="preserve">
-    <value>Aucune réservation trouvée</value>
-  </data>
-	<data name="Pending" xml:space="preserve">
-    <value>En attente</value>
-  </data>
-	<data name="PendingReservations" xml:space="preserve">
-    <value>Suivi et gestion des réservations en attente</value>
-  </data>
-	<data name="PowerfulNovelDescription" xml:space="preserve">
-    <value>Un roman puissant sur la mémoire de l'esclavage</value>
-  </data>
-	<data name="Priority" xml:space="preserve">
-    <value>Priorité</value>
-  </data>
-	<data name="RecordLoan" xml:space="preserve">
-    <value>Enregistrer un emprunt</value>
-  </data>
-	<data name="ReservationDate" xml:space="preserve">
-    <value>Date Réservation</value>
-  </data>
-	<data name="ReservationManagement" xml:space="preserve">
-    <value>Gestion des Réservations</value>
-  </data>
-	<data name="ReserveBook" xml:space="preserve">
-    <value>Réserver un livre</value>
-  </data>
-	<data name="ReturnBook" xml:space="preserve">
-    <value>Retourner un livre</value>
-  </data>
-	<data name="ReturnBorrowedBook" xml:space="preserve">
-    <value>Retourner Un livre Emprunté</value>
-  </data>
-	<data name="ReturnDate" xml:space="preserve">
-    <value>Date Retour</value>
-  </data>
-	<data name="Returned" xml:space="preserve">
-    <value>Retournés</value>
-  </data>
-	<data name="ReturnYourBooks" xml:space="preserve">
-    <value>Retournez vos livres</value>
-  </data>
-	<data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
-  </data>
-	<data name="SearchBook" xml:space="preserve">
-    <value>Rechercher un Livre </value>
-  </data>
-	<data name="SearchByCriteria" xml:space="preserve">
-    <value>Rechercher par titre, auteur, adhérent...</value>
-  </data>
-	<data name="SearchMembers" xml:space="preserve">
-    <value>Rechercher par nom ou email... </value>
-  </data>
-	<data name="SearchPlaceholder" xml:space="preserve">
-    <value>Titre, auteur ou ISBN...</value>
-  </data>
-	<data name="SearchReservations" xml:space="preserve">
-    <value>Rechercher par livre, adhérent... </value>
-  </data>
-	<data name="ShareKnowledge" xml:space="preserve">
-    <value>Partagez la connaissance</value>
-  </data>
-	<data name="StartDate" xml:space="preserve">
-    <value>Date Début</value>
-  </data>
-	<data name="Status" xml:space="preserve">
-    <value> Statut</value>
-  </data>
-	<data name="SubscriberID" xml:space="preserve">
+  <data name="IdMember" xml:space="preserve">
     <value>ID de l'abonné</value>
   </data>
-	<data name="TotalLoans" xml:space="preserve">
+  <data name="InProgress" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value> Nom</value>
+  </data>
+  <data name="Late" xml:space="preserve">
+    <value>Retard</value>
+  </data>
+  <data name="LoanDate" xml:space="preserve">
+    <value>Date Emprunt</value>
+  </data>
+  <data name="LoanList" xml:space="preserve">
+    <value>📋  Liste des emprunts</value>
+  </data>
+  <data name="LoansManagement" xml:space="preserve">
+    <value>Gestion des emprunts</value>
+  </data>
+  <data name="LoanManagementTitle" xml:space="preserve">
+    <value>Gestion des Emprunts</value>
+  </data>
+  <data name="ManageReservation" xml:space="preserve">
+    <value>Gérer les réservations</value>
+  </data>
+  <data name="MembersManagement" xml:space="preserve">
+    <value>Gestion des adhérents</value>
+  </data>
+  <data name="MemberManagementTitle" xml:space="preserve">
+    <value>Gestion des Adhérents</value>
+  </data>
+  <data name="NoLoansFound" xml:space="preserve">
+    <value>Aucun emprunt trouvé</value>
+  </data>
+  <data name="NoReservationsFound" xml:space="preserve">
+    <value>Aucune réservation trouvée</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>En attente</value>
+  </data>
+  <data name="PendingReservations" xml:space="preserve">
+    <value>Suivi et gestion des réservations en attente</value>
+  </data>
+  <data name="PowerfulNovelDescription" xml:space="preserve">
+    <value>Un roman puissant sur la mémoire de l'esclavage</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priorité</value>
+  </data>
+  <data name="RecordALoan" xml:space="preserve">
+    <value>Enregistrer un emprunt</value>
+  </data>
+  <data name="ReservationDate" xml:space="preserve">
+    <value>Date Réservation</value>
+  </data>
+  <data name="ReservationManagement" xml:space="preserve">
+    <value>Gestion des Réservations</value>
+  </data>
+  <data name="ReserveABook" xml:space="preserve">
+    <value>Réserver un livre</value>
+  </data>
+  <data name="ReturnABook" xml:space="preserve">
+    <value>Retourner un livre</value>
+  </data>
+  <data name="ReturnBorrowedBook" xml:space="preserve">
+    <value>Retourner Un livre Emprunté</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>📅 Date de Retour Prévue</value>
+  </data>
+  <data name="Returned" xml:space="preserve">
+    <value>Retournés</value>
+  </data>
+  <data name="ReturnYourBooks" xml:space="preserve">
+    <value>Retournez vos livres</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SearchABook" xml:space="preserve">
+    <value>Rechercher un Livre </value>
+  </data>
+  <data name="SearchByCriteria" xml:space="preserve">
+    <value>Rechercher par titre, auteur, adhérent...</value>
+  </data>
+  <data name="SearchMembers" xml:space="preserve">
+    <value>Rechercher par nom ou email... </value>
+  </data>
+  <data name="TitleIsbn" xml:space="preserve">
+    <value>Titre, auteur ou ISBN...</value>
+  </data>
+  <data name="SearchReservations" xml:space="preserve">
+    <value>Rechercher par livre, adhérent... </value>
+  </data>
+  <data name="ShareKnowledge" xml:space="preserve">
+    <value>Partagez la connaissance</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Date Début</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value> Statut</value>
+  </data>
+  <data name="MakeIdMember" xml:space="preserve">
+    <value>ID de l'abonné</value>
+  </data>
+  <data name="TotalLoans" xml:space="preserve">
     <value>Total</value>
   </data>
-	<data name="TrackMembers" xml:space="preserve">
+  <data name="TrackMembers" xml:space="preserve">
     <value> Suivez vos membres et leurs emprunts</value>
   </data>
-	<data name="VisionaryDescription" xml:space="preserve">
+  <data name="VisionaryDescription" xml:space="preserve">
     <value>Une visionnaire sur la surveillance et la liberté</value>
   </data>
-	<data name="WelcomeSubtitle" xml:space="preserve">
+  <data name="TextWelcom" xml:space="preserve">
     <value>La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information</value>
   </data>
-	<data name="WelcomeTitle" xml:space="preserve">
-    <value>Bienvenue dans LibraNova</value>
+  <data name="WelcomToLibraNova" xml:space="preserve">
+    <value>📖✨ Bienvenue à LibraNova</value>
+  </data>
+  <data name="SwitchLanguage" xml:space="preserve">
+    <value>Changer la langue</value>
   </data>
 </root>
