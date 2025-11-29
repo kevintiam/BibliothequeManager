@@ -124,10 +124,10 @@
     <value>Borrow a book</value>
   </data>
   <data name="BorrowANewBook" xml:space="preserve">
-    <value>Borrow a new book</value>
+    <value>✨📘 Borrow a new book</value>
   </data>
   <data name="BorrowNow" xml:space="preserve">
-    <value>Borrow now</value>
+    <value>⚡ Borrow now</value>
   </data>
   <data name="MakeIdMember" xml:space="preserve">
     <value>Enter the member ID</value>
@@ -160,18 +160,36 @@
     <value>Changer la langue</value>
   </data>
   <data name="TextWelcom" xml:space="preserve">
-    <value>Knowledge is gained through experience; everything else is just information.</value>
+    <value>Knowledge is gained through experience, everything else is just information.</value>
   </data>
   <data name="TitleIsbn" xml:space="preserve">
     <value>Title, Author or ISBN</value>
   </data>
   <data name="ToDiscoverToday" xml:space="preserve">
-    <value>To discover today</value>
+    <value>🔍 To discover today</value>
   </data>
   <data name="WelcomToLibraNova" xml:space="preserve">
-    <value>Welcom to LibraNova</value>
+    <value>📖✨ Welcom to LibraNova</value>
   </data>
   <data name="IdMember" xml:space="preserve">
     <value>Id Member</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>📅 Scheduled Return Date</value>
+  </data>
+  <data name="ConfirmLoan" xml:space="preserve">
+    <value>✅ Confirm Loan</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>🏠 Home</value>
+  </data>
+  <data name="LoanList" xml:space="preserve">
+    <value>📋  Loan List</value>
+  </data>
+  <data name="Auteur" xml:space="preserve">
+    <value>Author :</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Availability :</value>
   </data>
 </root>

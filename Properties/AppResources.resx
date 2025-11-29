@@ -124,10 +124,10 @@
     <value>Emprunter un livre</value>
   </data>
   <data name="BorrowANewBook" xml:space="preserve">
-    <value>Emprunter un nouveau livre</value>
+    <value>✨📘 Emprunter un nouveau livre</value>
   </data>
   <data name="BorrowNow" xml:space="preserve">
-    <value>Emprunter maintenant</value>
+    <value>⚡ Emprunter maintenant</value>
   </data>
   <data name="MakeIdMember" xml:space="preserve">
     <value>Entrez l'ID de l'abonné</value>
@@ -166,12 +166,30 @@
     <value>Titre, auteur ou ISBN...</value>
   </data>
   <data name="ToDiscoverToday" xml:space="preserve">
-    <value>À découvrir aujourd'hui</value>
+    <value>🔍 À découvrir aujourd'hui</value>
   </data>
   <data name="WelcomToLibraNova" xml:space="preserve">
-    <value>Bienvenue à LibraNova</value>
+    <value>📖✨ Bienvenue à LibraNova</value>
   </data>
   <data name="IdMember" xml:space="preserve">
     <value>ID de l'abonné</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>📅 Date de Retour Prévue</value>
+  </data>
+  <data name="ConfirmLoan" xml:space="preserve">
+    <value>✅ Confirmer l'emprunt</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>🏠  Accueil</value>
+  </data>
+  <data name="LoanList" xml:space="preserve">
+    <value>📋  Liste des emprunts</value>
+  </data>
+  <data name="Auteur" xml:space="preserve">
+    <value>Auteur : </value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Disponibilité :</value>
   </data>
 </root>

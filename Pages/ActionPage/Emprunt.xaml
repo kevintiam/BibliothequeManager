@@ -13,28 +13,34 @@
            Opacity="0.2" />
         <ScrollView>
             <Grid RowDefinitions="Auto,*">
-                <!-- En-tête -->
-                <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="{Binding [BorrowANewBook], Source={x:Static localApp:App.Localized}}" 
-                           Style="{StaticResource HeaderLabel}" />
-                        <Label  Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}"  
-                           Style="{StaticResource SubHeaderLabel}" />
+
+                <!-- ========== EN-TÊTE ========== -->
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="{Binding [BorrowANewBook], Source={x:Static localApp:App.Localized}}" 
+                                    Style="{StaticResource HeaderLabel}" />
+                            <Label  Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}"  
+                                    Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
 
                 <Grid Grid.Row="1" ColumnDefinitions="*,*">
 
-                    <Grid>
+                    <Grid Grid.Column="0">
                         <Image Source="image_emprunt.png"
                                Aspect="AspectFill"
-                               InputTransparent="True"/>
+                               InputTransparent="True"
+                               MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
-                           <Label Text="{Binding [BorrowNow], Source={x:Static localApp:App.Localized}}" 
+                            <Label Text="{Binding [BorrowNow], Source={x:Static localApp:App.Localized}}" 
                                        Style="{StaticResource HeroTitle}"/>
                             <Label Text="{Binding [AccessThousandsOfBooks], Source={x:Static localApp:App.Localized}}"                             
                                    Style="{StaticResource SectionLabelSubtitle}"
@@ -72,7 +78,7 @@
                                                 WidthRequest="60"/>
                             </Grid>
                         </StackLayout>
-                        
+
                         <!-- Section Livre Sélectionné -->
                         <StackLayout x:Name="LivreSection" 
                                              IsVisible="False">
@@ -87,7 +93,7 @@
                                                    FontSize="16"
                                                    TextColor="#7C3AED"/>
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                        <Label Text="Auteur:" 
+                                        <Label Text="{Binding [Auteur], Source={x:Static localApp:App.Localized}}"
                                                        Style="{StaticResource InfoLabel}"/>
                                         <Label x:Name="AuteurLivre" 
                                                        Style="{StaticResource InfoValue}"
@@ -101,7 +107,7 @@
                                                        Grid.Column="1"/>
                                     </Grid>
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                        <Label Text="Disponibilité:" 
+                                        <Label Text="{Binding [Availability], Source={x:Static localApp:App.Localized}}"
                                                        Style="{StaticResource InfoLabel}"/>
                                         <Label x:Name="DisponibiliteLivre" 
                                                        Style="{StaticResource InfoValue}"
@@ -116,23 +122,17 @@
                             <Label Text="{Binding [IdMember], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                             <Entry x:Name="AbonneIdEntry" 
-                               Placeholder="{Binding [MakeIdMember], Source={x:Static localApp:App.Localized}}"                                             
-    
-                            
+                               Placeholder="{Binding [MakeIdMember], Source={x:Static localApp:App.Localized}}"                                                
                                Keyboard="Numeric"
                                Style="{StaticResource ModernEntry}"/>
                         </StackLayout>
 
                         <!-- Date de Retour -->
                         <StackLayout>
-                            <Label Text="📅 Date de Retour Prévue" 
-                               Style="{StaticResource SectionLabel}"/>
+                            <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}"  
+                                    Style="{StaticResource SectionLabel}"/>
 
                             <StackLayout Grid.Column="1" Spacing="5">
-                                <Label Text="Date de fin" 
-                                       FontFamily="PlaypenSansSemiBold"
-                                       FontSize="12"
-                                       TextColor="#64748B"/>
                                 <DatePicker x:Name="DateFinPicker"
                                             Style="{StaticResource ModernDatePicker}"/>
                             </StackLayout>
@@ -140,24 +140,23 @@
 
                         <!-- Bouton Confirmer -->
                         <Button x:Name="ConfirmerButton" 
-                                Text="✅ Confirmer l'emprunt"
+                                Text="{Binding [ConfirmLoan], Source={x:Static localApp:App.Localized}}"
                                 Style="{StaticResource GradientButtonPrimary}"
                                 Clicked="OnConfirmerClicked"/>
                         <!-- Navigation -->
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                             <Button Grid.Column="0" 
-                                    Text="🏠 Accueil" 
+                                     Text="{Binding [Home], Source={x:Static localApp:App.Localized}}" 
                                     Style="{StaticResource GradientButtonSecondary}"
                                     Clicked="OnAccueilClicked"/>
 
                             <Button Grid.Column="1" 
-                                    Text="📋 Liste des emprunts" 
+                                    Text="{Binding [LoanList], Source={x:Static localApp:App.Localized}}"  
                                     Style="{StaticResource NextPage}"
                                     Clicked="OnListeEmpruntsClicked"/>
                         </Grid>
                     </StackLayout>
                 </Grid>
-
             </Grid>
         </ScrollView>
 

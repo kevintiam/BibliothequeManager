@@ -362,7 +362,7 @@
             <!-- Styles la page d'accueille -->
             <Style x:Key="StackLayoutAcc" TargetType="HorizontalStackLayout">
                 <Setter Property="Background" Value="{StaticResource PrimaryGradient}"/>
-                <Setter Property="Padding" Value="100,0"/>
+                <Setter Property="HeightRequest" Value="150"/>
                 <Setter Property="Spacing" Value="20"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
@@ -379,7 +379,6 @@
                 </Setter>
                 <Setter Property="WidthRequest" Value="120" />
                 <Setter Property="HeightRequest" Value="120" />
-                <Setter Property="Margin" Value="100,0"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>

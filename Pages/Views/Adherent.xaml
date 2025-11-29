@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.Views.Adherent"
-             Title="Adhérents">
+             Title="Adhérents"
+             NavigationPage.HasNavigationBar="False">
 
     <Grid>
         <!-- Fond -->
@@ -14,17 +15,22 @@
         <ScrollView>
             <Grid RowDefinitions="Auto,Auto,*,Auto">
                 <!-- En-tête -->
-                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Gestion des Adhérents"
+
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="Gestion des Adhérents"
                                Style="{StaticResource HeaderLabel}" />
-                        <Label Text="Suivez vos membres et leurs emprunts"
+                            <Label Text="Suivez vos membres et leurs emprunts"
                                Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
 
                 <!-- Recherche -->
                 <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
