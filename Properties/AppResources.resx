@@ -222,9 +222,6 @@
   <data name="ManageReservations" xml:space="preserve">
     <value>Gérer les réservations</value>
   </data>
-  <data name="MemberManagement" xml:space="preserve">
-    <value>Gestion des adhérents</value>
-  </data>
   <data name="MemberManagementTitle" xml:space="preserve">
     <value>Gestion des Adhérents</value>
   </data>
@@ -353,5 +350,26 @@
   </data>
   <data name="delete" xml:space="preserve">
     <value>Supprimer</value>
+  </data>
+  <data name="Book" xml:space="preserve">
+    <value>📖 Livres</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>👤 Auteurs</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>🏷️ Categorie</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>👥 Adherants</value>
+  </data>
+  <data name="SwichLanguage" xml:space="preserve">
+    <value>🇫🇷 Français</value>
+  </data>
+  <data name="MemberManagement" xml:space="preserve">
+    <value>Gestion des adhérents</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Deconnexion</value>
   </data>
 </root>
