@@ -12,6 +12,7 @@ public partial class Authors : ContentPage
         ChargerAuteurs();
         
 	}
+
     private void OnFloatingAddClicked(object sender, EventArgs e)
     {
         FormulaireLivres.IsVisible = !FormulaireLivres.IsVisible;
@@ -29,18 +30,27 @@ public partial class Authors : ContentPage
                     a.Id,
                     a.Nom,
                     a.Prenom,
-                    NombreLivres = a.Livres.Count
+                    NombreLivres = a.Livres.Count,
                 })
                 .OrderBy(a => a.Nom)
                 .ThenBy(a => a.Prenom)
+                .AsNoTracking()
                 .ToList();
 
             AuthorsCollectionView.ItemsSource = auteurs;
 
         }
         catch (Exception ex)
-        { 
-            //
+        {
+            Console.WriteLine($"Erreur chargement auteurs: {ex.Message}");
         }
+    }
+
+    private string GetInitiales(string prenom, string nom)
+    {
+        if (string.IsNullOrWhiteSpace(prenom) || string.IsNullOrWhiteSpace(nom))
+            return "??";
+
+        return $"{prenom[0]}{nom[0]}".ToUpper();
     }
 }
