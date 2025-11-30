@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.ActionPage.Reserver"
+              xmlns:localApp="clr-namespace:BibliothequeManager"
              NavigationPage.HasNavigationBar="False"
              Title="Réservation"
              BackgroundColor="#F8FAFC">
@@ -26,10 +27,10 @@
 
                         <!-- Texte de bienvenue (occupe tout l'espace central) -->
                         <StackLayout Style="{StaticResource StackLayoutAcce}">
-                            <Label Text="Réservation de Livre" 
+                            <Label Text="{Binding [BookReservation], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource HeaderLabel}"
                                    TextColor="White"/>
-                            <Label Text="Réservez vos livres à l'avance" 
+                            <Label Text="{Binding [ReserveYourBooksInAdvance], Source={x:Static localApp:App.Localized}}" 
                                    Style="{StaticResource SubHeaderLabel}"
                                    TextColor="#E0F2FE"/>
                         </StackLayout>
@@ -46,9 +47,9 @@
                                MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
-                            <Label Text="Réservez dès maintenant 📅" 
+                            <Label Text="{Binding [BookNow], Source={x:Static localApp:App.Localized}}"  
                                        Style="{StaticResource HeroTitle}"/>
-                            <Label Text="Garantissez votre accès aux livres les plus populaires" 
+                            <Label Text="{Binding [GuaranteeYourAccessToThemostPopularBooks], Source={x:Static localApp:App.Localized}}"  
                                    Style="{StaticResource SectionLabelSubtitle}"
                                    />
                         </StackLayout>
@@ -63,7 +64,7 @@
                                        Style="{StaticResource LogoImage}"/>
 
                         <!-- Titre principal -->
-                        <Label Text="Nouvelle Réservation" 
+                        <Label Text="{Binding [NewReservation], Source={x:Static localApp:App.Localized}}" 
                                    Style="{StaticResource HeroTitle}"/>
 
                         <!-- Formulaire -->
@@ -71,7 +72,7 @@
 
                             <!-- Section Recherche Livre -->
                             <StackLayout>
-                                <Label Text="🔍 Rechercher un Livre" 
+                                <Label Text="{Binding [SearchBook], Source={x:Static localApp:App.Localized}}" 
                                            Style="{StaticResource SectionLabel}"/>
 
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -97,21 +98,21 @@
                                         <Label x:Name="TitreLivre" 
                                                    Style="{StaticResource LabelTitleLivre}"/>
                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                            <Label Text="Auteur:" 
+                                            <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}"  
                                                        Style="{StaticResource InfoLabel}"/>
                                             <Label x:Name="AuteurLivre" 
                                                        Style="{StaticResource InfoValue}"
                                                        Grid.Column="1"/>
                                         </Grid>
                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                            <Label Text="ISBN:" 
+                                            <Label Text="{Binding [ISBN], Source={x:Static localApp:App.Localized}}"
                                                        Style="{StaticResource InfoLabel}"/>
                                             <Label x:Name="IsbnLivre" 
                                                        Style="{StaticResource InfoValue}"
                                                        Grid.Column="1"/>
                                         </Grid>
                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                            <Label Text="Disponibilité:" 
+                                            <Label Text="{Binding [Availability], Source={x:Static localApp:App.Localized}}" 
                                                        Style="{StaticResource InfoLabel}"/>
                                             <Label x:Name="DisponibiliteLivre" 
                                                        Style="{StaticResource InfoValue}"
@@ -123,7 +124,7 @@
 
                             <!-- Section Abonné -->
                             <StackLayout>
-                                <Label Text="👤 ID de l'abonné" 
+                                <Label Text="{Binding [SubscriberID], Source={x:Static localApp:App.Localized}}"
                                            Style="{StaticResource SectionLabel}"/>
                                 <Entry x:Name="AbonneIdEntry" 
                                            Placeholder="Saisissez l'ID de l'abonné..." 
@@ -133,7 +134,7 @@
 
                             <!-- Section Date de Réservation -->
                             <StackLayout Spacing="5">
-                                <Label Text="📅 Période de Réservation" 
+                                <Label Text="{Binding [ReservationPeriod], Source={x:Static localApp:App.Localized}}"
                                            Style="{StaticResource SectionLabel}"/>
 
                                 <Border Style="{StaticResource ModernCard}">
@@ -141,7 +142,7 @@
 
                                         <!-- Date de Début -->
                                         <StackLayout Grid.Column="0" Spacing="5">
-                                            <Label Text="Date de début" 
+                                            <Label Text="{Binding [StartDate], Source={x:Static localApp:App.Localized}}"
                                                            Style="{StaticResource LabelEmpruntDateText}"/>
                                             <DatePicker x:Name="DateDebutPicker"
                                                          Style="{StaticResource ModernDatePicker}"/>
@@ -149,7 +150,7 @@
 
                                         <!-- Date de Fin -->
                                         <StackLayout Grid.Column="1" Spacing="5">
-                                            <Label Text="Date de retour" 
+                                            <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}"
                                                        Style="{StaticResource LabelEmpruntDateText}"/>
                                             <DatePicker x:Name="DateFinPicker"
                                                         Style="{StaticResource ModernDatePicker}"/>
@@ -160,19 +161,19 @@
 
                             <!-- Bouton Confirmer -->
                             <Button x:Name="ConfirmerButton" 
-                                        Text="✅ Confirmer la Réservation"
+                                        Text="{Binding [ConfirmTheReservation], Source={x:Static localApp:App.Localized}}"
                                         Style="{StaticResource GradientButtonPrimary}"
                                         Clicked="OnConfirmerClicked"/>
 
                             <!-- Navigation -->
                             <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,10,0,0">
                                 <Button Grid.Column="0" 
-                                            Text="🏠 Accueil" 
+                                            Text="{Binding [Home], Source={x:Static localApp:App.Localized}}" 
                                             Style="{StaticResource GradientButtonSecondary}"
                                             Clicked="OnAccueilClicked"/>
 
                                 <Button Grid.Column="1" 
-                                            Text="📋 Liste des Réservations" 
+                                            Text="{Binding [ListOfReservations], Source={x:Static localApp:App.Localized}}" 
                                             Style="{StaticResource NextPage}"
                                             Clicked="OnMesReservationsClicked"/>
                             </Grid>
