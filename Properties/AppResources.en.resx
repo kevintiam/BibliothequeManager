@@ -138,7 +138,7 @@
   <data name="BorrowBook" xml:space="preserve">
     <value>Borrow a book</value>
   </data>
-  <data name="BorrowNewBook" xml:space="preserve">
+  <data name="BorrowANewBook" xml:space="preserve">
     <value>Borrow a New Book</value>
   </data>
   <data name="BorrowNow" xml:space="preserve">
@@ -264,7 +264,7 @@
   <data name="Priority" xml:space="preserve">
     <value>Priority</value>
   </data>
-  <data name="RecordLoan" xml:space="preserve">
+  <data name="RecordALoan" xml:space="preserve">
     <value>Record a Loan</value>
   </data>
   <data name="ReservationDate" xml:space="preserve">
@@ -336,8 +336,47 @@
   <data name="WelcomeTitle" xml:space="preserve">
     <value> Welcome to LibraNova</value>
   </data>
-  <data name="AccessBooks" xml:space="preserve">
-    <value>Access thousands of books for free</value>
+  <data name="Home" xml:space="preserve">
+    <value>🏠 Home</value>
+  </data>
+  <data name="MemberName" xml:space="preserve">
+    <value>Member's Name :</value>
+  </data>
+  <data name="MemberFirstName" xml:space="preserve">
+    <value>Member's First Name :</value>
+  </data>
+  <data name="NumberBorrowedBooks" xml:space="preserve">
+    <value>Number of Borrowed Books</value>
+  </data>
+  <data name="LoanID" xml:space="preserve">
+    <value>Loan ID</value>
+  </data>
+  <data name="BookTitle" xml:space="preserve">
+    <value>Book Title</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="ISBN" xml:space="preserve">
+    <value>Title, author ou ISBN ...</value>
+  </data>
+  <data name="AuthorManagement" xml:space="preserve">
+    <value>Author Management</value>
+  </data>
+  <data name="Knowledge" xml:space="preserve">
+    <value>Knowledge is acquired through experience; everything else is just information.</value>
+  </data>
+  <data name="SearchAuthor" xml:space="preserve">
+    <value>Search for an author.....</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="ReserveYourBooksInAdvance" xml:space="preserve">
     <value>Reserve Your books in Advance</value>
