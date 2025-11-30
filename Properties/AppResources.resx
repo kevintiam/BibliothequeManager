@@ -144,7 +144,7 @@
   <data name="BorrowBook" xml:space="preserve">
     <value>Emprunter un livre</value>
   </data>
-  <data name="BorrowNewBook" xml:space="preserve">
+  <data name="BorrowANewBook" xml:space="preserve">
     <value>Emprunter un nouveau Livre</value>
   </data>
   <data name="Cancel" xml:space="preserve">
@@ -243,7 +243,7 @@
   <data name="Priority" xml:space="preserve">
     <value>Priorité</value>
   </data>
-  <data name="RecordLoan" xml:space="preserve">
+  <data name="RecordALoan" xml:space="preserve">
     <value>Enregistrer un emprunt</value>
   </data>
   <data name="ReservationDate" xml:space="preserve">
@@ -331,7 +331,7 @@
     <value>Auteur</value>
   </data>
   <data name="ISBN" xml:space="preserve">
-    <value>ISBN</value>
+    <value>Titre, auteur ou ISBN ...</value>
   </data>
   <data name="AuthorManagement" xml:space="preserve">
     <value>Gestion Des Auteurs</value>

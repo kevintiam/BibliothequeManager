@@ -63,9 +63,9 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Accédez à des milliers de livres gratuitemen.
         /// </summary>
-        public static string AccessThousandsOfBooks {
+        public static string AccessBooks {
             get {
-                return ResourceManager.GetString("AccessThousandsOfBooks", resourceCulture);
+                return ResourceManager.GetString("AccessBooks", resourceCulture);
             }
         }
         
@@ -151,25 +151,25 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Emprunter un nouveau Livre.
+        /// </summary>
+        public static string BorrowANewBook {
+            get {
+                return ResourceManager.GetString("BorrowANewBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Emprunter un livre.
         /// </summary>
-        public static string BorrowABook {
+        public static string BorrowBook {
             get {
-                return ResourceManager.GetString("BorrowABook", resourceCulture);
+                return ResourceManager.GetString("BorrowBook", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ✨📘 Emprunter un nouveau livre.
-        /// </summary>
-        public static string BorrowNewBook {
-            get {
-                return ResourceManager.GetString("BorrowNewBook", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à ⚡ Emprunter maintenant.
+        ///   Recherche une chaîne localisée semblable à Empruntez dès maintenant.
         /// </summary>
         public static string BorrowNow {
             get {
@@ -241,7 +241,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ✅ Confirmer l&apos;emprunt.
+        ///   Recherche une chaîne localisée semblable à Confirmer l&apos;emprunt.
         /// </summary>
         public static string ConfirmLoan {
             get {
@@ -394,7 +394,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ISBN.
+        ///   Recherche une chaîne localisée semblable à Titre, auteur ou ISBN ....
         /// </summary>
         public static string ISBN {
             get {
@@ -450,9 +450,9 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Gestion des emprunts.
         /// </summary>
-        public static string LoanList {
+        public static string LoanManagement {
             get {
-                return ResourceManager.GetString("LoanList", resourceCulture);
+                return ResourceManager.GetString("LoanManagement", resourceCulture);
             }
         }
         
@@ -466,11 +466,11 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gestion des emprunts.
+        ///   Recherche une chaîne localisée semblable à Gérer les réservations.
         /// </summary>
-        public static string LoansManagement {
+        public static string ManageReservations {
             get {
-                return ResourceManager.GetString("LoansManagement", resourceCulture);
+                return ResourceManager.GetString("ManageReservations", resourceCulture);
             }
         }
         
@@ -486,9 +486,9 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Gestion des adhérents.
         /// </summary>
-        public static string ManageReservation {
+        public static string MemberManagement {
             get {
-                return ResourceManager.GetString("ManageReservation", resourceCulture);
+                return ResourceManager.GetString("MemberManagement", resourceCulture);
             }
         }
         
@@ -612,18 +612,18 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Réserver un livre.
         /// </summary>
-        public static string ReserveABook {
+        public static string ReserveBook {
             get {
-                return ResourceManager.GetString("ReserveABook", resourceCulture);
+                return ResourceManager.GetString("ReserveBook", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Retourner un livre.
         /// </summary>
-        public static string ReturnABook {
+        public static string ReturnBook {
             get {
-                return ResourceManager.GetString("ReturnABook", resourceCulture);
+                return ResourceManager.GetString("ReturnBook", resourceCulture);
             }
         }
         
@@ -637,7 +637,7 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 📅 Date de Retour Prévue.
+        ///   Recherche une chaîne localisée semblable à Date Retour.
         /// </summary>
         public static string ReturnDate {
             get {
@@ -684,9 +684,9 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Rechercher un Livre .
         /// </summary>
-        public static string SearchABook {
+        public static string SearchBook {
             get {
-                return ResourceManager.GetString("SearchABook", resourceCulture);
+                return ResourceManager.GetString("SearchBook", resourceCulture);
             }
         }
         
@@ -705,6 +705,15 @@ namespace BibliothequeManager.Properties {
         public static string SearchMembers {
             get {
                 return ResourceManager.GetString("SearchMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Titre, auteur ou ISBN....
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
             }
         }
         
@@ -756,27 +765,9 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à 👤 ID de l&apos;abonné.
         /// </summary>
-        public static string TextWelcom {
+        public static string SubscriberID {
             get {
-                return ResourceManager.GetString("TextWelcom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Titre, auteur ou ISBN....
-        /// </summary>
-        public static string TitleIsbn {
-            get {
-                return ResourceManager.GetString("TitleIsbn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à 🔍 À découvrir aujourd&apos;hui.
-        /// </summary>
-        public static string ToDiscoverToday {
-            get {
-                return ResourceManager.GetString("ToDiscoverToday", resourceCulture);
+                return ResourceManager.GetString("SubscriberID", resourceCulture);
             }
         }
         
@@ -817,11 +808,20 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 📖✨ Bienvenue à LibraNova.
+        ///   Recherche une chaîne localisée semblable à La connaissance s&apos;acquiert par l&apos;expérience, tout le reste n&apos;est que de l&apos;information.
         /// </summary>
-        public static string WelcomToLibraNova {
+        public static string WelcomeSubtitle {
             get {
-                return ResourceManager.GetString("WelcomToLibraNova", resourceCulture);
+                return ResourceManager.GetString("WelcomeSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Bienvenue dans LibraNova.
+        /// </summary>
+        public static string WelcomeTitle {
+            get {
+                return ResourceManager.GetString("WelcomeTitle", resourceCulture);
             }
         }
     }

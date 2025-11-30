@@ -62,12 +62,12 @@
 
                         <!-- ISBN du Livre -->
                         <StackLayout>
-                            <Label Text="{Binding [SearchABook], Source={x:Static localApp:App.Localized}}" 
+                            <Label Text="{Binding [SearchBook], Source={x:Static localApp:App.Localized}}" 
                                            Style="{StaticResource SectionLabel}"/>
 
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                 <Entry x:Name="RechercheEntry" 
-                                               Placeholder="{Binding [TitleIsbn], Source={x:Static localApp:App.Localized}}"                                                
+                                               Placeholder="{Binding [ISBN], Source={x:Static localApp:App.Localized}}"                                                
                                                Style="{StaticResource ModernEntry}"
                                                Grid.Column="0"/>
 
@@ -93,7 +93,7 @@
                                                    FontSize="16"
                                                    TextColor="#7C3AED"/>
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                        <Label Text="{Binding [Auteur], Source={x:Static localApp:App.Localized}}"
+                                        <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}"
                                                        Style="{StaticResource InfoLabel}"/>
                                         <Label x:Name="AuteurLivre" 
                                                        Style="{StaticResource InfoValue}"
@@ -119,10 +119,10 @@
                         <!-- ID de l'abonné -->
                         <StackLayout>
 
-                            <Label Text="{Binding [IdMember], Source={x:Static localApp:App.Localized}}" 
+                            <Label Text="{Binding [Members], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                             <Entry x:Name="AbonneIdEntry" 
-                               Placeholder="{Binding [MakeIdMember], Source={x:Static localApp:App.Localized}}"                                                
+                               Placeholder="{Binding [EnterSubscriberID], Source={x:Static localApp:App.Localized}}"                                                
                                Keyboard="Numeric"
                                Style="{StaticResource ModernEntry}"/>
                         </StackLayout>
@@ -151,7 +151,7 @@
                                     Clicked="OnAccueilClicked"/>
 
                             <Button Grid.Column="1" 
-                                    Text="{Binding [LoanList], Source={x:Static localApp:App.Localized}}"  
+                                    Text="{Binding [LoanManagement], Source={x:Static localApp:App.Localized}}"  
                                     Style="{StaticResource NextPage}"
                                     Clicked="OnListeEmpruntsClicked"/>
                         </Grid>
