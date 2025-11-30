@@ -52,7 +52,7 @@
                         Grid.Column="1"
                         Style="{StaticResource CadreEmprunt}">
 
-                        <!-- Entrer les identifiants -->
+                        <!-- Entrer les identifiants-->
                         <Image 
                                 Source="emprunt_book.png"
                                 Style="{StaticResource LogoImage}"
