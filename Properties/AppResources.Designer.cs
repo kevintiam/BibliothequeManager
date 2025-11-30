@@ -698,7 +698,7 @@ namespace BibliothequeManager.Properties {
                 return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
             }
         }
-     
+              
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Rechercher par livre, adhérent... .
         /// </summary>
@@ -743,7 +743,12 @@ namespace BibliothequeManager.Properties {
                 return ResourceManager.GetString("SubscriberID", resourceCulture);
             }
         }
-    
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 🇫🇷 Français.
+        /// </summary>
+
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Total.
         /// </summary>
