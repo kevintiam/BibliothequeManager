@@ -2,6 +2,7 @@
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="BibliothequeManager.Pages.HomePage"
+            xmlns:localApp="clr-namespace:BibliothequeManager"
             FlyoutLayoutBehavior="Popover">
 
     <!-- menu latéral -->
@@ -13,11 +14,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
                 <!-- En-tête du menu -->
                 <StackLayout Grid.Row="0">
                     <Label x:Name="TitleHome"
-                            Text="📚 BiblioTech" 
+                            Text="📚 LibraNova" 
                            Style="{StaticResource TitleMenu}"/>
                 </StackLayout>
 
@@ -25,32 +25,32 @@
                 <StackLayout Grid.Row="1" 
                             Style="{StaticResource StackLayoutMenu}">
                     <Button x:Name="AccueilButton"
-                            Text="🏠 Accueil" 
+                            Text="{Binding [Home], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource ButtonMenu}">
                     </Button>
 
                     <Button x:Name="LivresButton"
-                            Text="📖 Livres" 
+                            Text="{Binding [Book], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource ButtonMenu}">
                     </Button>
 
                     <Button x:Name="AuthorsButton"
-                            Text="👤 Auteurs" 
+                            Text="{Binding [Authors], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource ButtonMenu}">
                     </Button>
                     <Button x:Name="CategorieButton"
-                            Text="✒️ Categorie" 
+                            Text="{Binding [Category], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource ButtonMenu}">
                     </Button>
 
                     <Button x:Name="AdherentsButton"
-                            Text="👥 Adhérents" 
+                            Text="{Binding [Members], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource ButtonMenu}">
                     </Button>
 
                     <!-- Bouton de changement de langue  -->
-                    <Button Text="🌐FR/EN"                          
-                        Style="{StaticResource ButtonMenu}"
+                    <Button Text="{Binding [SwichLanguage], Source={x:Static localApp:App.Localized}}"                         
+                        Style="{StaticResource LanguageButtonStyle}"
                         x:Name="LangButton"                            
                         Clicked="OnSwitchLanguageClicked"
                         HorizontalOptions="Center"/>
@@ -60,9 +60,17 @@
                 <StackLayout Grid.Row="2" 
                              Style="{StaticResource StackLayoutFooter}">
 
-                    <Button x:Name="DeconnexionButton"
-                            Text="🚪 Déconnexion" 
-                            Style="{StaticResource ButtonMenuDec}"/>
+                    <Button 
+                            Text="{Binding [SignOut], Source={x:Static localApp:App.Localized}}"  
+                            Command="{Binding LogoutCommand}"
+                            Style="{StaticResource ButtonMenuDec}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="MaterialIcons"
+                                             Glyph="logout"
+                                             Color="White"
+                                             Size="30"/>
+                        </Button.ImageSource>
+                    </Button>
 
                     <Label x:Name="version"
                             Text="Version 1.0.0" 

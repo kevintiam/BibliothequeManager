@@ -11,35 +11,53 @@ public partial class Accueil : ContentPage
         InitializeComponent();
     }
 
- 
+    
+    private async Task NavigationToPage<TPage>() where TPage : Page, new()
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            IsBusy = true;
+            await Navigation.PushAsync(new TPage());
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Navigation échouée", "Une erreur est survenue lors de l'ouverture de la page.", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 
     private async void OnEmprunterLivreClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Emprunt());
+        await NavigationToPage<Emprunt>();
     }
 
     private async void OnRetournerLivreClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Retour());
+        await NavigationToPage<Retour>();
     }
 
     private async void OnReserverLivreClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Reserver());
+        await NavigationToPage<Reserver>();
     }
+
 
     private async void OnGestionEmpruntsClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new GestionEmprunts());
+        await NavigationToPage<GestionEmprunts>();
     }
-
     private async void OnGestionReservationsClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new GestionReservations());
+        await NavigationToPage<GestionReservations>();
     }
 
-    private async void OnGestionAdherents(object sender, EventArgs e)
+    private async void OnGestionAdherentsClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Adherent());
+        await NavigationToPage<Adherent>();
     }
 }
