@@ -24,7 +24,7 @@
 
                         <StackLayout Style="{StaticResource StackLayoutAcce}">
                             <Label Text="{Binding [LoanManagement], Source={x:Static localApp:App.Localized}}"
-                           Style="{StaticResource HeaderLabel}"/>
+                                    Style="{StaticResource HeaderLabel}"/>
                             <Label Text="Suivi complet des emprunts en cours et historiques" 
                            Style="{StaticResource SubHeaderLabel}"/>
                         </StackLayout>
@@ -39,11 +39,11 @@
                               ColumnSpacing="10" 
                               Padding="10,0">
                             <Button Grid.Column="0" 
-                                    Text="🏠 Accueil" 
+                                    Text="{Binding [Home], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource GradientButtonSecondary}"
                                     Clicked="OnAccueilClicked"/>
                             <Entry x:Name="SearchEntry"
-                                    Placeholder="🔍 Rechercher par titre, auteur, adhérent..."
+                                    Placeholder="{Binding [SearchReservations], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource ModernEntry}"
                                     Grid.Column="1"/>
 
@@ -51,16 +51,7 @@
                                     Title="Filtrer par statut"
                                     Style="{StaticResource ModernPicker}"
                                     Grid.Column="2"
-                                    WidthRequest="150">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Tous les emprunts</x:String>
-                                        <x:String>En cours</x:String>
-                                        <x:String>En retard</x:String>
-                                        <x:String>Retournés</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                    WidthRequest="150"/>
                         </Grid>
 
                         <!-- Statistiques rapides -->
@@ -76,17 +67,17 @@
                                            FontSize="20"
                                            TextColor="#1E293B"
                                            HorizontalOptions="Center"/>
-                                    <Label Text="Total" 
+                                    <Label Text="{Binding [TotalLoans], Source={x:Static localApp:App.Localized}}"
                                             Style="{StaticResource LabelEmprunt}"/>
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
                                     <Label Text="{Binding EmpruntsEnCours}" 
-                                   FontFamily="PlaypenSansBold"
-                                   FontSize="20"
-                                   TextColor="#10B981"
-                                   HorizontalOptions="Center"/>
-                                    <Label Text="En cours" 
+                                           FontFamily="PlaypenSansBold"
+                                           FontSize="20"
+                                           TextColor="#10B981"
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="{Binding [InProgress], Source={x:Static localApp:App.Localized}}"
                                             Style="{StaticResource LabelEmprunt}"/>
                                 </StackLayout>
 
@@ -96,7 +87,7 @@
                                            FontSize="20"
                                            TextColor="#EF4444"
                                            HorizontalOptions="Center"/>
-                                    <Label Text="En retard" 
+                                    <Label Text="{Binding [Late], Source={x:Static localApp:App.Localized}}"
                                             Style="{StaticResource LabelEmprunt}"/>
                                 </StackLayout>
 
@@ -106,7 +97,7 @@
                                            FontSize="20"
                                            TextColor="#3B82F6"
                                            HorizontalOptions="Center"/>
-                                    <Label Text="Retournés" 
+                                    <Label Text="{Binding [Returned], Source={x:Static localApp:App.Localized}}"
                                             Style="{StaticResource LabelEmprunt}"/>
                                 </StackLayout>
                             </Grid>
@@ -124,15 +115,15 @@
                                 BackgroundColor="#F1F5F9"
                                 Padding="15,12">
                             <Grid ColumnDefinitions="1.5*,1.2*,1*,1*,1*,1*,0.8*,1*"
-                          ColumnSpacing="10">
-                                <Label Text="Livre et Adhérent" Style="{StaticResource TableHeader}" />
+                                    ColumnSpacing="10">
+                                <Label Text="{Binding [BookAndMember], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" />
                                 <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="1"/>
-                                <Label Text="Date Emprunt" Style="{StaticResource TableHeader}" Grid.Column="2"/>
-                                <Label Text="Date Retour" Style="{StaticResource TableHeader}" Grid.Column="3"/>
-                                <Label Text="Jours restants" Style="{StaticResource TableHeader}" Grid.Column="4"/>
-                                <Label Text="Statut" Style="{StaticResource TableHeader}" Grid.Column="5"/>
-                                <Label Text="Retard" Style="{StaticResource TableHeader}" Grid.Column="6"/>
-                                <Label Text="Actions" Style="{StaticResource TableHeader}" Grid.Column="7" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding [LoanDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="2"/>
+                                <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3"/>
+                                <Label Text="{Binding [DaysRemaining], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4"/>
+                                <Label Text="{Binding [Status], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5"/>
+                                <Label Text="{Binding [Late], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="6"/>
+                                <Label Text="{Binding [Actions], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="7" HorizontalTextAlignment="Center"/>
                             </Grid>
                         </Border>
 

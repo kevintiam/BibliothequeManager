@@ -160,7 +160,7 @@
                     <Button x:Name="AjouterButton"
                             Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource PrimaryButton}"
-                            Command="{Binding ToggleFormCommand}">
+                            Clicked="OnAjouterClicked">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="MaterialIcons"
                                      Glyph="&#xe145;"   
@@ -172,7 +172,7 @@
                     <Button x:Name="ModifierButton"
                             Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource WarningButton}"
-                            Command="{Binding ModifierCommand}">
+                            Clicked="OnModifierClicked">
                         <Button.ImageSource>
                             <FontImageSource 
                                 FontFamily="MaterialIcons"
@@ -181,9 +181,23 @@
                                 Size="18" />
                         </Button.ImageSource>
                     </Button>
+                    
+                    <Button x:Name="SupprimerButton"
+                            Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
+                            Style="{StaticResource DangerButton}"
+                            Clicked="OnSupprimerClicked">
+                    <Button.ImageSource>
+                        <FontImageSource 
+                                FontFamily="MaterialIcons"
+                                Glyph="&#xe872;"   
+                                Color="White"
+                                Size="18" />
+                        </Button.ImageSource>
+                    </Button>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>
+        
         <!-- ========== BOUTON FLOTTANT “+” ========== -->
         <Button x:Name="FloatingAddButton"
                 Text="+"

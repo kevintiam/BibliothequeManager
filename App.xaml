@@ -442,6 +442,7 @@
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="FontFamily" Value="PlaypenSansRegular"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
             </Style>
 
             <Color x:Key="PrimaryIconColor">#000000</Color>
@@ -1085,7 +1086,31 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
+            
+            <!--Disign pour le pop-->
+            <Style x:Key="PopBorder" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Padding" Value="20"/>
+                <Setter Property="Stroke" Value="{StaticResource PrimaryBlue}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+                <Setter Property="WidthRequest" Value="300"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+            </Style>
 
+            <Style x:Key="PopLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="PlaypenSansSemiBold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="PopMessage" TargetType="Label">
+                <Setter Property="FontFamily" Value="PlaypenSansSemiBold"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
