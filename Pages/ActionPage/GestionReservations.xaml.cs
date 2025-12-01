@@ -5,14 +5,25 @@ public partial class GestionReservations : ContentPage
 	public GestionReservations()
 	{
 		InitializeComponent();
-	}
+        StatutPicker.ItemsSource = StatutOptions;
+
+    }
 
 	private async void OnAccueilClicked(object sender, EventArgs e)
 	{
-		await Navigation.PushModalAsync(new HomePage());
+		await Navigation.PushAsync(new HomePage());
 	}
-	private async void OnNewReservation(object sender,EventArgs e)
+	private async void OnNewReservation(object sender, EventArgs e)
 	{
-		await Navigation.PushModalAsync(new Reserver());
+		await Navigation.PushAsync(new Reserver());
 	}
+    public List<string> StatutOptions { get; } = new()
+	{
+		App.Localized["All"],
+		App.Localized["Pending"],
+		App.Localized["Confirmed"],
+		App.Localized["InProgress"],
+		App.Localized["Returned"],
+		App.Localized["Cancel"]
+	};
 }

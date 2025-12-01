@@ -35,7 +35,14 @@
                             Text="{Binding [WelcomeTitle], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource HeaderLabel}" />
                             <Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"
-                         Style="{StaticResource SubHeaderLabel}" />
+                                   Style="{StaticResource SubHeaderLabel}" />
+                            <Label Text="Albert Einstein"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="PlaypenSansRegular"
+                                   HorizontalOptions="End"/>
+                                   
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -82,7 +89,7 @@
 
                     <!-- Ligne 2 -->
                     <Button x:Name="GestionEmprunt" 
-                             Text="{Binding [LoanManagement], Source={x:Static localApp:App.Localized}}"
+                             Text="{Binding [LoanManagementTitle], Source={x:Static localApp:App.Localized}}"
                             Clicked="OnGestionEmpruntsClicked"
                             Style="{StaticResource FeatureCardContent}" 
                             Grid.Row="1" Grid.Column="0">

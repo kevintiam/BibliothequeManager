@@ -41,7 +41,7 @@ namespace BibliothequeManager.Models
                 .HasOne(l => l.Auteur)
                 .WithMany(a => a.Livres)
                 .HasForeignKey(l => l.AuteurId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // LivreCategorie (many-to-many)
             modelBuilder.Entity<LivreCategorie>()

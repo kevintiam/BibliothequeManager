@@ -62,12 +62,12 @@ namespace BibliothequeManager.Pages.ActionPage
 
         private async void OnAccueilClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new HomePage());
+            await Navigation.PopAsync();
         }
 
         private async void OnMesReservationsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new GestionReservations());
+            await Navigation.PushAsync(new GestionReservations());
         }
     }
 }
