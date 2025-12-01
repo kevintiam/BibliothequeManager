@@ -163,13 +163,13 @@
     <value>Confirmées</value>
   </data>
   <data name="ConfirmLoan" xml:space="preserve">
-    <value>Confirmer l'emprunt</value>
+    <value>✅ Confirmer l'emprunt</value>
   </data>
   <data name="DaysRemaining" xml:space="preserve">
     <value>Jours restants</value>
   </data>
   <data name="DiscoverToday" xml:space="preserve">
-    <value>A découvrir aujourd'hui</value>
+    <value>🌟 A découvrir aujourd'hui</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -199,13 +199,13 @@
     <value>Prénom</value>
   </data>
   <data name="FirstNameOfTheMember" xml:space="preserve">
-    <value>Prenom de l' Adherant</value>
+    <value>Prenom de l' Adherant : </value>
   </data>
   <data name="FreeUpBooks" xml:space="preserve">
     <value>Libérez des ouvrages pour d'autres lecteurs</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Accueil</value>
+    <value>🏠  Accueil</value>
   </data>
   <data name="IDOfTheLoan" xml:space="preserve">
     <value>ID de l'emprunt</value>
@@ -214,19 +214,19 @@
     <value>En cours</value>
   </data>
   <data name="ISBN" xml:space="preserve">
-    <value>ISBN</value>
+    <value>Titre, auteur ou ISBN ...</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value> Nom</value>
   </data>
   <data name="Late" xml:space="preserve">
-    <value>Retard</value>
+    <value>En retard</value>
   </data>
   <data name="LoanDate" xml:space="preserve">
     <value>Date Emprunt</value>
   </data>
   <data name="LoanManagement" xml:space="preserve">
-    <value>Gestion des emprunts</value>
+    <value>📋 Gestion des emprunts</value>
   </data>
   <data name="LoanManagementTitle" xml:space="preserve">
     <value>Gestion des Emprunts</value>
@@ -241,7 +241,7 @@
     <value>Gestion des Adhérents</value>
   </data>
   <data name="NameOfThemember" xml:space="preserve">
-    <value>Nom de l'Adherant</value>
+    <value>Nom de l'Adherant :</value>
   </data>
   <data name="NoLoansFound" xml:space="preserve">
     <value>Aucun emprunt trouvé</value>
@@ -250,7 +250,7 @@
     <value>Aucune réservation trouvée</value>
   </data>
   <data name="NumberOfBorrowedBooks" xml:space="preserve">
-    <value>Nombre de Livre Emprunter</value>
+    <value>Nombre de Livre Emprunter : </value>
   </data>
   <data name="Pending" xml:space="preserve">
     <value>En attente</value>
@@ -270,17 +270,11 @@
   <data name="ReservationDate" xml:space="preserve">
     <value>Date Réservation</value>
   </data>
-  <data name="ReservationManagement" xml:space="preserve">
-    <value>Gestion des Réservations</value>
-  </data>
   <data name="ReserveBook" xml:space="preserve">
     <value>Réserver un livre</value>
   </data>
   <data name="ReturnBook" xml:space="preserve">
     <value>Retourner un livre</value>
-  </data>
-  <data name="ReturnBorrowedBook" xml:space="preserve">
-    <value>Retourner Un livre Emprunté</value>
   </data>
   <data name="ReturnDate" xml:space="preserve">
     <value>Date Retour</value>
@@ -307,10 +301,10 @@
     <value>Titre, auteur ou ISBN...</value>
   </data>
   <data name="SearchReservations" xml:space="preserve">
-    <value>Rechercher par livre, adhérent... </value>
+    <value>🔍 Rechercher par livre, adhérent... </value>
   </data>
   <data name="ShareKnowledge" xml:space="preserve">
-    <value>Partagez la connaissance</value>
+    <value>« La lecture est essentielle pour ceux qui cherchent à s’élever au‑dessus de l’ordinaire. »</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Date Début</value>
@@ -319,7 +313,7 @@
     <value> Statut</value>
   </data>
   <data name="SubscriberID" xml:space="preserve">
-    <value>ID de l'abonné</value>
+    <value>ID de l'abonné : </value>
   </data>
   <data name="TotalLoans" xml:space="preserve">
     <value>Total</value>
@@ -331,13 +325,10 @@
     <value>Une visionnaire sur la surveillance et la liberté</value>
   </data>
   <data name="WelcomeSubtitle" xml:space="preserve">
-    <value>La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information</value>
+    <value>✨ « La connaissance s’acquiert par l’expérience, tout le reste n’est que de l’information. »</value>
   </data>
   <data name="WelcomeTitle" xml:space="preserve">
-    <value>Bienvenue dans LibraNova</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>🏠 Accueil</value>
+    <value>🌐 Bienvenue dans LibraNova!</value>
   </data>
   <data name="MemberName" xml:space="preserve">
     <value>Nom de l'Adherant : </value>
@@ -350,15 +341,6 @@
   </data>
   <data name="LoanID" xml:space="preserve">
     <value>ID de l'emprunt</value>
-  </data>
-  <data name="BookTitle" xml:space="preserve">
-    <value>Titre Du Livre</value>
-  </data>
-  <data name="Author" xml:space="preserve">
-    <value>Auteur</value>
-  </data>
-  <data name="ISBN" xml:space="preserve">
-    <value>Titre, auteur ou ISBN ...</value>
   </data>
   <data name="AuthorManagement" xml:space="preserve">
     <value>Gestion Des Auteurs</value>
@@ -379,10 +361,10 @@
     <value>Supprimer</value>
   </data>
   <data name="ReserveYourBooksInAdvance" xml:space="preserve">
-    <value>Réservez vos livre à l'avance</value>
+    <value>« Les livres sont une magie unique et portable. »</value>
   </data>
   <data name="ListOfReservations" xml:space="preserve">
-    <value>Liste des Réservations</value>
+    <value>📋 Liste des Réservations</value>
   </data>
   <data name="ConfirmTheReservation" xml:space="preserve">
     <value>Confirmer la Réservation</value>
@@ -398,5 +380,59 @@
   </data>
   <data name="GuaranteeYourAccessToThemostPopularBooks" xml:space="preserve">
     <value>Garantissez votre accés aux livres les plus populaires</value>
+  </data>
+  <data name="Book" xml:space="preserve">
+    <value>📖 Livres</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>👤 Auteurs</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>🗂️  Catégorie</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>👥 Adherents</value>
+  </data>
+  <data name="SwichLanguage" xml:space="preserve">
+    <value>🇫🇷 Français</value>
+  </data>
+  <data name="LoanNow" xml:space="preserve">
+    <value>✨ Plongez dans votre prochaine lecture aujourd’hui ✨</value>
+  </data>
+  <data name="LoanSubtitle" xml:space="preserve">
+    <value>✨Partagez vos lectures, offrez une chance aux autres lecteurs ✨</value>
+  </data>
+  <data name="NewReservation" xml:space="preserve">
+    <value>Nouvelle Reservation</value>
+  </data>
+  <data name="EnterSubscribeID" xml:space="preserve">
+    <value>Saisissez l'ID de l'abonné..</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tout</value>
+  </data>
+  <data name="ReservationManagement" xml:space="preserve">
+    <value>Gestion des Réservations</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>➕ Nouvelle</value>
+  </data>
+  <data name="Alls" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ReturnBorrowedBook" xml:space="preserve">
+    <value>Retourner Un livre Emprunté</value>
+  </data>
+  <data name="EditOrDelete" xml:space="preserve">
+    <value>Modifier ou supprimer un auteur</value>
+  </data>
+  <data name="AddOthor" xml:space="preserve">
+    <value>Ajouter un auteur</value>
+  </data>
+  <data name="popDelAuthor" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer cet auteur ? (cela supprimera tous les livres de cet auteur)"</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirmer la suppression</value>
   </data>
 </root>

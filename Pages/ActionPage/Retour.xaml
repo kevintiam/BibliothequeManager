@@ -23,12 +23,18 @@
                         </Border>
 
                         <!-- Texte de bienvenue (occupe tout l'espace central) -->
-                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <StackLayout VerticalOptions="Center">
                             <Label Text="{Binding [ReturnBorrowedBook], Source={x:Static localApp:App.Localized}}"
     
                        Style="{StaticResource HeaderLabel}" />
                             <Label Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}"
                        Style="{StaticResource SubHeaderLabel}" />
+                            <Label Text="Jim Rohn"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="PlaypenSansRegular"
+                                   HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -42,7 +48,9 @@
                                InputTransparent="True"
                                MinimumHeightRequest="900"/>
 
-                        <StackLayout Padding="20">
+                        <StackLayout Padding="20"
+                                     IsVisible="True"
+                                     x:Name="HeaderText">
                             <Label  Text="{Binding [ReturnYourBooks], Source={x:Static localApp:App.Localized}}"
                                        Style="{StaticResource HeroTitle}"/>
                             <Label Text="{Binding [FreeUpBooks], Source={x:Static localApp:App.Localized}}"
@@ -99,9 +107,13 @@
                 <Grid Grid.Row="2"
                         x:Name="ListeEmprunts"
                         IsVisible="False"
-                        RowDefinitions="Auto,*">
-                    <HorizontalStackLayout Grid.Row="0">
-                        <VerticalStackLayout>
+                        RowDefinitions="Auto,*"
+                        RowSpacing="10">
+                    <Grid ColumnDefinitions="*,*" 
+                        Grid.Row="0" 
+                        Padding="20,10"
+                          ColumnSpacing="50">
+                        <VerticalStackLayout Grid.Column="0">
                             <Label 
                                 x:Name="NomAbonne"
                                 Text="{Binding [NameOfThemember], Source={x:Static localApp:App.Localized}}" 
@@ -111,7 +123,8 @@
                                 Text="{Binding [FirstNameOfTheMember], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                         </VerticalStackLayout>
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1"
+                                             HorizontalOptions="Start">
                             <Label 
                                 x:Name="IDAbonne"
                                 Text="{Binding [SubscriberID], Source={x:Static localApp:App.Localized}}" 
@@ -122,9 +135,7 @@
                                 Text="{Binding [NumberOfBorrowedBooks], Source={x:Static localApp:App.Localized}}" 
                                 Style="{StaticResource SectionLabel}"/>
                         </VerticalStackLayout>
-
-                            
-                    </HorizontalStackLayout>
+                    </Grid>
                     <CollectionView Grid.Row="1"
                                     ItemsSource="{Binding Adherents}"
                                     Margin="20,0"
@@ -134,7 +145,7 @@
                                     Style="{StaticResource TabHead}">
                                 <Label Text="{Binding [BookTitle], Source={x:Static localApp:App.Localized}}"  Style="{StaticResource TableHeader}" />
                                 <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="1"  />
-                                <Label Text="{Binding [ISBN], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                                <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="2" />
                                 <Label Text="{Binding [LoanDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3" />
                                 <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
                                 <Label Text="{Binding [IDOfTheLoan], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />

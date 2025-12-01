@@ -26,13 +26,19 @@
                         </Border>
 
                         <!-- Texte de bienvenue (occupe tout l'espace central) -->
-                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <StackLayout VerticalOptions="Center">
                             <Label Text="{Binding [BookReservation], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource HeaderLabel}"
                                    TextColor="White"/>
                             <Label Text="{Binding [ReserveYourBooksInAdvance], Source={x:Static localApp:App.Localized}}" 
                                    Style="{StaticResource SubHeaderLabel}"
                                    TextColor="#E0F2FE"/>
+                            <Label Text="Stephen King"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="PlaypenSansRegular"
+                                   HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -77,7 +83,7 @@
 
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                     <Entry x:Name="RechercheEntry" 
-                                               Placeholder="Titre, auteur ou ISBN..." 
+                                               Placeholder="{Binding [ISBN], Source={x:Static localApp:App.Localized}}" 
                                                Style="{StaticResource ModernEntry}"
                                                Grid.Column="0"/>
 
@@ -127,7 +133,7 @@
                                 <Label Text="{Binding [SubscriberID], Source={x:Static localApp:App.Localized}}"
                                            Style="{StaticResource SectionLabel}"/>
                                 <Entry x:Name="AbonneIdEntry" 
-                                           Placeholder="Saisissez l'ID de l'abonné..." 
+                                           Placeholder="{Binding [EnterSubscribeID], Source={x:Static localApp:App.Localized}}"
                                            Keyboard="Numeric"
                                            Style="{StaticResource ModernEntry}"/>
                             </StackLayout>

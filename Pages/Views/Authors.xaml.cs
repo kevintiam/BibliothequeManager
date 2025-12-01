@@ -1,4 +1,5 @@
 using BibliothequeManager.Models;
+using BibliothequeManager.Pages.Popups;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliothequeManager.Pages.Views;
@@ -14,19 +15,22 @@ public partial class Authors : ContentPage
         AuthorsCollectionView.SelectionChanged += OnAuthorSelectionChanged;
 
         ChargerAuteurs();
-        
 	}
 
     private void OnFloatingAddClicked(object sender, EventArgs e)
     {
-        FormulaireLivres.IsVisible = !FormulaireLivres.IsVisible;
-
-        if(FormulaireLivres.IsVisible && AuthorsCollectionView.SelectedItems == null)
+        if (FormulaireLivres.IsVisible)
+        {
+            FormulaireLivres.IsVisible = false;
+        }
+        else
         {
             ReinitialiserFormulaire();
-            FormTitle.Text = "Ajouter un auteur"; 
+            FormTitle.Text = App.Localized["AddOthor"];
             ModifierButton.IsVisible = false;
             AjouterButton.IsVisible = true;
+            FormulaireLivres.IsVisible = true;
+            SupprimerButton.IsVisible = false;
         }
     }
 
@@ -35,42 +39,33 @@ public partial class Authors : ContentPage
         PrenomEntry.Text = "";
         NomEntry.Text = "";
     }
-    
+
     private void ChargerAuteurs()
     {
         using var Donnees = new BibliothequeContext();
         try
         {
             var auteurs = Donnees.Auteurs
-                .Include(a => a.Livres)
-                .Select(a => new
-                {
-                    a.Id,
-                    a.Nom,
-                    a.Prenom,
-                    NombreLivres = a.Livres.Count,
-                })
+                .Include(a => a.Livres) 
                 .OrderBy(a => a.Nom)
                 .ThenBy(a => a.Prenom)
                 .AsNoTracking()
                 .ToList();
 
             AuthorsCollectionView.ItemsSource = auteurs;
-
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erreur chargement auteurs: {ex.Message}");
+            Console.WriteLine($"Erreur : {ex.Message}");
         }
     }
 
-    private async void OnAuthorSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void OnAuthorSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        var selectedAuthor = e.CurrentSelection.FirstOrDefault();
+        var selectedAuthor = e.CurrentSelection.FirstOrDefault() as Auteur;
         if (selectedAuthor != null)
         {
-            dynamic auteur = selectedAuthor;
-            int authorId = auteur.Id;
+            int authorId = selectedAuthor.Id;
             using var Donnees = new BibliothequeContext();
             var auteurDetails = await Donnees.Auteurs
                 .FirstOrDefaultAsync(a => a.Id == authorId);
@@ -78,49 +73,43 @@ public partial class Authors : ContentPage
             {
                 PrenomEntry.Text = auteurDetails.Prenom;
                 NomEntry.Text = auteurDetails.Nom;
-                FormTitle.Text = "Modifier un auteur";
+                FormTitle.Text = App.Localized["EditOrDelete"];
                 ModifierButton.IsVisible = true;
                 AjouterButton.IsVisible = false;
+                SupprimerButton.IsVisible = true;
                 FormulaireLivres.IsVisible = true;
             }
         }
     }
 
     // filtrage des auteurs
-    private void FiltrerAuteurs(string searchText)
+    private async void FiltrerAuteurs(string searchText)
     {
-        using var Donnees = new BibliothequeContext();
+        using var donnees = new BibliothequeContext();
         try
         {
-            var auteurRechercher = Donnees.Auteurs
-                .Include(a => a.Livres)
+            var query = donnees.Auteurs
+                .Include(a => a.Livres) 
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(searchText))
             {
-                auteurRechercher = auteurRechercher.Where(a =>
+                query = query.Where(a =>
                     a.Nom.Contains(searchText) ||
                     a.Prenom.Contains(searchText));
             }
 
-            var auteurs = auteurRechercher
-                .Select(a => new
-                {
-                    a.Id,
-                    a.Nom,
-                    a.Prenom,
-                    NombreLivres = a.Livres.Count
-                })
+            var auteurs = await query
                 .OrderBy(a => a.Nom)
                 .ThenBy(a => a.Prenom)
                 .AsNoTracking()
-                .ToList();
+                .ToListAsync();
 
             AuthorsCollectionView.ItemsSource = auteurs;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erreur filtrage: {ex.Message}");
+            await DisplayAlert("Erreur", $"Impossible de filtrer : {ex.Message}", "OK");
         }
     }
 
@@ -135,6 +124,87 @@ public partial class Authors : ContentPage
         if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
         {
             FiltrerAuteurs(e.NewTextValue);
+        }
+    }
+
+    //Bouton Modifier
+    private async void OnModifierClicked(object sender, EventArgs e)
+    {
+        var selectedAuthor = AuthorsCollectionView.SelectedItem as Auteur;
+        if (selectedAuthor != null)
+        {
+            int authorId = selectedAuthor.Id;
+            using var Donnees = new BibliothequeContext();
+            var auteurToUpdate = await Donnees.Auteurs.FindAsync(authorId);
+            if (auteurToUpdate != null)
+            {
+                auteurToUpdate.Prenom = PrenomEntry.Text;
+                auteurToUpdate.Nom = NomEntry.Text;
+                await Donnees.SaveChangesAsync();
+                ChargerAuteurs();
+                ReinitialiserFormulaire();
+                FormulaireLivres.IsVisible = false;
+            }
+        }
+    }
+
+    //Bouton Ajouter
+    private async void OnAjouterClicked(object sender, EventArgs e)
+    {
+        using var Donnees = new BibliothequeContext();
+        var newAuteur = new Auteur
+        {
+            Prenom = PrenomEntry.Text,
+            Nom = NomEntry.Text
+        };
+        Donnees.Auteurs.Add(newAuteur);
+        await Donnees.SaveChangesAsync();
+
+        await SuccessPopup.Show("Auteur Ajouté avec succès !", this);
+
+        ChargerAuteurs();
+        ReinitialiserFormulaire();
+        FormulaireLivres.IsVisible = false;
+    }
+
+    //Bouton Supprimer
+    private async void OnSupprimerClicked(object sender, EventArgs e)
+    {
+        var selectedAuthor = AuthorsCollectionView.SelectedItem as Auteur;
+
+        if (selectedAuthor !=null)
+        {
+            var popup = new ConfirmationPopup
+            {
+                Title = App.Localized["ConfirmDelete"],
+                Message = string.Format(App.Localized["popDelAuthor"], selectedAuthor.Prenom, selectedAuthor.Nom)
+            };
+
+            popup.OnCompleted += async (confirmed) =>
+            {
+                if (confirmed)
+                {
+                    await SupprimerAuteur(selectedAuthor.Id);
+                }
+            };
+
+            await Navigation.PushModalAsync(popup);
+        }
+  
+    }
+
+    private async Task SupprimerAuteur(int id)
+    {
+        using var context = new BibliothequeContext();
+        var auteur = await context.Auteurs.FindAsync(id);
+        if (auteur != null)
+        {
+            context.Auteurs.Remove(auteur);
+            await context.SaveChangesAsync();
+            ChargerAuteurs();
+            ReinitialiserFormulaire();
+            FormulaireLivres.IsVisible = false;
+            AuthorsCollectionView.SelectedItem = null;
         }
     }
 }
