@@ -28,13 +28,13 @@ public partial class Emprunt : ContentPage
         IsbnLivre.Text = "978-2-07-040813-8";
         DisponibiliteLivre.Text = "Disponible";
     }
-    private async void OnAccueilClicked(object sender, System.EventArgs e)
+    private async void OnAccueilClicked(object sender, EventArgs e)
     {
         // Navigation vers la page d'accueil
-        await Navigation.PushModalAsync(new HomePage());
+        await Navigation.PopAsync();
     }
 
-    private async void OnListeEmpruntsClicked(object sender, System.EventArgs e)
+    private async void OnListeEmpruntsClicked(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new GestionEmprunts());
 

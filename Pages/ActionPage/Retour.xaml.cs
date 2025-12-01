@@ -34,13 +34,15 @@ public partial class Retour : ContentPage
     private async void OnAccueilClicked(object sender, System.EventArgs e)
     {
         // Navigation vers la page d'accueil
-        await Navigation.PushModalAsync(new HomePage());
+        await Navigation.PopAsync();
     }
 
     private void OnFloatingAddAdherentClicked(object sender, EventArgs e)
     {
         ListeEmprunts.IsVisible = !ListeEmprunts.IsVisible;
         RetourContents.IsVisible = !RetourContents.IsVisible;
+        HeaderText.IsVisible = !HeaderText.IsVisible;
+
     }
 
 }

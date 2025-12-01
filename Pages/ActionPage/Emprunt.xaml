@@ -22,11 +22,18 @@
                             <Image Source="logo.png" Style="{StaticResource Logo}" />
                         </Border>
 
-                        <StackLayout Style="{StaticResource StackLayoutAcce}">
-                            <Label Text="{Binding [BorrowANewBook], Source={x:Static localApp:App.Localized}}" 
+                        <StackLayout VerticalOptions="Center">
+                            <Label 
+                                    Text="{Binding [BorrowANewBook], Source={x:Static localApp:App.Localized}}" 
                                     Style="{StaticResource HeaderLabel}" />
                             <Label  Text="{Binding [ShareKnowledge], Source={x:Static localApp:App.Localized}}"  
                                     Style="{StaticResource SubHeaderLabel}" />
+                            <Label Text="Jim Rohn"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="PlaypenSansRegular"
+                                   HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -40,9 +47,9 @@
                                MinimumHeightRequest="900"/>
 
                         <StackLayout Padding="20">
-                            <Label Text="{Binding [WelcomeTitle], Source={x:Static localApp:App.Localized}}" 
+                            <Label Text="{Binding [LoanNow], Source={x:Static localApp:App.Localized}}" 
                                        Style="{StaticResource HeroTitle}"/>
-                            <Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"                             
+                            <Label Text="{Binding [LoanSubtitle], Source={x:Static localApp:App.Localized}}"                             
                                    Style="{StaticResource SectionLabelSubtitle}"
                                    />
                         </StackLayout>
