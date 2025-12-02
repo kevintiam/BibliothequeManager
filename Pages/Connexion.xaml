@@ -18,7 +18,7 @@
                 <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                     <Image Source="library_icon.png"  
                            HorizontalOptions="Center"/>
-                    <Label Text="BIBLIOTECH" 
+                    <Label Text="LaNova" 
                            Style="{StaticResource MainTitleLabel}"/>
                     <Label Text="Système de gestion" 
                            Style="{StaticResource SubtitleLabel}"/>
