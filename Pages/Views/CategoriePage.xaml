@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Views.CategoriePage"
+             Title="Catégories">
+
+    <Grid>
+        <!-- Fond -->
+        <Image Source="new_background.png"
+               Aspect="AspectFill"
+               InputTransparent="True"
+               Opacity="0.2" />
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*">
+                <!-- En-tête -->
+                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
+                    <Border Style="{StaticResource RoundedImageBorder}">
+                        <Image Source="logo.png" Style="{StaticResource Logo}" />
+                    </Border>
+                    <StackLayout Style="{StaticResource StackLayoutAcce}">
+                        <Label Text="Gestion des Catégories"
+                               Style="{StaticResource HeaderLabel}" />
+                        <Label Text="Organisez vos livres par catégories"
+                               Style="{StaticResource SubHeaderLabel}" />
+                    </StackLayout>
+                </HorizontalStackLayout>
+
+                <!-- Recherche -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
+                    <Border Stroke="{StaticResource PrimaryBlue}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 24"
+                            BackgroundColor="White"
+                            HeightRequest="50"
+                            WidthRequest="600"
+                            HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry x:Name="SearchEntry"
+                                   Placeholder="Rechercher une catégorie..."
+                                   Style="{StaticResource TextZone}" />
+                            <Button x:Name="SearchButton"
+                                    Style="{StaticResource SearchIconButton}">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Color="White"
+                                                     Size="22" />
+                                </Button.ImageSource>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- ========== LISTE DES CATÉGORIES ========== -->
+                <CollectionView x:Name="CategoriesCollectionView"
+                                Grid.Row="2"
+                                SelectionMode="Single"
+                                Margin="50,0">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout 
+                            Orientation="Vertical"
+                            Span="{OnIdiom Phone=2, Tablet=4, Desktop=6, Default=3}"
+                            VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource AuthorCard}">
+                                <Grid RowDefinitions="Auto,Auto,Auto" 
+                                      RowSpacing="8"
+                                      Padding="15">
+                                    <!-- Icône -->
+                                    <Label Grid.Row="0"
+                                           Text="📚"
+                                           FontSize="32"
+                                           HorizontalOptions="Center" />
+                                    <!-- Nom -->
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Nom}"
+                                           Style="{StaticResource AuthorNom}" />
+                                    <!-- Nombre de livres -->
+                                    <Border Grid.Row="2"
+                                            Style="{StaticResource BookCountBadge}">
+                                        <Label Text="{Binding NombreLivres, StringFormat='{0} livre(s)'}"
+                                               Style="{StaticResource BookCountText}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+
+        <!-- ========== FORMULAIRE (UNIQUEMENT ICI) ========== -->
+        <Border x:Name="FormulaireCategorie"
+                IsVisible="False"
+                Style="{StaticResource FormulaireAuteur}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="400"
+                Padding="20">
+            <VerticalStackLayout Spacing="15">
+                <!-- Titre du formulaire -->
+                <Label x:Name="FormTitle"
+                       Text="Ajouter une catégorie"
+                       Style="{StaticResource FormulaireTitle}" />
+
+                <!-- Champs -->
+                <Entry x:Name="NomCategorieEntry"
+                       Placeholder="Nom (obligatoire)"
+                       Style="{StaticResource FormEntry}" />
+
+                <Entry x:Name="DescriptionCategorieEntry"
+                       Placeholder="Description (facultatif)"
+                       Style="{StaticResource FormEntry}" />
+
+                <!-- Boutons -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
+                    <Button x:Name="AjouterButton"
+                            Text="Ajouter"
+                            Style="{StaticResource PrimaryButton}"
+                            Clicked="OnAjouterCategorieClicked" />
+
+                    <Button x:Name="ModifierButton"
+                            Text="Modifier"
+                            Style="{StaticResource WarningButton}"
+                            Clicked="OnModifierCategorieClicked"
+                            IsVisible="False" />
+
+                    <Button x:Name="SupprimerButton"
+                            Text="Supprimer"
+                            Style="{StaticResource DangerButton}"
+                            Clicked="OnSupprimerCategorieClicked"
+                            IsVisible="False" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Bouton flottant "+" (toujours visible, en bas à droite) -->
+        <Button Text="+"
+                Clicked="OnFloatingAddCategorieClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
+    </Grid>
+</ContentPage>
