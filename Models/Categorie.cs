@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BibliothequeManager.Models
 {
     public class Categorie
@@ -19,6 +20,8 @@ namespace BibliothequeManager.Models
         public string Description { get; set; } = string.Empty;
 
         public ICollection<LivreCategorie> LivreCategories { get; } = new List<LivreCategorie>();
+
+        public int NombreLivres => LivreCategories.Count;
 
     }
 }

@@ -37,7 +37,7 @@ public partial class HomePage : FlyoutPage
 		};
 		CategorieButton.Clicked += (s, e) =>
 		{
-			Detail = new Categorie();
+			Detail = new CategoriePage();
 			IsPresented = false;
 		};
 		AdherentsButton.Clicked += (s, e) =>
