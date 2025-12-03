@@ -29,7 +29,7 @@ namespace BibliothequeManager.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
+                    "Server=L-107-MEDDOUR;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
             }
         }
 
