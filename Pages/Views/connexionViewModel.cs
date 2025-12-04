@@ -71,7 +71,7 @@ public class ConnexionViewModel : INotifyPropertyChanged
 
             if (user != null)
             {
-                // ✅ Connexion réussie → aller à Accueil
+                // une fois  Connexion réussie / aller à l'accueil
                 await Application.Current.MainPage.Navigation.PushModalAsync(new HomePage());
             }
             else
