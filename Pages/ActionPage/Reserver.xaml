@@ -74,7 +74,7 @@
                                    Style="{StaticResource HeroTitle}"/>
 
                         <!-- Formulaire -->
-                        <StackLayout >
+                        <StackLayout>
 
                             <!-- Section Recherche Livre -->
                             <StackLayout>
@@ -87,13 +87,34 @@
                                                Style="{StaticResource ModernEntry}"
                                                Grid.Column="0"/>
 
-                                    <Button Text="🔎"
+                                    <Button x:Name="SearchButton" 
+                                                Text="🔎"
                                                 Style="{StaticResource GradientButtonPrimary}"
-                                                Clicked="OnRechercherClicked"
                                                 Grid.Column="1"
                                                 WidthRequest="60"/>
                                 </Grid>
                             </StackLayout>
+
+                            <!-- Liste dynamique des livres -->
+                            <CollectionView x:Name="SuggestionsCollectionView"
+                                        HeightRequest="200"
+                                        IsVisible="False"
+                                        Margin="0,5"
+                                        SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource SearchBorder}">
+                                            <Grid ColumnDefinitions="Auto,*">
+                                                <Label Text="📚" FontSize="16" VerticalOptions="Center" />
+                                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                                    <Label Text="{Binding Titre}"
+                                                       Style="{StaticResource SearchLabel}"/>
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
                             <!-- Section Livre Sélectionné -->
                             <StackLayout x:Name="LivreSection" 
@@ -111,7 +132,7 @@
                                                        Grid.Column="1"/>
                                         </Grid>
                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                                            <Label Text="{Binding [ISBN], Source={x:Static localApp:App.Localized}}"
+                                            <Label Text="ISBN"
                                                        Style="{StaticResource InfoLabel}"/>
                                             <Label x:Name="IsbnLivre" 
                                                        Style="{StaticResource InfoValue}"
@@ -134,9 +155,22 @@
                                            Style="{StaticResource SectionLabel}"/>
                                 <Entry x:Name="AbonneIdEntry" 
                                            Placeholder="{Binding [EnterSubscribeID], Source={x:Static localApp:App.Localized}}"
-                                           Keyboard="Numeric"
                                            Style="{StaticResource ModernEntry}"/>
                             </StackLayout>
+                            <Grid ColumnDefinitions="*,*" HorizontalOptions="Center" ColumnSpacing="25">
+                                <Picker x:Name="StatutPicker"
+                                    Title="{Binding [Status], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource ModernPicker}"
+                                    Grid.Column="0" 
+                                    WidthRequest="300"/>
+                                
+                                <Picker x:Name="PrioritePicker"
+                                    Title="{Binding [Priority], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource ModernPicker}"
+                                    Grid.Column="1"
+                                    WidthRequest="300"/>
+
+                            </Grid>
 
                             <!-- Section Date de Réservation -->
                             <StackLayout Spacing="5">

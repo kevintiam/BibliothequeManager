@@ -84,7 +84,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\ActionPage\Emprunt.xaml">
+	  <MauiXaml Update="Pages\ActionPage\EmpruntPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ActionPage\GestionEmprunts.xaml">
@@ -108,13 +108,16 @@
 	  <MauiXaml Update="Pages\Popups\ConfirmationPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Popups\ErrorPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Popups\SuccessPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Views\Accueil.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Views\Adherent.xaml">
+	  <MauiXaml Update="Pages\Views\GestionAdherent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Views\Authors.xaml">
@@ -153,6 +156,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\ActionPage\EmpruntPage.xaml.cs">
+	    <DependentUpon>EmpruntPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Views\GestionAdherent.xaml.cs">
+	    <DependentUpon>GestionAdherent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Views\CategoriePage.xaml.cs">
 	    <DependentUpon>CategoriePage.xaml</DependentUpon>
 	  </Compile>
