@@ -1,4 +1,5 @@
 ﻿using BibliothequeManager.Pages;
+using BibliothequeManager.Views;
 using Microsoft.Maui.Controls;
 
 namespace BibliothequeManager
@@ -11,8 +12,8 @@ namespace BibliothequeManager
         {
             InitializeComponent();
 
-
-            MainPage = new NavigationPage(new HomePage());
+            // MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new Connexion());
         }
 
 
