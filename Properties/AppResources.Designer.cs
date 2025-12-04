@@ -19,7 +19,7 @@ namespace BibliothequeManager.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -75,6 +75,24 @@ namespace BibliothequeManager.Properties {
         public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter une catégorie.
+        /// </summary>
+        public static string AddCategories {
+            get {
+                return ResourceManager.GetString("AddCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter/Modifier une catégorie.
+        /// </summary>
+        public static string AddEditCategory {
+            get {
+                return ResourceManager.GetString("AddEditCategory", resourceCulture);
             }
         }
         
@@ -142,6 +160,33 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Auteur Ajouté avec succès !.
+        /// </summary>
+        public static string AuthorSuccessfullyAdded {
+            get {
+                return ResourceManager.GetString("AuthorSuccessfullyAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Auteur supprime avec succès !.
+        /// </summary>
+        public static string AuthorSuccessfullyDeleted {
+            get {
+                return ResourceManager.GetString("AuthorSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Auteur modifiée avec succes!.
+        /// </summary>
+        public static string AuthorSuccessfullyModified {
+            get {
+                return ResourceManager.GetString("AuthorSuccessfullyModified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Disponibilité.
         /// </summary>
         public static string Availability {
@@ -165,6 +210,15 @@ namespace BibliothequeManager.Properties {
         public static string BookAndMember {
             get {
                 return ResourceManager.GetString("BookAndMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion Des Livres.
+        /// </summary>
+        public static string BookManagement {
+            get {
+                return ResourceManager.GetString("BookManagement", resourceCulture);
             }
         }
         
@@ -250,6 +304,33 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des Catégories.
+        /// </summary>
+        public static string CategoryManagement {
+            get {
+                return ResourceManager.GetString("CategoryManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catégorie ajoutée avec succès !.
+        /// </summary>
+        public static string CategorySuccessfullyAdded {
+            get {
+                return ResourceManager.GetString("CategorySuccessfullyAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catégorie supprimee avec succès !.
+        /// </summary>
+        public static string CategorySuccessfullyDeleted_ {
+            get {
+                return ResourceManager.GetString("CategorySuccessfullyDeleted!", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à verifier la liste des Emprunts.
         /// </summary>
         public static string CheckLoanList {
@@ -264,6 +345,15 @@ namespace BibliothequeManager.Properties {
         public static string ClassicDescription {
             get {
                 return ResourceManager.GetString("ClassicDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirmer la suppression.
+        /// </summary>
+        public static string CofirmDelection {
+            get {
+                return ResourceManager.GetString("CofirmDelection", resourceCulture);
             }
         }
         
@@ -313,6 +403,24 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exemplaires.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de publication.
+        /// </summary>
+        public static string DateOfPublication {
+            get {
+                return ResourceManager.GetString("DateOfPublication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Jours restants.
         /// </summary>
         public static string DaysRemaining {
@@ -331,6 +439,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description (facultatif).
+        /// </summary>
+        public static string DescriptionOptional {
+            get {
+                return ResourceManager.GetString("DescriptionOptional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à 🌟 A découvrir aujourd&apos;hui.
         /// </summary>
         public static string DiscoverToday {
@@ -345,6 +462,15 @@ namespace BibliothequeManager.Properties {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier / Supprimer.
+        /// </summary>
+        public static string Edit_Delete {
+            get {
+                return ResourceManager.GetString("Edit/Delete", resourceCulture);
             }
         }
         
@@ -390,6 +516,15 @@ namespace BibliothequeManager.Properties {
         public static string EnterSubscriberID {
             get {
                 return ResourceManager.GetString("EnterSubscriberID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ex. Dispo..
+        /// </summary>
+        public static string ExAvailable {
+            get {
+                return ResourceManager.GetString("ExAvailable", resourceCulture);
             }
         }
         
@@ -493,6 +628,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à ISBN.
+        /// </summary>
+        public static string IISBN {
+            get {
+                return ResourceManager.GetString("IISBN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à En cours.
         /// </summary>
         public static string InProgress {
@@ -511,7 +655,16 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La connaissance s&apos;acquiert par l&apos;expérience, tout le reste n&apos;est que de l&apos;information.
+        ///   Recherche une chaîne localisée semblable à La connaissance s&apos;acquiert par l&apos;expérience. . ..
+        /// </summary>
+        public static string KnowdledgeAcquired {
+            get {
+                return ResourceManager.GetString("KnowdledgeAcquired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Kn.
         /// </summary>
         public static string Knowledge {
             get {
@@ -664,6 +817,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom (obligatoire).
+        /// </summary>
+        public static string NameRequired {
+            get {
+                return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à ➕ Nouvelle.
         /// </summary>
         public static string New {
@@ -718,6 +880,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Organisez vos livres par catégories.
+        /// </summary>
+        public static string OrganizeCategory {
+            get {
+                return ResourceManager.GetString("OrganizeCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à En attente.
         /// </summary>
         public static string Pending {
@@ -745,6 +916,42 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Voulez-vous supprimer la catégorie ?.
+        /// </summary>
+        public static string PopDelCathegori {
+            get {
+                return ResourceManager.GetString("PopDelCathegori", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le prénom et le nom sont obligatoires..
+        /// </summary>
+        public static string popErrorAutor1 {
+            get {
+                return ResourceManager.GetString("popErrorAutor1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cet auteur existe deja.
+        /// </summary>
+        public static string popErrorAutor2 {
+            get {
+                return ResourceManager.GetString("popErrorAutor2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le nom est obligatoire.
+        /// </summary>
+        public static string popErrorCategori1 {
+            get {
+                return ResourceManager.GetString("popErrorCategori1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Un roman puissant sur la mémoire de l&apos;esclavage.
         /// </summary>
         public static string PowerfulNovelDescription {
@@ -759,6 +966,15 @@ namespace BibliothequeManager.Properties {
         public static string Priority {
             get {
                 return ResourceManager.GetString("Priority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Voulez-vous vraiment supprimer le livre ?.
+        /// </summary>
+        public static string ReallydeleteBook {
+            get {
+                return ResourceManager.GetString("ReallydeleteBook", resourceCulture);
             }
         }
         
@@ -925,6 +1141,24 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sélectionner un auteur.
+        /// </summary>
+        public static string SelectAuthor {
+            get {
+                return ResourceManager.GetString("SelectAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sélectionner une catégorie.
+        /// </summary>
+        public static string SelectCategory {
+            get {
+                return ResourceManager.GetString("SelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à « La lecture est essentielle pour ceux qui cherchent à s’élever au‑dessus de l’ordinaire. ».
         /// </summary>
         public static string ShareKnowledge {
@@ -961,11 +1195,29 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catégorie modifiée avec secces !.
+        /// </summary>
+        public static string succespopCategorie1 {
+            get {
+                return ResourceManager.GetString("succespopCategorie1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à 🇫🇷 Français.
         /// </summary>
         public static string SwichLanguage {
             get {
                 return ResourceManager.GetString("SwichLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Titre.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

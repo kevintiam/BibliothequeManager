@@ -42,7 +42,7 @@ public partial class HomePage : FlyoutPage
 		};
 		AdherentsButton.Clicked += (s, e) =>
 		{
-			Detail = new Adherent();
+			Detail = new GestionAdherent();
 			IsPresented = false;
 		};
 

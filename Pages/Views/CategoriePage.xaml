@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BibliothequeManager.Pages.Views.CategoriePage"
-             Title="Catégories">
+                xmlns:localApp="clr-namespace:BibliothequeManager"
+             Title="Catégories"
+             NavigationPage.HasNavigationBar="False">
 
     <Grid>
         <!-- Fond -->
@@ -13,18 +15,22 @@
 
         <ScrollView>
             <Grid RowDefinitions="Auto,Auto,*">
-                <!-- En-tête -->
-                <HorizontalStackLayout Style="{StaticResource StackLayoutAcc}">
-                    <Border Style="{StaticResource RoundedImageBorder}">
-                        <Image Source="logo.png" Style="{StaticResource Logo}" />
-                    </Border>
-                    <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Gestion des Catégories"
+                <!-- ========== EN-TÊTE ========== -->
+                <Grid Style="{StaticResource StackLayoutAcc}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
+                        <!-- Logo à gauche -->
+                        <Border Style="{StaticResource RoundedImageBorder}">
+                            <Image Source="logo.png" Style="{StaticResource Logo}" />
+                        </Border>
+
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="{Binding [CategoryManagement], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource HeaderLabel}" />
-                        <Label Text="Organisez vos livres par catégories"
+                            <Label Text="{Binding [OrganizeCategory], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource SubHeaderLabel}" />
+                        </StackLayout>
                     </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
 
                 <!-- Recherche -->
                 <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
@@ -93,47 +99,79 @@
             </Grid>
         </ScrollView>
 
-        <!-- ========== FORMULAIRE (UNIQUEMENT ICI) ========== -->
+        <!-- ========== FORMULAIRE  ========== -->
         <Border x:Name="FormulaireCategorie"
                 IsVisible="False"
-                Style="{StaticResource FormulaireAuteur}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="400"
+                Style="{StaticResource FormulaireAuteur}" 
                 Padding="20">
             <VerticalStackLayout Spacing="15">
                 <!-- Titre du formulaire -->
                 <Label x:Name="FormTitle"
-                       Text="Ajouter une catégorie"
+                       Text="{Binding [AddCategories], Source={x:Static localApp:App.Localized}}"
                        Style="{StaticResource FormulaireTitle}" />
 
                 <!-- Champs -->
-                <Entry x:Name="NomCategorieEntry"
-                       Placeholder="Nom (obligatoire)"
-                       Style="{StaticResource FormEntry}" />
-
-                <Entry x:Name="DescriptionCategorieEntry"
-                       Placeholder="Description (facultatif)"
-                       Style="{StaticResource FormEntry}" />
-
+                <Grid RowDefinitions="*,*" RowSpacing="50">
+                    <VerticalStackLayout Spacing="5" >
+                        <Label x:Name="NomFormLabel" Grid.Row="0"
+                               Text="{Binding [NameRequired], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormLabel}" />
+                        <Entry x:Name="NomCategorieEntry"
+                               Placeholder="{Binding [NameRequired], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormEntry}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5" Grid.Row="1">
+                        <Label x:Name="DescriptionFormLabel"
+                               Text="{Binding [DescriptionOptional], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormLabel}" />
+                        <Entry x:Name="DescriptionCategorieEntry"
+                               Placeholder="{Binding [DescriptionOptional], Source={x:Static localApp:App.Localized}}"
+                               Style="{StaticResource FormEntry}" />
+                    </VerticalStackLayout>
+                </Grid>
+                
                 <!-- Boutons -->
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
                     <Button x:Name="AjouterButton"
-                            Text="Ajouter"
+                            Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource PrimaryButton}"
-                            Clicked="OnAjouterCategorieClicked" />
+                            Clicked="OnAjouterCategorieClicked">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                                FontFamily="MaterialIcons"
+                                Glyph="&#xe145;"  
+                                Color="White"
+                                Size="18" />
+                        </Button.ImageSource>
+                    </Button>
 
                     <Button x:Name="ModifierButton"
-                            Text="Modifier"
+                            Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource WarningButton}"
                             Clicked="OnModifierCategorieClicked"
-                            IsVisible="False" />
+                            IsVisible="False">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                            FontFamily="MaterialIcons"
+                            Glyph="&#xe3c9;"    
+                            Color="White"
+                            Size="18" />
+                        </Button.ImageSource>
+                    </Button>
 
                     <Button x:Name="SupprimerButton"
-                            Text="Supprimer"
+                            Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource DangerButton}"
                             Clicked="OnSupprimerCategorieClicked"
-                            IsVisible="False" />
+                            IsVisible="False">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                                FontFamily="MaterialIcons"
+                                Glyph="&#xe872;"   
+                                Color="White"
+                                Size="18" />
+                        </Button.ImageSource>
+                    </Button>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>

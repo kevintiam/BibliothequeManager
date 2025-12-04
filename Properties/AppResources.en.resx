@@ -435,4 +435,96 @@
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Confirm delete</value>
   </data>
+  <data name="CategoryManagement" xml:space="preserve">
+    <value>Category Management</value>
+  </data>
+  <data name="OrganizeCategory" xml:space="preserve">
+    <value>Organize your books by category</value>
+  </data>
+  <data name="AddCategories" xml:space="preserve">
+    <value>Add a category</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name (required)</value>
+  </data>
+  <data name="DescriptionOptional" xml:space="preserve">
+    <value>Description (optional)</value>
+  </data>
+  <data name="AddEditCategory" xml:space="preserve">
+    <value>Add/Edit a category</value>
+  </data>
+  <data name="PopDelCathegori" xml:space="preserve">
+    <value>Do you want to delete the category?</value>
+  </data>
+  <data name="AuthorSuccessfullyAdded" xml:space="preserve">
+    <value>Author successfully added!</value>
+  </data>
+  <data name="CategorySuccessfullyAdded" xml:space="preserve">
+    <value>Category successfully added!</value>
+  </data>
+  <data name="CategorySuccessfullyDeleted!" xml:space="preserve">
+    <value>Category successfully deleted!</value>
+  </data>
+  <data name="AuthorSuccessfullyDeleted" xml:space="preserve">
+    <value>Author successfully deleted!</value>
+  </data>
+  <data name="popErrorAutor1" xml:space="preserve">
+    <value>First name and last name are required.</value>
+  </data>
+  <data name="popErrorAutor2" xml:space="preserve">
+    <value>This author already exists</value>
+  </data>
+  <data name="popErrorCategori1" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="succespopCategorie1" xml:space="preserve">
+    <value>Category successfully modified!</value>
+  </data>
+  <data name="AuthorSuccessfullyModified" xml:space="preserve">
+    <value>Author successfully modified!</value>
+  <data name="BookManagement" xml:space="preserve">
+    <value>Book Management</value>
+  </data>
+  <data name="KnowdledgeAcquired" xml:space="preserve">
+    <value>Knowledge is acquired through experience. . .</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="ExAvailable" xml:space="preserve">
+    <value>Ex. Available.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Categoryy" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="IISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="DateOfPublication" xml:space="preserve">
+    <value>Date of publication</value>
+  </data>
+  <data name="SelectAuthor" xml:space="preserve">
+    <value>Selector an author</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Selector an category</value>
+  </data>
+  <data name="Edit/Delete" xml:space="preserve">
+    <value>Edit / Delete</value>
+  </data>
+  <data name="AddBook" xml:space="preserve">
+    <value>Add a Book</value>
+  </data>
+  <data name="CofirmDelection" xml:space="preserve">
+    <value>Confirm delection</value>
+  </data>
+  <data name="ReallydeleteBook" xml:space="preserve">
+    <value>Do you really want to delete the book ?</value>
+  </data>
 </root>
