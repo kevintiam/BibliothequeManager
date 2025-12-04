@@ -16,6 +16,9 @@ namespace BibliothequeManager.Models
         [MaxLength(100)]
         public string Prenom { get; set; } = string.Empty;
 
+        [NotMapped]
+        public string NomComplet => $"{Prenom} {Nom}";
+
 
         public virtual ICollection<Livres> Livres { get; } = new List<Livres>();
 

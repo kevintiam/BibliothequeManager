@@ -13,8 +13,8 @@ namespace BibliothequeManager
         {
             InitializeComponent();
 
-
-            MainPage = new NavigationPage(new HomePage());
+            // MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new Connexion());
         }
 
 
