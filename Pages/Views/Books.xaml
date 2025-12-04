@@ -2,26 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:BibliothequeManager.Models"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
              x:Class="BibliothequeManager.Pages.Views.Books"
-             Title="Books">
+             Title="Books"
+             NavigationPage.HasNavigationBar="False">
     <Grid>
         <!-- Fond -->
-        <Image Source="new_background.png"
+        <Image 
+               Source="new_background.png"
                Aspect="AspectFill"
                InputTransparent="True"
                Opacity="0.2" />
 
         <ScrollView>
-            <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <Grid RowDefinitions="Auto,Auto,*">
                 <!-- En-tête -->
                 <HorizontalStackLayout Grid.Row="0" Style="{StaticResource StackLayoutAcc}">
                     <Border Style="{StaticResource RoundedImageBorder}">
                         <Image Source="logo.png" Style="{StaticResource Logo}" />
                     </Border>
                     <StackLayout Style="{StaticResource StackLayoutAcce}">
-                        <Label Text="Gestion Des Livres"
+                        <Label Text="{Binding [BookManagement], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource HeaderLabel}" />
-                        <Label Text="La connaissance s'acquiert par l'expérience..."
+                        <Label Text="{Binding [KnowdledgeAcquired], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource SubHeaderLabel}" />
                     </StackLayout>
                 </HorizontalStackLayout>
@@ -36,10 +39,14 @@
                             WidthRequest="600"
                             HorizontalOptions="Center">
                         <Grid ColumnDefinitions="*,Auto">
-                            <Entry Text="{Binding SearchQuery}"
-                                   Placeholder="Rechercher un livre..."
+                           
+                            <Entry x:Name="SearchEntry"
+                                   Placeholder="{Binding [SearchBook], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TextZone}" />
-                            <Button Grid.Column="1" Style="{StaticResource SearchIconButton}">
+                           
+                            <Button x:Name="SearchButton"
+                                    Grid.Column="1" 
+                                    Style="{StaticResource SearchIconButton}">
                                 <Button.ImageSource>
                                     <FontImageSource FontFamily="MaterialIcons"
                                                      Glyph="&#xe8b6;"
@@ -52,19 +59,25 @@
                 </HorizontalStackLayout>
 
                 <!-- Liste des livres -->
-                <CollectionView Grid.Row="2"
-                                ItemsSource="{Binding Livres}"
-                                SelectionMode="None"
+                <CollectionView x:Name="BooksCollectionView"
+                                Grid.Row="2"
+                                SelectionMode="Single"
                                 Margin="20,0">
                     <CollectionView.Header>
                         <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*"
                               Style="{StaticResource TabHead}">
-                            <Label Text="Titre" Style="{StaticResource TableHeader}" />
-                            <Label Text="Auteur" Style="{StaticResource TableHeader}" Grid.Column="1" />
-                            <Label Text="Catégorie" Style="{StaticResource TableHeader}" Grid.Column="2" />
-                            <Label Text="ISBN" Style="{StaticResource TableHeader}" Grid.Column="3" />
-                            <Label Text="Pages" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
-                            <Label Text="Ex. Dispo." Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding [Title], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" />
+                            <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="1" />
+                            <Label Text="{Binding [Categoryy], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="2" />
+                            <Label Text="{Binding [IISBN], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="3" />
+                            <Label Text="{Binding [Pages], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding [ExAvailable], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
                         </Grid>
                     </CollectionView.Header>
 
@@ -73,92 +86,133 @@
                             <Border Style="{StaticResource TabContent}">
                                 <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*" ColumnSpacing="10">
                                     <Label Text="{Binding Titre}" Style="{StaticResource TableRowData}" />
-                                    <Label Text="{Binding Auteur}" Style="{StaticResource TableRowData}" Grid.Column="1" />
-                                    <Label Text="{Binding Categorie}" Style="{StaticResource TableRowData}" Grid.Column="2" />
+                                    <Label Text="{Binding Auteur.Prenom}" Style="{StaticResource TableRowData}" Grid.Column="1" />
+                                    <Label Text="{Binding LivreCategories[0].Categorie.Nom}" Style="{StaticResource TableRowData}" Grid.Column="2" />
                                     <Label Text="{Binding ISBN}" Style="{StaticResource TableRowData}" Grid.Column="3" />
-                                    <Label Text="{Binding NombrePages}" Style="{StaticResource TableRowData}" Grid.Column="4" HorizontalTextAlignment="Center" />
-                                    <Label Text="{Binding NombreExemplaires}" Style="{StaticResource TableRowData}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Exemplaires[0].NombrePage}" Style="{StaticResource TableRowData}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Exemplaires.Count}" Style="{StaticResource TableRowData}" Grid.Column="5" HorizontalTextAlignment="Center" />
                                 </Grid>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-                <!-- Formulaire GESTION LIVRES -->
-                <Border x:Name="FormulaireLivres"
-                        Grid.Row="3"
-                        IsVisible="False"
-                        StrokeShape="RoundRectangle 20"
-                        BackgroundColor="White"
-                        Padding="20"
-                        Margin="30,15"
-                        Stroke="{StaticResource Gray300}">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="Gérer Les Livres"
-                               FontFamily="PlaypenSansSemiBold"
-                               FontSize="16"
-                               TextColor="{StaticResource PrimaryBlue}" />
-
-                        <Grid ColumnDefinitions="1.2*,1*,Auto,1.1*" ColumnSpacing="20">
-                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                <Label Text="Titre" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtTitre"
-                                       Style="{StaticResource FormEntry}" />
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="1" Style="{StaticResource FormFieldStackPanel}">
-                                <Picker x:Name="PickerAuthorSelect"
-                                        Title="Sélectionner un auteur"
-                                        Style="{StaticResource FormPicker}" />
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="2" Style="{StaticResource FormFieldStackPanel}">
-                                <Label Text="Date de publication" Style="{StaticResource FormLabel}" />
-                                <DatePicker x:Name="DatePickerPublication"
-                                            Style="{StaticResource FormDatePicker}"
-                                            Format="dd/MM/yyyy" />
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="3" Style="{StaticResource FormFieldStackPanel}">
-                                <Picker x:Name="PickerCathegorieSelect"
-                                        Title="Sélectionner une catégorie"
-                                        Style="{StaticResource FormPicker}" />
-                            </VerticalStackLayout>
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                <Label Text="ISBN" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtISBN" Style="{StaticResource FormEntry}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                <Label Text="Pages" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtPages"
-                                       Style="{StaticResource FormEntry}"
-                                       Keyboard="Numeric" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="2">
-                                <Label Text="Exemplaires" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtExemplaires"
-                                       Style="{StaticResource FormEntry}"
-                                       Keyboard="Numeric" />
-                            </VerticalStackLayout>
-                        </Grid>
-
-                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
-                            <Button Text="Ajouter"
-                                    Style="{StaticResource PrimaryButton}"/>
-                            <Button Text="Modifier"
-                                    Style="{StaticResource WarningButton}" />
-                            <Button Text="Supprimer"
-                                    Style="{StaticResource DangerButton}"/>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
             </Grid>
         </ScrollView>
+        <!-- Formulaire GESTION LIVRES -->
+        <Border 
+        x:Name="FormulaireLivres"
+        IsVisible="False"
+        Style="{StaticResource FormulaireAuteur}">
+            <VerticalStackLayout Spacing="15">
+                <Label x:Name="FormTitle"
+                Text="{Binding [BookManagement], Source={x:Static localApp:App.Localized}}"
+               Style="{StaticResource FormulaireTitle}"/>
 
-        <!-- BOUTON FLOTTANT “+” -->
+               <!--Titre, Auteur, Categorie-->
+                <Grid RowDefinitions="*,*,*,*,*" RowSpacing="20">
+                    <VerticalStackLayout Spacing="5" Grid.Row="0">
+                        <Label  Text="{Binding [Title], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                        <Entry x:Name="TxtTitre"
+                       Style="{StaticResource FormEntry}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5" Grid.Row="1">
+                        <Label  Text="{Binding [Author], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                        <Picker x:Name="PickerAuthorSelect"
+                        Title="{Binding [SelectAuthor], Source={x:Static localApp:App.Localized}}"
+                        Style="{StaticResource FormPicker}"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5" Grid.Row="2">
+                        <Label Text="{Binding [Categoryy], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                        <Picker x:Name="PickerCathegorieSelect"
+                        Title="{Binding [SelectCategory], Source={x:Static localApp:App.Localized}}"
+                        Style="{StaticResource FormPicker}" />
+                    </VerticalStackLayout>
+
+                    <!--  ISBN et Date de publication -->
+                    <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="15">
+                        <VerticalStackLayout Spacing="5" Grid.Column="0">
+                            <Label Text="{Binding [IISBN], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                            <Entry x:Name="TxtISBN" 
+                       Style="{StaticResource FormEntry}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5" Grid.Column="1">
+                            <Label  Text="{Binding [DateOfPublication], Source={x:Static localApp:App.Localized}}"
+                     Style="{StaticResource FormLabel}" />
+                            <DatePicker x:Name="DatePickerPublication"
+                          Style="{StaticResource FormDatePicker}"
+                          Format="dd/MM/yyyy" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    
+                    <!-- Pages et Exemplaires -->
+                    <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10" >
+                        <VerticalStackLayout Spacing="5" Grid.Column="0">
+                            <Label Text="{Binding [Pages], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                            <Entry x:Name="TxtPages"
+                       Style="{StaticResource FormEntry}"
+                       Keyboard="Numeric" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="5" Grid.Column="1">
+                            <Label Text="{Binding [Copy], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormLabel}" />
+                            <Entry x:Name="TxtExemplaires"
+                       Style="{StaticResource FormEntry}"
+                       Keyboard="Numeric" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Grid>
+
+
+                <!-- Boutons d'action -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
+                    <Button x:Name="AjouterButton"
+                    Text="{Binding [Add], Source={x:Static localApp:App.Localized}}" 
+                    Clicked="OnAjouterClicked">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="MaterialIcons"
+                             Glyph="&#xe145;"   
+                             Color="White"
+                             Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="ModifierButton"
+                        Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
+                        Style="{StaticResource WarningButton}"
+                        Clicked="OnModifierClicked">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                        FontFamily="MaterialIcons"
+                        Glyph="&#xe3c9;"   
+                        Color="White"
+                        Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+
+                    <Button x:Name="SupprimerButton"
+                        Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
+                        Style="{StaticResource DangerButton}"
+                        Clicked="OnSupprimerClicked">
+                        <Button.ImageSource>
+                            <FontImageSource 
+                        FontFamily="MaterialIcons"
+                        Glyph="&#xe872;"   
+                        Color="White"
+                        Size="18" />
+                        </Button.ImageSource>
+                    </Button>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+        <!-- BOUTON FLOTTANT "+" -->
         <Button Text="+"
                 Clicked="OnFloatingAddClicked"
                 Style="{StaticResource FloatingAddButton}"

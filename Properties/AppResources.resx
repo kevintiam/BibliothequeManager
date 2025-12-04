@@ -346,7 +346,7 @@
     <value>Gestion Des Auteurs</value>
   </data>
   <data name="Knowledge" xml:space="preserve">
-    <value>La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information</value>
+    <value>Kn</value>
   </data>
   <data name="SearchAuthor" xml:space="preserve">
     <value>Rechercher un auteur ...</value>
@@ -434,5 +434,50 @@
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Confirmer la suppression</value>
+  </data>
+  <data name="BookManagement" xml:space="preserve">
+    <value>Gestion Des Livres</value>
+  </data>
+  <data name="KnowdledgeAcquired" xml:space="preserve">
+    <value>La connaissance s'acquiert par l'expérience. . .</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="ExAvailable" xml:space="preserve">
+    <value>Ex. Dispo.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Exemplaires</value>
+  </data>
+  <data name="Categoryy" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="IISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="DateOfPublication" xml:space="preserve">
+    <value>Date de publication</value>
+  </data>
+  <data name="SelectAuthor" xml:space="preserve">
+    <value>Sélectionner un auteur</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Sélectionner une catégorie</value>
+  </data>
+  <data name="Edit/Delete" xml:space="preserve">
+    <value>Modifier / Supprimer</value>
+  </data>
+  <data name="AddBook" xml:space="preserve">
+    <value>Ajouter un livre</value>
+  </data>
+  <data name="CofirmDelection" xml:space="preserve">
+    <value>Confirmer la suppression</value>
+  </data>
+  <data name="ReallydeleteBook" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer le livre ?</value>
   </data>
 </root>
