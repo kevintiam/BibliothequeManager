@@ -1,9 +1,10 @@
-namespace BibliothequeManager.Pages;
+namespace BibliothequeManager.Views;
 
 public partial class Connexion : ContentPage
 {
-	public Connexion()
-	{
-		InitializeComponent();
-	}
+    public Connexion()
+    {
+        InitializeComponent();
+        BindingContext = new ConnexionViewModel();
+    }
 }
