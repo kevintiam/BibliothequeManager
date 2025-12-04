@@ -33,7 +33,7 @@ public partial class Accueil : ContentPage
 
     private async void OnEmprunterLivreClicked(object sender, EventArgs e)
     {
-        await NavigationToPage<Emprunt>();
+        await NavigationToPage<EmpruntPage>();
     }
 
     private async void OnRetournerLivreClicked(object sender, EventArgs e)
@@ -58,6 +58,6 @@ public partial class Accueil : ContentPage
 
     private async void OnGestionAdherentsClicked(object sender, EventArgs e)
     {
-        await NavigationToPage<Adherent>();
+        await NavigationToPage<GestionAdherent>();
     }
 }

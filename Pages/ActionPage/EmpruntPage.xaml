@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibliothequeManager.Pages.ActionPage.Emprunt"
+             x:Class="BibliothequeManager.Pages.ActionPage.EmpruntPage"
               xmlns:localApp="clr-namespace:BibliothequeManager"
              NavigationPage.HasNavigationBar="False"
              Title="Emprunt">
@@ -78,13 +78,34 @@
                                                Style="{StaticResource ModernEntry}"
                                                Grid.Column="0"/>
 
-                                <Button Text="🔎"
-                                                Style="{StaticResource GradientButtonPrimary}"
-                                                Clicked="OnRechercherClicked"
-                                                Grid.Column="1"
-                                                WidthRequest="60"/>
+                                <Button x:Name="SearchButton"       
+                                        Text="🔎"
+                                        Style="{StaticResource GradientButtonPrimary}"
+                                        Clicked="OnRechercherClicked"
+                                        Grid.Column="1"
+                                        WidthRequest="60"/>
                             </Grid>
                         </StackLayout>
+                        <!-- Liste dynamique des livres -->
+                        <CollectionView x:Name="SuggestionsCollectionView"
+                                        HeightRequest="200"
+                                        IsVisible="False"
+                                        Margin="0,5"
+                                        SelectionMode="Single">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource SearchBorder}">
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Label Text="📚" FontSize="16" VerticalOptions="Center" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                                <Label Text="{Binding Titre}"
+                                                       Style="{StaticResource SearchLabel}"/>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
                         <!-- Section Livre Sélectionné -->
                         <StackLayout x:Name="LivreSection" 

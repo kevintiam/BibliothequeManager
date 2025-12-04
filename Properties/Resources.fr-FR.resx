@@ -123,6 +123,9 @@
   <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>
+  <data name="AddBook" xml:space="preserve">
+    <value>Add a book</value>
+  </data>
   <data name="AddEditMember" xml:space="preserve">
     <value>Ajouter / Modifier un adhérent</value>
   </data>

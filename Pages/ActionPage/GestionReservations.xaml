@@ -144,7 +144,9 @@
                         </Border>
 
                         <!-- Liste -->
-                        <CollectionView Grid.Row="1"
+                        <CollectionView 
+                            x:Name="CollectionViewReservations"
+                            Grid.Row="1"
                              ItemsSource="{Binding Reservations}"
                              SelectionMode="Single"
                              EmptyView="Aucune réservation trouvée">
@@ -158,19 +160,19 @@
 
                                             <!-- Colonne Livre & Adhérent -->
                                             <StackLayout Grid.Column="0" Spacing="4">
-                                                <Label Text="{Binding TitreLivre}" Style="{StaticResource TableRowData}"/>
-                                                <Label Text="{Binding NomAdherent}" Style="{StaticResource TableRowData}"/>
-                                                <Label Text="{Binding EmailAdherent}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding reservations.Livre.Titre}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Adherent.Nom}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Adherent.Email}" Style="{StaticResource TableRowData}"/>
                                             </StackLayout>
 
                                             <!-- Date Réservation -->
                                             <Label Grid.Column="1"  Text="{Binding DateReservation, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Date Début -->
-                                            <Label Grid.Column="2" Text="{Binding DateDebut, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+                                            <Label Grid.Column="2" Text="{Binding DateReservation, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Date Fin -->
-                                            <Label Grid.Column="3"  Text="{Binding DateFin, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+                                            <Label Grid.Column="3"  Text="{Binding DateRetour, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Jours restants -->
                                             <Label Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}"/>
@@ -196,24 +198,8 @@
                                              WidthRequest="28"
                                              HeightRequest="28"/>
 
-                                                <Button Text="↻"
-                                             BackgroundColor="#3B82F6"
-                                             TextColor="White"
-                                             FontSize="10"
-                                             CornerRadius="6"
-                                             WidthRequest="28"
-                                             HeightRequest="28"/>
-
                                                 <Button Text="✎"
                                              BackgroundColor="#F59E0B"
-                                             TextColor="White"
-                                             FontSize="10"
-                                             CornerRadius="6"
-                                             WidthRequest="28"
-                                             HeightRequest="28"/>
-
-                                                <Button Text="📧"
-                                             BackgroundColor="#8B5CF6"
                                              TextColor="White"
                                              FontSize="10"
                                              CornerRadius="6"
