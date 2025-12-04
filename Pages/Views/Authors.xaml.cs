@@ -134,12 +134,23 @@ public partial class Authors : ContentPage
         if (selectedAuthor != null)
         {
             int authorId = selectedAuthor.Id;
+
+            var prenom = PrenomEntry.Text?.Trim();
+            var nom = NomEntry.Text?.Trim();
+
+            if (string.IsNullOrEmpty(prenom) || string.IsNullOrEmpty(nom))
+            {
+                await ErrorPopup.Show(App.Localized["popErrorAutor1"], this);
+                return;
+            }
+
             using var Donnees = new BibliothequeContext();
             var auteurToUpdate = await Donnees.Auteurs.FindAsync(authorId);
             if (auteurToUpdate != null)
             {
-                auteurToUpdate.Prenom = PrenomEntry.Text;
-                auteurToUpdate.Nom = NomEntry.Text;
+                auteurToUpdate.Prenom = prenom;
+                auteurToUpdate.Nom = nom;
+                await SuccessPopup.Show(App.Localized["AuthorSuccessfullyModified"], this);
                 await Donnees.SaveChangesAsync();
                 ChargerAuteurs();
                 ReinitialiserFormulaire();
@@ -151,16 +162,31 @@ public partial class Authors : ContentPage
     //Bouton Ajouter
     private async void OnAjouterClicked(object sender, EventArgs e)
     {
+        var prenom = PrenomEntry.Text?.Trim();
+        var nom = NomEntry.Text?.Trim();
+
+        if (string.IsNullOrEmpty(prenom) || string.IsNullOrEmpty(nom))
+        {
+           await ErrorPopup.Show(App.Localized["popErrorAutor1"],this);
+           return;
+        }
+        
         using var Donnees = new BibliothequeContext();
+
+        if(await Donnees.Auteurs.AnyAsync(a => a.Prenom == prenom) && (await Donnees.Auteurs.AnyAsync(a =>a.Nom == nom)))
+        {
+            await ErrorPopup.Show(App.Localized["popErrorAutor2"], this);
+            return;
+        }
         var newAuteur = new Auteur
         {
-            Prenom = PrenomEntry.Text,
-            Nom = NomEntry.Text
+            Prenom = prenom,
+            Nom = nom
         };
         Donnees.Auteurs.Add(newAuteur);
         await Donnees.SaveChangesAsync();
 
-        await SuccessPopup.Show("Auteur Ajouté avec succès !", this);
+        await SuccessPopup.Show(App.Localized["AuthorSuccessfullyAdded"], this);
 
         ChargerAuteurs();
         ReinitialiserFormulaire();
@@ -201,10 +227,12 @@ public partial class Authors : ContentPage
         {
             context.Auteurs.Remove(auteur);
             await context.SaveChangesAsync();
+            await SuccessPopup.Show(App.Localized["AuthorSuccessfullyDeleted!"], this);
             ChargerAuteurs();
             ReinitialiserFormulaire();
             FormulaireLivres.IsVisible = false;
             AuthorsCollectionView.SelectedItem = null;
         }
     }
+
 }

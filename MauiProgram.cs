@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using BibliothequeManager.Models;
 using CommunityToolkit.Maui;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 using System.Globalization;
 
 namespace BibliothequeManager
@@ -37,6 +39,12 @@ namespace BibliothequeManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            // === 🔑 ENREGISTRER LE CONTEXT EF CORE ===
+            string connectionString = "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;";
+            builder.Services.AddDbContext<BibliothequeContext>(options =>
+                options.UseSqlServer(connectionString));
+
             // Langue par défaut : français
             var culture = new CultureInfo("fr");
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -44,6 +52,27 @@ namespace BibliothequeManager
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
             return builder.Build();
+        }
+    }
+
+    public static class SeedData
+    {
+        public static async Task InitializeAdminAsync(BibliothequeContext context)
+        {
+            // Ne pas recréer si déjà présent
+            if (await context.Bibliothecaires.AnyAsync(b => b.Email == "admin@biblio.local"))
+                return;
+
+            var admin = new Bibliothecaire
+            {
+                Nom = "Admin",
+                Prenom = "Bibliothèque",
+                Email = "admin@biblio.local",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Kevin@25!")
+            };
+
+            context.Bibliothecaires.Add(admin);
+            await context.SaveChangesAsync();
         }
     }
 }

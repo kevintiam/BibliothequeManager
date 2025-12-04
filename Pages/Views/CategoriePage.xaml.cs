@@ -1,4 +1,5 @@
 using BibliothequeManager.Models;
+using BibliothequeManager.Pages.Popups;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliothequeManager.Pages.Views;
@@ -25,7 +26,7 @@ public partial class CategoriePage : ContentPage
         else
         {
             ReinitialiserFormulaire();
-            FormTitle.Text = "Ajouter une catégorie";
+            FormTitle.Text = App.Localized["AddCategories"];
             ModifierButton.IsVisible = false;
             AjouterButton.IsVisible = true;
             SupprimerButton.IsVisible = false;
@@ -72,7 +73,7 @@ public partial class CategoriePage : ContentPage
             {
                 NomCategorieEntry.Text = categorieDetails.Nom;
                 DescriptionCategorieEntry.Text = categorieDetails.Description;
-                FormTitle.Text = "Modifier / Supprimer";
+                FormTitle.Text = App.Localized["AddEditCategory"];
                 ModifierButton.IsVisible = true;
                 AjouterButton.IsVisible = false;
                 SupprimerButton.IsVisible = true;
@@ -129,11 +130,12 @@ public partial class CategoriePage : ContentPage
         var nom = NomCategorieEntry.Text?.Trim();
         if (string.IsNullOrWhiteSpace(nom))
         {
-            await DisplayAlert("Erreur", "Le nom est obligatoire.", "OK");
+            await ErrorPopup.Show(App.Localized["popErrorCategori1"], this);
             return;
         }
 
         using var context = new BibliothequeContext();
+
         // Vérifier unicité (sauf si c'est le même nom)
         var existeDeja = await context.Categories
             .AnyAsync(c => c.Nom == nom && c.Id != selectedCategorie.Id);
@@ -150,7 +152,7 @@ public partial class CategoriePage : ContentPage
             categorie.Nom = nom;
             categorie.Description = DescriptionCategorieEntry.Text?.Trim() ?? string.Empty;
             await context.SaveChangesAsync();
-            await DisplayAlert("Succès", "Catégorie modifiée !", "OK");
+            await SuccessPopup.Show(App.Localized["succespopCategorie1"], this);
             ChargerCategories();
             ReinitialiserFormulaire();
             FormulaireCategorie.IsVisible = false;
@@ -182,7 +184,7 @@ public partial class CategoriePage : ContentPage
         context.Categories.Add(newCategorie);
         await context.SaveChangesAsync();
 
-        await DisplayAlert("Succès", "Catégorie ajoutée avec succès !", "OK");
+        await SuccessPopup.Show(App.Localized["CategorySuccessfullyAdded"], this);
         ChargerCategories();
         ReinitialiserFormulaire();
         FormulaireCategorie.IsVisible = false;
@@ -193,31 +195,30 @@ public partial class CategoriePage : ContentPage
         var selectedCategorie = CategoriesCollectionView.SelectedItem as Categorie;
         if (selectedCategorie != null)
         {
-            bool confirmed = await DisplayAlert(
-                "Confirmer",
-                $"Voulez-vous supprimer la catégorie '{selectedCategorie.Nom}' ?",
-                "Oui", "Non");
-
-            if (confirmed)
+            var popup = new ConfirmationPopup
             {
-                using var context = new BibliothequeContext();
-                var categorie = await context.Categories.FindAsync(selectedCategorie.Id);
-                if (categorie != null)
+                Title = App.Localized["ConfirmDelete"],
+                Message = string.Format(App.Localized["PopDelCathegori"], selectedCategorie.Nom)
+            };
+            popup.OnCompleted += async (confirmed) =>
+            {
+                if (confirmed)
                 {
-                    context.Categories.Remove(categorie);
-                    await context.SaveChangesAsync();
-                    await DisplayAlert("Succès", "Catégorie supprimée !", "OK");
-                    ChargerCategories();
-                    ReinitialiserFormulaire();
-                    FormulaireCategorie.IsVisible = false;
-                    CategoriesCollectionView.SelectedItem = null;
+                    using var context = new BibliothequeContext();
+                    var categorie = await context.Categories.FindAsync(selectedCategorie.Id);
+                    if (categorie != null)
+                    {
+                        context.Categories.Remove(categorie);
+                        await context.SaveChangesAsync();
+                        await SuccessPopup.Show(App.Localized["CategorySuccessfullyDeleted!"], this);
+                        ChargerCategories();
+                        ReinitialiserFormulaire();
+                        FormulaireCategorie.IsVisible = false;
+                        CategoriesCollectionView.SelectedItem = null;
+                    }
                 }
-            }
+            };
+            await Navigation.PushModalAsync(popup);
         }
-    }
-
-    private void OnAnnulerCategorieClicked(object sender, EventArgs e)
-    {
-        FormulaireCategorie.IsVisible = false;
     }
 }

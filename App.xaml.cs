@@ -1,4 +1,6 @@
-﻿using BibliothequeManager.Pages;
+﻿using BibliothequeManager.Models;
+using BibliothequeManager.Pages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Controls;
 
 namespace BibliothequeManager
@@ -16,9 +18,25 @@ namespace BibliothequeManager
         }
 
 
-        //protected override Window CreateWindow(IActivationState? activationState)
-        //{
-        //    return new Window(new AppShell());
-        //}
+        protected override async void OnStart()
+        {
+            base.OnStart();
+            try
+            {
+                using var scope = MauiProgram.CreateMauiApp().Services.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<BibliothequeContext>();
+
+                // Mettre à jour le schéma de la base
+                await context.Database.MigrateAsync();
+
+                // Créer le compte admin
+                await SeedData.InitializeAdminAsync(context);
+            }
+            catch (Exception ex)
+            {
+                // Log l'erreur (visible dans la sortie DEBUG)
+                System.Diagnostics.Debug.WriteLine($"Erreur SeedData : {ex}");
+            }
+        }
     }
 }

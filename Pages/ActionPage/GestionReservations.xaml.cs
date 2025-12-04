@@ -1,3 +1,6 @@
+using BibliothequeManager.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class GestionReservations : ContentPage
@@ -6,9 +9,24 @@ public partial class GestionReservations : ContentPage
 	{
 		InitializeComponent();
         StatutPicker.ItemsSource = StatutOptions;
+		ChargerReservation();
 
     }
 
+	private void ChargerReservation()
+	{
+		using var donnee = new BibliothequeContext();
+
+		var reservations = donnee.Reservations
+			.Include(r => r.Livre)
+			.Include(r => r.Adherent)
+			.Include(r => r.ExemplaireAttribue)
+			.ToList();
+
+
+        CollectionViewReservations.ItemsSource = reservations;
+
+    }
 	private async void OnAccueilClicked(object sender, EventArgs e)
 	{
 		await Navigation.PushAsync(new HomePage());

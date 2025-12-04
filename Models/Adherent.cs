@@ -25,6 +25,8 @@ namespace BibliothequeManager.Models
         [MaxLength(30)]
         public string Telephone { get; set; } = string.Empty;
 
+        public decimal Amandes { get; set; } = 0;
+
         // Stocké en base : 10 chiffres
         [Required]
         [MaxLength(10)]
@@ -50,6 +52,7 @@ namespace BibliothequeManager.Models
             return (value % 10000000000UL).ToString("D10");
         }
 
+        
         // Navigation
         public ICollection<Emprunt> Emprunts { get; } = new List<Emprunt>();
         public ICollection<Reservation> Reservations { get; } = new List<Reservation>();

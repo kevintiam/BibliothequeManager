@@ -129,6 +129,7 @@
 
                         <!-- Liste -->
                         <CollectionView Grid.Row="1"
+                                x:Name="EmpruntsCollectionView"
                                 ItemsSource="{Binding Emprunts}"
                                 SelectionMode="Single"
                                 EmptyView="Aucun emprunt trouvé">

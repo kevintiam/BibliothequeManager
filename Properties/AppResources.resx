@@ -435,4 +435,52 @@
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Confirmer la suppression</value>
   </data>
+  <data name="CategoryManagement" xml:space="preserve">
+    <value>Gestion des Catégories</value>
+  </data>
+  <data name="OrganizeCategory" xml:space="preserve">
+    <value>Organisez vos livres par catégories</value>
+  </data>
+  <data name="AddCategories" xml:space="preserve">
+    <value>Ajouter une catégorie</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Nom (obligatoire)</value>
+  </data>
+  <data name="DescriptionOptional" xml:space="preserve">
+    <value>Description (facultatif)</value>
+  </data>
+  <data name="AddEditCategory" xml:space="preserve">
+    <value>Ajouter/Modifier une catégorie</value>
+  </data>
+  <data name="PopDelCathegori" xml:space="preserve">
+    <value>Voulez-vous supprimer la catégorie ?</value>
+  </data>
+  <data name="AuthorSuccessfullyAdded" xml:space="preserve">
+    <value>Auteur Ajouté avec succès !</value>
+  </data>
+  <data name="CategorySuccessfullyAdded" xml:space="preserve">
+    <value>Catégorie ajoutée avec succès !</value>
+  </data>
+  <data name="CategorySuccessfullyDeleted!" xml:space="preserve">
+    <value>Catégorie supprimee avec succès !</value>
+  </data>
+  <data name="AuthorSuccessfullyDeleted" xml:space="preserve">
+    <value>Auteur supprime avec succès !</value>
+  </data>
+  <data name="popErrorAutor1" xml:space="preserve">
+    <value>Le prénom et le nom sont obligatoires.</value>
+  </data>
+  <data name="popErrorAutor2" xml:space="preserve">
+    <value>Cet auteur existe deja</value>
+  </data>
+  <data name="popErrorCategori1" xml:space="preserve">
+    <value>Le nom est obligatoire</value>
+  </data>
+  <data name="succespopCategorie1" xml:space="preserve">
+    <value>Catégorie modifiée avec secces !</value>
+  </data>
+  <data name="AuthorSuccessfullyModified" xml:space="preserve">
+    <value>Auteur modifiée avec succes!</value>
+  </data>
 </root>
