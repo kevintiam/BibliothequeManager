@@ -4,6 +4,7 @@ using BibliothequeManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliothequeManager.Migrations
 {
     [DbContext(typeof(BibliothequeContext))]
-    partial class BibliothequeContextModelSnapshot : ModelSnapshot
+    [Migration("20251205040740_chagementBD")]
+    partial class chagementBD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,6 @@ namespace BibliothequeManager.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Amandes")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Email")
@@ -179,10 +181,6 @@ namespace BibliothequeManager.Migrations
 
                     b.Property<int>("ExemplaireId")
                         .HasColumnType("int");
-
-                    b.Property<string>("StatutEmprunt")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

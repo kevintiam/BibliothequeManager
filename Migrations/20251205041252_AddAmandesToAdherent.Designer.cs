@@ -4,6 +4,7 @@ using BibliothequeManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliothequeManager.Migrations
 {
     [DbContext(typeof(BibliothequeContext))]
-    partial class BibliothequeContextModelSnapshot : ModelSnapshot
+    [Migration("20251205041252_AddAmandesToAdherent")]
+    partial class AddAmandesToAdherent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,9 +175,6 @@ namespace BibliothequeManager.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateRetourPrevu")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateRetourReel")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExemplaireId")

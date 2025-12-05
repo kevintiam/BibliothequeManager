@@ -482,6 +482,7 @@
   </data>
   <data name="AuthorSuccessfullyModified" xml:space="preserve">
     <value>Auteur modifiée avec succes!</value>
+  </data>
   <data name="BookManagement" xml:space="preserve">
     <value>Gestion Des Livres</value>
   </data>

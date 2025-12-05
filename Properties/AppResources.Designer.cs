@@ -79,6 +79,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter un livre.
+        /// </summary>
+        public static string AddBook {
+            get {
+                return ResourceManager.GetString("AddBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Ajouter une catégorie.
         /// </summary>
         public static string AddCategories {
@@ -327,6 +336,15 @@ namespace BibliothequeManager.Properties {
         public static string CategorySuccessfullyDeleted_ {
             get {
                 return ResourceManager.GetString("CategorySuccessfullyDeleted!", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Catégorie.
+        /// </summary>
+        public static string Categoryy {
+            get {
+                return ResourceManager.GetString("Categoryy", resourceCulture);
             }
         }
         
@@ -885,6 +903,15 @@ namespace BibliothequeManager.Properties {
         public static string OrganizeCategory {
             get {
                 return ResourceManager.GetString("OrganizeCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pages.
+        /// </summary>
+        public static string Pages {
+            get {
+                return ResourceManager.GetString("Pages", resourceCulture);
             }
         }
         
