@@ -1,39 +1,108 @@
+Ôªøusing BibliothequeManager.Models;
 using BibliothequeManager.Pages.Views;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class Retour : ContentPage
 {
+    private readonly BibliothequeContext contexte = new();
+    private Adherent adherentCourant;
+    private List<Emprunt> empruntsActifs;
+
+    // Classe pour afficher les emprunts dans la liste
+    public class EmpruntAffiche
+    {
+        public string TitreLivre { get; set; } = "";
+        public string Auteur { get; set; } = "";
+        public string ISBN { get; set; } = "";
+        public DateTime DateEmprunt { get; set; }
+        public DateTime DateRetour { get; set; }
+        public int IdEmprunt { get; set; }
+    }
+
     public Retour()
     {
         InitializeComponent();
     }
-    private async void OnConfirmerClicked(object sender, System.EventArgs e)
-    {
 
+    // ‚Üí SEULE VERSION DE OnConfirmerClicked
+    private async void OnConfirmerClicked(object sender, EventArgs e)
+    {
         if (string.IsNullOrWhiteSpace(AbonneIdEntry.Text))
         {
-            await DisplayAlert("Erreur", "Veuillez entrer l'ID de l'abonnÈ.", "OK");
+            await DisplayAlert("Erreur", "Veuillez entrer l'ID de l'abonn√©.", "OK");
             return;
         }
 
-        // RÈcupÈration des donnÈes
-        var abonneId = AbonneIdEntry.Text;
+        if (!int.TryParse(AbonneIdEntry.Text, out int idAdherent))
+        {
+            await DisplayAlert("Erreur", "ID invalide.", "OK");
+            return;
+        }
 
+        try
+        {
+            Adherent adherent = await contexte.Adherents
+                .Include(a => a.Emprunts)
+                    .ThenInclude(e => e.Exemplaire)
+                        .ThenInclude(ex => ex.Livre)
+                        .ThenInclude(l => l.Auteur)
+                .FirstOrDefaultAsync(a => a.Id == idAdherent);
 
-        // Ici, vous pouvez ajouter la logique pour enregistrer l'emprunt dans votre base de donnÈes
-        // Par exemple : 
-        // await _empruntService.AjouterEmpruntAsync(isbn, abonneId, dateRetour);
+            if (adherent == null)
+            {
+                await DisplayAlert("Erreur", "Adh√©rent non trouv√©.", "OK");
+                return;
+            }
 
+            List<Emprunt> listeEmprunts = adherent.Emprunts
+                .Where(e => !e.DateRetourReel.HasValue)
+                .ToList();
 
-        // RÈinitialiser le formulaire
-        AbonneIdEntry.Text = string.Empty;
+            if (listeEmprunts.Count == 0)
+            {
+                await DisplayAlert("Info", "Cet adh√©rent n'a aucun emprunt en cours.", "OK");
+                return;
+            }
 
+            adherentCourant = adherent;
+            empruntsActifs = listeEmprunts;
+
+            NomAbonne.Text = adherent.Nom;
+            PrenomAbonne.Text = adherent.Prenom;
+            IDAbonne.Text = $"ID : {adherent.Id}";
+            NbLivreEmprunter.Text = $"Livres emprunt√©s : {listeEmprunts.Count}";
+
+            List<EmpruntAffiche> empruntsAAfficher = new();
+            foreach (Emprunt emprunt in listeEmprunts)
+            {
+                empruntsAAfficher.Add(new EmpruntAffiche
+                {
+                    TitreLivre = emprunt.Exemplaire?.Livre?.Titre ?? "Titre inconnu",
+                    Auteur = emprunt.Exemplaire?.Livre?.Auteur?.Nom ?? "Auteur inconnu",
+                    ISBN = emprunt.Exemplaire?.Livre?.ISBN ?? "ISBN inconnu",
+                    DateEmprunt = emprunt.DateEmprunt.ToLocalTime().Date,
+                    DateRetour = emprunt.DateRetourPrevu.ToLocalTime().Date,
+                    IdEmprunt = emprunt.Id
+                });
+            }
+
+            EmpruntsCollectionView.ItemsSource = empruntsAAfficher;
+
+            ListeEmprunts.IsVisible = true;
+            RetourContents.IsVisible = false;
+            HeaderText.IsVisible = false;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erreur", $"Impossible de charger les donn√©es : {ex.Message}", "OK");
+        }
     }
 
-    private async void OnAccueilClicked(object sender, System.EventArgs e)
+    private async void OnAccueilClicked(object sender, EventArgs e)
     {
-        // Navigation vers la page d'accueil
         await Navigation.PopAsync();
     }
 
@@ -42,7 +111,5 @@ public partial class Retour : ContentPage
         ListeEmprunts.IsVisible = !ListeEmprunts.IsVisible;
         RetourContents.IsVisible = !RetourContents.IsVisible;
         HeaderText.IsVisible = !HeaderText.IsVisible;
-
     }
-
 }
