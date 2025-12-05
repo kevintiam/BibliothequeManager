@@ -177,13 +177,7 @@
                                                 BackgroundColor="#3B82F6" TextColor="White" FontSize="10" CornerRadius="6"
                                                 WidthRequest="30" HeightRequest="30"/>
 
-                                                                                    <Button Text="📧"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RelancerCommand}"
-                                                CommandParameter="{Binding .}"
-                                                BackgroundColor="#8B5CF6" TextColor="White" FontSize="10" CornerRadius="6"
-                                                WidthRequest="30" HeightRequest="30"/>
-
-                                                                                    <Button Text="🔄"
+                                                <Button Text="🔄"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RetournerCommand}"
                                                 CommandParameter="{Binding .}"
                                                 BackgroundColor="#10B981" TextColor="White" FontSize="10" CornerRadius="6"

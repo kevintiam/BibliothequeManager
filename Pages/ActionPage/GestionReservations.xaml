@@ -160,8 +160,8 @@
 
                                             <!-- Colonne Livre & Adhérent -->
                                             <StackLayout Grid.Column="0" Spacing="4">
-                                                <Label Text="{Binding reservations.Livre.Titre}" Style="{StaticResource TableRowData}"/>
-                                                <Label Text="{Binding Adherent.Nom}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Livre.Titre}" Style="{StaticResource TableRowData}" FontSize="15" TextColor="Blue" FontAttributes="Bold"/>
+                                                <Label Text="{Binding Adherent.Nom}" Style="{StaticResource TableRowData}" FontSize="14" TextColor="Chocolate"/>
                                                 <Label Text="{Binding Adherent.Email}" Style="{StaticResource TableRowData}"/>
                                             </StackLayout>
 

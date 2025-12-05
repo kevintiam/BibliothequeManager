@@ -1,4 +1,6 @@
 using BibliothequeManager.Models;
+using BibliothequeManager.Pages.Popups;
+using CommunityToolkit.Maui.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 
@@ -7,7 +9,6 @@ namespace BibliothequeManager.Pages.ActionPage;
 public partial class GestionEmprunts : ContentPage
 {
     public ICommand VoirCommand { get; }
-    public ICommand RelancerCommand { get; }
     public ICommand RetournerCommand { get; }
 
     public GestionEmprunts()
@@ -16,9 +17,7 @@ public partial class GestionEmprunts : ContentPage
         FilterPicker.ItemsSource = StatutOptions;
 
         VoirCommand = new Command<Emprunt>(OnVoir);
-        RelancerCommand = new Command<Emprunt>(OnRelancer);
         RetournerCommand = new Command<Emprunt>(OnRetourner);
-
 
         BindingContext = this;
         ChargerEmprunts();
@@ -26,23 +25,25 @@ public partial class GestionEmprunts : ContentPage
 
     }
 
-    private void OnVoir(Emprunt emprunt)
+    private async void OnVoir(Emprunt emprunt)
     {
-        // Ex: naviguer vers une page de détails
-        // await Shell.Current.GoToAsync($"//DetailEmpruntPage?id={emprunt.Id}");
-        DisplayAlert("Détails", $"Emprunt de {emprunt.Adherent?.NomComplet} - {emprunt.Exemplaire?.Livre?.Titre}", "OK");
-    }
-
-    private void OnRelancer(Emprunt emprunt)
-    {
-        if (emprunt.JoursRestants >= 0)
+      if (emprunt == null) 
         {
-            DisplayAlert("Info", "Pas de relance nécessaire – pas en retard.", "OK");
-            return;
+            await ErrorPopup.Show("Aucun emprunt sélectionné.", this);
+             return;
+       }
+        var livre = $"Livre Emprunté : {emprunt.Exemplaire?.Livre?.Titre ?? "N/A"}";
+        if (livre == null) {
+            livre = "N/A";
         }
-
-        // Simulation d’envoi d’email ou notification
-        DisplayAlert("Relance", $"Un rappel a été envoyé à {emprunt.Adherent?.Email ?? "l'adhérent"} pour retard de {Math.Abs(emprunt.JoursRestants)} j.", "OK");
+        var adherent = $"Adhérent : {emprunt.Adherent?.NomComplet ?? "N/A"}";
+        if (adherent == null) {
+            adherent = "N/A";
+        }
+        var dates = $"Date Emprunt : {emprunt.DateEmprunt:dd/MM/yy} \n Date de Retour prévu : {emprunt.DateRetourPrevu:dd/MM/yy}";
+        var statut = $"Statut : {emprunt.StatutEmprunt}";
+        var amande = $"Amende : {emprunt.Amande}";
+        await DetailPopup.Show(livre, adherent, dates, statut, amande, this);
     }
 
     private void OnRetourner(Emprunt emprunt)
@@ -56,13 +57,13 @@ public partial class GestionEmprunts : ContentPage
             using var context = new BibliothequeContext();
             var empruntDb = context.Emprunts.First(e => e.Id == emprunt.Id);
             empruntDb.DateRetourReel = DateTime.UtcNow;
-            empruntDb.MettreAJourStatut(); // met à jour StatutEmprunt = "Retourné"
+            empruntDb.MettreAJourStatut();
             context.SaveChanges();
 
-            // Rafraîchir la liste pour refléter le changement
             ChargerEmprunts();
         
     }
+    
     private void ChargerEmprunts()
     {
         using var donnee = new BibliothequeContext();
