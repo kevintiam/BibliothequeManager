@@ -27,6 +27,9 @@ namespace BibliothequeManager.Models
 
         public decimal Amandes { get; set; } = 0;
 
+        [NotMapped]
+        public string NomComplet => $"{Prenom} {Nom}";
+
         // Stocké en base : 10 chiffres
         [Required]
         [MaxLength(10)]
