@@ -19,7 +19,7 @@ namespace BibliothequeManager.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -309,6 +309,15 @@ namespace BibliothequeManager.Properties {
         public static string Category {
             get {
                 return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rechercher  une catégorie ....
+        /// </summary>
+        public static string Category2 {
+            get {
+                return ResourceManager.GetString("Category2", resourceCulture);
             }
         }
         
@@ -826,6 +835,15 @@ namespace BibliothequeManager.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à La seule source de connaissance, c’est l’expérience..
+        /// </summary>
+        public static string mess {
+            get {
+                return ResourceManager.GetString("mess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Nom de l&apos;Adherant :.
         /// </summary>
         public static string NameOfThemember {
@@ -1278,9 +1296,54 @@ namespace BibliothequeManager.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à ✨ « La connaissance s’acquiert par l’expérience, tout le reste n’est que de l’information. ».
         /// </summary>
-        public static string WelcomeSubtitle {
+        public static string WelcomeSubtitle_1 {
             get {
-                return ResourceManager.GetString("WelcomeSubtitle", resourceCulture);
+                return ResourceManager.GetString("WelcomeSubtitle_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ✨ « La seule source de connaissance, c’est l’expérience. ».
+        /// </summary>
+        public static string WelcomeSubtitle_2 {
+            get {
+                return ResourceManager.GetString("WelcomeSubtitle_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à  ✨ « La seule source de connaissance, c’est l’expérience. » .
+        /// </summary>
+        public static string WelcomeSubtitle_3 {
+            get {
+                return ResourceManager.GetString("WelcomeSubtitle_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ✨ « L’imagination est plus importante que le savoir. ».
+        /// </summary>
+        public static string WelcomeSubtitle_4 {
+            get {
+                return ResourceManager.GetString("WelcomeSubtitle_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ✨ « La vie, c’est comme faire du vélo. Pour garder l’équilibre, il faut avancer. ».
+        /// </summary>
+        public static string WelcomeSubtitle_5 {
+            get {
+                return ResourceManager.GetString("WelcomeSubtitle_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ✨ « L’essentiel, c’est de ne jamais cesser de se poser des questions. La curiosité a sa propre raison d’être. ».
+        /// </summary>
+        public static string WelcomeSubtitle_6 {
+            get {
+                return ResourceManager.GetString("WelcomeSubtitle_6", resourceCulture);
             }
         }
         

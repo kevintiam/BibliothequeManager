@@ -16,6 +16,8 @@ namespace BibliothequeManager
 
              MainPage = new NavigationPage(new HomePage());
             //MainPage = new NavigationPage(new Connexion());
+            MainPage = new NavigationPage(new HomePage());
+            //MainPage = new NavigationPage(new Connexion());
         }
 
 

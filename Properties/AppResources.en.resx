@@ -324,7 +324,7 @@
   <data name="VisionaryDescription" xml:space="preserve">
     <value>A visionary perspective on surveillance and freedom</value>
   </data>
-  <data name="WelcomeSubtitle" xml:space="preserve">
+  <data name="WelcomeSubtitle_1" xml:space="preserve">
     <value>✨ “Knowledge is gained through experience; everything else is just information.”</value>
   </data>
   <data name="WelcomeTitle" xml:space="preserve">
@@ -527,5 +527,26 @@
   </data>
   <data name="ReallydeleteBook" xml:space="preserve">
     <value>Do you really want to delete the book ?</value>
+  </data>
+  <data name="Category2" xml:space="preserve">
+    <value>Search a category ...</value>
+  </data>
+  <data name="mess" xml:space="preserve">
+    <value>The only source of knowledge is experience</value>
+  </data>
+  <data name="WelcomeSubtitle_2" xml:space="preserve">
+    <value>✨ “The only source of knowledge is experience.” </value>
+  </data>
+  <data name="WelcomeSubtitle_3" xml:space="preserve">
+    <value>✨ « Dès que vous arrêtez d’apprendre, vous commencez à mourir. » </value>
+  </data>
+  <data name="WelcomeSubtitle_4" xml:space="preserve">
+    <value> ✨ “Imagination is more important than knowledge.</value>
+  </data>
+  <data name="WelcomeSubtitle_5" xml:space="preserve">
+    <value>✨ “Life is like riding a bicycle. To keep your balance, you must keep moving.</value>
+  </data>
+  <data name="WelcomeSubtitle_6" xml:space="preserve">
+    <value>✨ “The important thing is not to stop questioning. Curiosity has its own reason for existing.” </value>
   </data>
 </root>

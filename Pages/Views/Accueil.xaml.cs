@@ -1,6 +1,8 @@
 using System.Globalization;
 using System.Threading;
 using BibliothequeManager.Pages.ActionPage;
+using BibliothequeManager.Properties;
+
 
 namespace BibliothequeManager.Pages.Views;
 
@@ -9,9 +11,17 @@ public partial class Accueil : ContentPage
     public Accueil()
     {
         InitializeComponent();
+      
     }
 
-    
+    // Met à jour la citation de bienvenue à chaque apparition de la page
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+   
+        SetRandomWelcomeQuote();
+    }
+
     private async Task NavigationToPage<TPage>() where TPage : Page, new()
     {
         if (IsBusy) return;
@@ -60,4 +70,25 @@ public partial class Accueil : ContentPage
     {
         await NavigationToPage<GestionAdherent>();
     }
+    // Citation aléatoire
+    private static readonly Random _random = new Random();
+
+    private void SetRandomWelcomeQuote()
+    {
+        var quotes = new[]
+        {
+        AppResources.WelcomeSubtitle_1,
+        AppResources.WelcomeSubtitle_2,
+        AppResources.WelcomeSubtitle_3,
+        AppResources.WelcomeSubtitle_4,
+        AppResources.WelcomeSubtitle_5,
+        AppResources.WelcomeSubtitle_6
+    };
+        // Sélectionne une citation aléatoire
+        WelcomeSubtitleLabel.Text = quotes[_random.Next(quotes.Length)];
+    }
+
+
+
+
 }
