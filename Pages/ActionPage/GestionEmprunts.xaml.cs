@@ -1,4 +1,4 @@
-using BibliothequeManager.Models;
+ï»¿using BibliothequeManager.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 
@@ -6,107 +6,91 @@ namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class GestionEmprunts : ContentPage
 {
-    public ICommand VoirCommand { get; }
-    public ICommand RelancerCommand { get; }
     public ICommand RetournerCommand { get; }
 
     public GestionEmprunts()
-	{
-		InitializeComponent();
-        FilterPicker.ItemsSource = StatutOptions;
-
-        VoirCommand = new Command<Emprunt>(OnVoir);
-        RelancerCommand = new Command<Emprunt>(OnRelancer);
+    {
+        InitializeComponent();
         RetournerCommand = new Command<Emprunt>(OnRetourner);
-
-
         BindingContext = this;
         ChargerEmprunts();
-        ChargerStatistique();
-
+        ChargerStatistique(); // â† facultatif, voir note ci-dessous
     }
 
-    private void OnVoir(Emprunt emprunt)
-    {
-        // Ex: naviguer vers une page de détails
-        // await Shell.Current.GoToAsync($"//DetailEmpruntPage?id={emprunt.Id}");
-        DisplayAlert("Détails", $"Emprunt de {emprunt.Adherent?.NomComplet} - {emprunt.Exemplaire?.Livre?.Titre}", "OK");
-    }
-
-    private void OnRelancer(Emprunt emprunt)
-    {
-        if (emprunt.JoursRestants >= 0)
-        {
-            DisplayAlert("Info", "Pas de relance nécessaire – pas en retard.", "OK");
-            return;
-        }
-
-        // Simulation d’envoi d’email ou notification
-        DisplayAlert("Relance", $"Un rappel a été envoyé à {emprunt.Adherent?.Email ?? "l'adhérent"} pour retard de {Math.Abs(emprunt.JoursRestants)} j.", "OK");
-    }
-
-    private void OnRetourner(Emprunt emprunt)
+    private async void OnRetourner(Emprunt emprunt)
     {
         if (emprunt.DateRetourReel.HasValue)
         {
-            DisplayAlert("Déjà rendu", "Cet emprunt est déjà enregistré comme rendu.", "OK");
+            await DisplayAlert("Info", "Cet emprunt est dÃ©jÃ  retournÃ©.", "OK");
             return;
         }
 
-            using var context = new BibliothequeContext();
-            var empruntDb = context.Emprunts.First(e => e.Id == emprunt.Id);
-            empruntDb.DateRetourReel = DateTime.UtcNow;
-            empruntDb.MettreAJourStatut(); // met à jour StatutEmprunt = "Retourné"
-            context.SaveChanges();
+        string titre = emprunt.Exemplaire?.Livre?.Titre ?? "ce livre";
+        bool confirmer = await DisplayAlert("Confirmer", $"Retourner Â«{titre}Â» ?", "Oui", "Annuler");
+        if (!confirmer) return;
 
-            // Rafraîchir la liste pour refléter le changement
+        try
+        {
+            using var context = new BibliothequeContext();
+            var empruntDb = context.Emprunts
+                .Include(e => e.Exemplaire)
+                .First(e => e.Id == emprunt.Id);
+
+            empruntDb.DateRetourReel = DateTime.UtcNow;
+            empruntDb.BibliothecaireRetourId = null; // ou App.UtilisateurConnecte?.Id plus tard
+            empruntDb.MettreAJourStatut();
+
+            if (empruntDb.Exemplaire != null)
+            {
+                empruntDb.Exemplaire.EstDisponible = true;
+            }
+
+            context.SaveChanges();
+            await DisplayAlert("SuccÃ¨s", $"Â«{titre}Â» a Ã©tÃ© retournÃ©.", "OK");
+
             ChargerEmprunts();
-        
+            ChargerStatistique(); // â† facultatif
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erreur", $"Ã‰chec du retour : {ex.Message}", "OK");
+        }
     }
+
     private void ChargerEmprunts()
     {
-        using var donnee = new BibliothequeContext();
-        var emprunts = donnee.Emprunts
+        using var contexte = new BibliothequeContext();
+        var emprunts = contexte.Emprunts
             .Include(e => e.Adherent)
             .Include(e => e.Exemplaire)
                 .ThenInclude(ex => ex.Livre)
+            .Where(e => !e.DateRetourReel.HasValue) // â† SEULEMENT les emprunts actifs
             .ToList();
 
         foreach (var e in emprunts)
         {
-            e.MettreAJourStatut();
+            e.MettreAJourStatut(); // met Ã  jour "En cours" / "En retard"
         }
 
-        donnee.SaveChanges();
-        ChargerStatistique();
         EmpruntsCollectionView.ItemsSource = emprunts;
-    }
-
-    private async void OnAccueilClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new HomePage());
     }
 
     private void ChargerStatistique()
     {
-        using var donnee = new BibliothequeContext();
-        var nbStatutEnCours = donnee.Emprunts.Count(e => e.StatutEmprunt == "En cours");
-        var nbRetarde = donnee.Emprunts.Count(e => e.StatutEmprunt == "En retard");
-        var nbStatutRetournee = donnee.Emprunts.Count(e => e.StatutEmprunt == "Retourné");
-        var total = donnee.Emprunts.Count();
+        using var contexte = new BibliothequeContext();
+        var enCours = contexte.Emprunts.Count(e => e.StatutEmprunt == "En cours");
+        var enRetard = contexte.Emprunts.Count(e => e.StatutEmprunt == "En retard");
+        var totalActif = enCours + enRetard;
 
-        TotalEmprunt.Text = total.ToString();
-        EmpruntsEnCours.Text = nbStatutEnCours.ToString();
-        EmpruntsEnRetard.Text = nbRetarde.ToString();
-        EmpruntsRetournes.Text = nbStatutRetournee.ToString();
-
+        // Mettez Ã  jour vos Labels (Ã  adapter selon vos noms rÃ©els)
+        EmpruntsEnCours.Text = enCours.ToString();
+        EmpruntsEnRetard.Text = enRetard.ToString();
+        TotalEmprunt.Text = totalActif.ToString();
+        // â†’ Supprimez cette mÃ©thode si vous nâ€™affichez pas ces stats
     }
 
-    public List<string> StatutOptions { get; } = new()
+    private async void OnAccueilClicked(object sender, EventArgs e)
     {
-        App.Localized["All"],
-        App.Localized["InProgress"],
-        App.Localized["Late"],
-        App.Localized["Returned"]
-    };
+        await Navigation.PopAsync();
+    }
 }
