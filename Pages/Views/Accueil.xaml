@@ -34,8 +34,12 @@
                             <Label  
                             Text="{Binding [WelcomeTitle], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource HeaderLabel}" />
-                            <Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"
-                                   Style="{StaticResource SubHeaderLabel}" />
+                            <!--<Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource SubHeaderLabel}" />-->
+
+                            <Label x:Name="WelcomeSubtitleLabel"
+                               Style="{StaticResource SubHeaderLabel}" />       
+
                             <Label Text="Albert Einstein"
                                    TextColor="White"
                                    FontSize="16"

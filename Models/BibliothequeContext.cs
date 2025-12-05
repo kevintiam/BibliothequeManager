@@ -29,7 +29,7 @@ namespace BibliothequeManager.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=DESKTOP-5BALS8A;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
+                    "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
             }
         }
 
@@ -172,6 +172,10 @@ namespace BibliothequeManager.Models
             modelBuilder.Entity<Categorie>()
                 .HasIndex(c => c.Nom)
                 .IsUnique();
+
+            modelBuilder.Entity<Adherent>()
+                .Property(a => a.Amandes)
+                .HasPrecision(18, 2);
         }
     }
 }

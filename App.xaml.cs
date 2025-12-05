@@ -1,5 +1,6 @@
 ﻿using BibliothequeManager.Models;
 using BibliothequeManager.Pages;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Controls;
 
@@ -13,6 +14,8 @@ namespace BibliothequeManager
         {
             InitializeComponent();
 
+             MainPage = new NavigationPage(new HomePage());
+            //MainPage = new NavigationPage(new Connexion());
             MainPage = new NavigationPage(new HomePage());
             //MainPage = new NavigationPage(new Connexion());
         }
