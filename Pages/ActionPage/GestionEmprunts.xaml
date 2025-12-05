@@ -62,7 +62,7 @@
                                   Padding="15">
 
                                 <StackLayout Grid.Column="0" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding TotalEmprunts}" 
+                                    <Label x:Name="TotalEmprunt" 
                                            FontFamily="PlaypenSansBold"
                                            FontSize="20"
                                            TextColor="#1E293B"
@@ -72,7 +72,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding EmpruntsEnCours}" 
+                                    <Label x:Name="EmpruntsEnCours" 
                                            FontFamily="PlaypenSansBold"
                                            FontSize="20"
                                            TextColor="#10B981"
@@ -82,7 +82,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding EmpruntsEnRetard}" 
+                                    <Label x:Name=" EmpruntsEnRetard" 
                                            FontFamily="PlaypenSansBold"
                                            FontSize="20"
                                            TextColor="#EF4444"
@@ -92,7 +92,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="3" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding EmpruntsRetournes}" 
+                                    <Label x:Name="EmpruntsRetournes" 
                                            FontFamily="PlaypenSansBold"
                                            FontSize="20"
                                            TextColor="#3B82F6"
@@ -122,7 +122,7 @@
                                 <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3"/>
                                 <Label Text="{Binding [DaysRemaining], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4"/>
                                 <Label Text="{Binding [Status], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5"/>
-                                <Label Text="{Binding [Late], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="6"/>
+                                <Label Text="{Binding [Fines], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="6" />
                                 <Label Text="{Binding [Actions], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="7" HorizontalTextAlignment="Center"/>
                             </Grid>
                         </Border>
@@ -143,12 +143,12 @@
 
                                             <!-- Colonne Livre & Adhérent -->
                                             <StackLayout Grid.Column="0" Spacing="4">
-                                                <Label Text="{Binding TitreLivre}" Style="{StaticResource TableRowData}"/>
-                                                <Label Text="{Binding NomAdherent}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Exemplaire.Livre.Titre}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Adherent.NomComplet}" Style="{StaticResource TableRowData}" FontAttributes="Bold"/>
                                             </StackLayout>
 
                                             <!-- ISBN -->
-                                            <Label Grid.Column="1" Text="{Binding ISBN}" Style="{StaticResource TableRowData}"/>
+                                            <Label Grid.Column="1" Text="{Binding Exemplaire.Livre.ISBN}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Date Emprunt -->
                                             <Label Grid.Column="2" 
@@ -156,49 +156,38 @@
 
                                             <!-- Date Retour -->
                                             <Label Grid.Column="3" 
-                                           Text="{Binding DateRetourPrevue, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+                                           Text="{Binding DateRetourPrevu, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Jours restants -->
-                                            <Label Grid.Column="4" Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}" HorizontalTextAlignment="Center"/>
+                                            <Label Grid.Column="4" Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}" />
 
                                             <!-- Statut -->
-                                            <Border Grid.Column="5">
-                                                <Label Text="{Binding Statut}" Style="{StaticResource TableRowData}" HorizontalOptions="Center"/>
-                                            </Border>
+                                            <Label Grid.Column="5" Text="{Binding StatutEmprunt}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Retard -->
                                             <Label Grid.Column="6" 
-                                           Text="{Binding JoursRetard}" Style="{StaticResource TableRowData}" HorizontalTextAlignment="Center"/>
+                                           Text="{Binding Amande}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Actions -->
-                                            <StackLayout Grid.Column="7" 
-                                                 Orientation="Horizontal" 
-                                                 Spacing="5"
-                                                 HorizontalOptions="Center">
-
+                                            <!-- Dans ton DataTemplate (CollectionView.ItemTemplate) -->
+                                            <StackLayout Grid.Column="7" Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
                                                 <Button Text="👁️"
-                                                BackgroundColor="#3B82F6"
-                                                TextColor="White"
-                                                FontSize="10"
-                                                CornerRadius="6"
-                                                WidthRequest="30"
-                                                HeightRequest="30"/>
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VoirCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#3B82F6" TextColor="White" FontSize="10" CornerRadius="6"
+                                                WidthRequest="30" HeightRequest="30"/>
 
-                                                <Button Text="📧"
-                                                BackgroundColor="#8B5CF6"
-                                                TextColor="White"
-                                                FontSize="10"
-                                                CornerRadius="6"
-                                                WidthRequest="30"
-                                                HeightRequest="30"/>
+                                                                                    <Button Text="📧"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RelancerCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#8B5CF6" TextColor="White" FontSize="10" CornerRadius="6"
+                                                WidthRequest="30" HeightRequest="30"/>
 
-                                                <Button Text="🔄"
-                                                BackgroundColor="#10B981"
-                                                TextColor="White"
-                                                FontSize="10"
-                                                CornerRadius="6"
-                                                WidthRequest="30"
-                                                HeightRequest="30"/>
+                                                                                    <Button Text="🔄"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RetournerCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#10B981" TextColor="White" FontSize="10" CornerRadius="6"
+                                                WidthRequest="30" HeightRequest="30"/>
                                             </StackLayout>
                                         </Grid>
                                     </Border>

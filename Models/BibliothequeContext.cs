@@ -172,6 +172,10 @@ namespace BibliothequeManager.Models
             modelBuilder.Entity<Categorie>()
                 .HasIndex(c => c.Nom)
                 .IsUnique();
+
+            modelBuilder.Entity<Adherent>()
+                .Property(a => a.Amandes)
+                .HasPrecision(18, 2);
         }
     }
 }

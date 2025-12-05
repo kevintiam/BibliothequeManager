@@ -45,8 +45,6 @@ public partial class HomePage : FlyoutPage
 			Detail = new GestionAdherent();
 			IsPresented = false;
 		};
-
-
     }
 
     // Gestion du changement de langue

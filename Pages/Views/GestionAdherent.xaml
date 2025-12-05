@@ -60,6 +60,7 @@
                 <!-- Liste des adhérents -->
                 <CollectionView x:Name="AdherentsCollectionView"
                                 Grid.Row="2"
+                                SelectionMode="Single"
                                 ItemsSource="{Binding Adherents}"
                                 Margin="20,0">
                     <CollectionView.Header>
@@ -92,6 +93,7 @@
 
                 <!-- Formulaire -->
                 <Border x:Name="FormulaireAdherent"
+                        IsVisible="False"
                         Grid.Row="2"
                         Style="{StaticResource FormulaireAdherent}">
                     <VerticalStackLayout Spacing="15">
@@ -114,11 +116,11 @@
                                 <Label Text="{Binding [Email], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtEmailAdherent" Style="{StaticResource FormEntry}" Keyboard="Email" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Row="3" IsVisible="False">
+                            <VerticalStackLayout x:Name="Carte" Spacing="5" Grid.Row="3" IsVisible="False">
                                 <Label Text="{Binding [CardNumber], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtNumeroCarte" Style="{StaticResource FormEntry}" />
+                                <Entry x:Name="TxtNumeroCarte" Style="{StaticResource FormEntry}" IsReadOnly="True"/>
                             </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Row="4" IsVisible="false">
+                            <VerticalStackLayout x:Name="Amande" Spacing="5" Grid.Row="4" IsVisible="false">
                                 <Label Text="{Binding [Fines], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtAmande" Style="{StaticResource FormEntry} " IsReadOnly="True" />
                             </VerticalStackLayout>
@@ -130,8 +132,37 @@
                                     Text="{Binding [Save], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource PrimaryButton}" 
                                     Clicked="btnAjouter_Clicked"/>
-                            <Button Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
-                                    Style="{StaticResource SecondaryButton}" />
+                            <Button x:Name="btnAnnuler"
+                                    Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource SecondaryButton}" 
+                                    Clicked="btnAnnuler_Clicked"/>
+                            <Button x:Name="ModifierButton"
+                                        Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
+                                        Style="{StaticResource WarningButton}"
+                                        Clicked="ModifierButton_Clicked"
+                                        IsVisible="False">
+                                <Button.ImageSource>
+                                    <FontImageSource 
+                                        FontFamily="MaterialIcons"
+                                        Glyph="&#xe3c9;"    
+                                        Color="White"
+                                        Size="18" />
+                                </Button.ImageSource>
+                            </Button>
+
+                            <Button x:Name="SupprimerButton"
+                                        Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
+                                        Style="{StaticResource DangerButton}"
+                                       Clicked="SupprimerButton_Clicked"
+                                        IsVisible="False">
+                                <Button.ImageSource>
+                                    <FontImageSource 
+                                        FontFamily="MaterialIcons"
+                                        Glyph="&#xe872;"   
+                                        Color="White"
+                                        Size="18" />
+                                </Button.ImageSource>
+                            </Button>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
