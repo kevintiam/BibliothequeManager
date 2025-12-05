@@ -324,7 +324,7 @@
   <data name="VisionaryDescription" xml:space="preserve">
     <value>Une visionnaire sur la surveillance et la liberté</value>
   </data>
-  <data name="WelcomeSubtitle" xml:space="preserve">
+  <data name="WelcomeSubtitle_1" xml:space="preserve">
     <value>✨ « La connaissance s’acquiert par l’expérience, tout le reste n’est que de l’information. »</value>
   </data>
   <data name="WelcomeTitle" xml:space="preserve">
@@ -482,6 +482,7 @@
   </data>
   <data name="AuthorSuccessfullyModified" xml:space="preserve">
     <value>Auteur modifiée avec succes!</value>
+  </data>
   <data name="BookManagement" xml:space="preserve">
     <value>Gestion Des Livres</value>
   </data>
@@ -526,5 +527,27 @@
   </data>
   <data name="ReallydeleteBook" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le livre ?</value>
+  </data>
+  <data name="Category2" xml:space="preserve">
+    <value>Rechercher  une catégorie ...</value>
+  </data>
+  <data name="mess" xml:space="preserve">
+    <value>La seule source de connaissance, c’est l’expérience.</value>
+  </data>
+  <data name="WelcomeSubtitle_2" xml:space="preserve">
+    <value>✨ « La seule source de connaissance, c’est l’expérience. »</value>
+  </data>
+  <data name="WelcomeSubtitle_3" xml:space="preserve">
+    <value> ✨ « La seule source de connaissance, c’est l’expérience. » </value>
+    <comment> </comment>
+  </data>
+  <data name="WelcomeSubtitle_4" xml:space="preserve">
+    <value>✨ « L’imagination est plus importante que le savoir. »</value>
+  </data>
+  <data name="WelcomeSubtitle_5" xml:space="preserve">
+    <value>✨ « La vie, c’est comme faire du vélo. Pour garder l’équilibre, il faut avancer. »</value>
+  </data>
+  <data name="WelcomeSubtitle_6" xml:space="preserve">
+    <value>✨ « L’essentiel, c’est de ne jamais cesser de se poser des questions. La curiosité a sa propre raison d’être. »</value>
   </data>
 </root>
