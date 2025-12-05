@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BibliothequeManager.Models
 {
@@ -15,7 +16,13 @@ namespace BibliothequeManager.Models
         [MaxLength(100)]
         public string Prenom { get; set; } = string.Empty;
 
+        [NotMapped]
+        public string NomComplet => $"{Prenom} {Nom}";
 
-        public ICollection<Livres> Livres { get; } = new List<Livres>();
+
+        public virtual ICollection<Livres> Livres { get; } = new List<Livres>();
+
+        [NotMapped]
+        public int NombreLivres => Livres.Count;
     }
 }

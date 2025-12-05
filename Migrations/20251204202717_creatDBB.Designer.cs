@@ -4,6 +4,7 @@ using BibliothequeManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliothequeManager.Migrations
 {
     [DbContext(typeof(BibliothequeContext))]
-    partial class BibliothequeContextModelSnapshot : ModelSnapshot
+    [Migration("20251204202717_creatDBB")]
+    partial class creatDBB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace BibliothequeManager.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amandes")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -292,22 +292,11 @@ namespace BibliothequeManager.Migrations
                     b.Property<DateTime>("DateReservation")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateRetour")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("ExemplaireAttribueId")
                         .HasColumnType("int");
 
                     b.Property<int>("LivreId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Priorite")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Statut")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

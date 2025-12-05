@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Popups.SuccessPopup"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
+             Title="SuccessPopup"
+             BackgroundColor="#00000000"
+             Padding="0">
+
+    <Grid VerticalOptions="Center" 
+      HorizontalOptions="Center">
+    <Border Style="{StaticResource PopBorder}">
+
+        <VerticalStackLayout Spacing="16">
+                <Label Text="✅" 
+                   FontSize="36" 
+                   HorizontalOptions="Center" />
+                <Label x:Name="TitleLabel"
+                   Style="{StaticResource PopLabel}" />
+            
+                <Label x:Name="MessageLabel" 
+                    Text="{Binding [popDelAuthor], Source={x:Static localApp:App.Localized}}" 
+                    Style="{StaticResource PopMessage}" />
+        </VerticalStackLayout>
+    </Border>
+    </Grid>
+</ContentPage>

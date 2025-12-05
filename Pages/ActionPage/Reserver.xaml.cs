@@ -1,3 +1,6 @@
+using BibliothequeManager.Models;
+using BibliothequeManager.Pages.Popups;
+using Microsoft.EntityFrameworkCore;
 using BibliothequeManager.Pages.Views;
 using Microsoft.Maui.Controls;
 
@@ -5,69 +8,195 @@ namespace BibliothequeManager.Pages.ActionPage
 {
     public partial class Reserver : ContentPage
     {
+        private int? livreSelectionne;
         public Reserver()
         {
             InitializeComponent();
 
+            SearchButton.Clicked += OnRechercherClicked;
+            StatutPicker.ItemsSource = StatutOptions;
+            SuggestionsCollectionView.SelectionChanged += OnLivreSuggestionSelected;
+            RechercheEntry.TextChanged += async (s, e) => {
+                await Task.Delay(300);
+
+                if (e.NewTextValue == RechercheEntry.Text)
+                {
+                    await OnSearchTextChanged(s, e);
+                }
+
+            };
+
             // Définir les dates par défaut
             DateDebutPicker.Date = DateTime.Now;
-            DateFinPicker.Date = DateTime.Now.AddDays(7);
+            DateFinPicker.Date = DateTime.Now.AddDays(14);
         }
-
-        private async void OnRechercherClicked(object sender, EventArgs e)
+        public List<string> StatutOptions { get; } = new()
         {
-            if (string.IsNullOrWhiteSpace(RechercheEntry.Text))
-            {
-                await DisplayAlert("Recherche", "Veuillez saisir un titre, auteur ou ISBN", "OK");
-                return;
-            }
+            App.Localized["All"],
+            App.Localized["Pending"],
+            App.Localized["Confirmed"],
+            App.Localized["InProgress"],
+            App.Localized["Returned"],
+            App.Localized["Cancel"]
+        };
 
-            // Simulation de recherche
-            LivreSection.IsVisible = true;
-            TitreLivre.Text = "Les Misérables";
-            AuteurLivre.Text = "Victor Hugo";
-            IsbnLivre.Text = "978-2-07-040813-8";
-            DisponibiliteLivre.Text = "Disponible";
+        private async Task FiltrerLivre(string searchText)
+        {
+            using var donnees = new BibliothequeContext();
+            try
+            {
+                var query = donnees.Livres
+                    .Include(l => l.Auteur)
+                    .Include(l => l.Exemplaires)
+                    .Include(l => l.LivreCategories)
+                        .ThenInclude(lc => lc.Categorie)
+                    .AsQueryable();
+
+                if (!string.IsNullOrWhiteSpace(searchText))
+                {
+                    query = query.Where(l =>
+                        l.Titre.Contains(searchText) ||
+                        l.ISBN.Contains(searchText) ||
+                        (l.Auteur != null && (
+                            l.Auteur.Nom.Contains(searchText) ||
+                            l.Auteur.Prenom.Contains(searchText)
+                        ))
+                    );
+                }
+
+                var livresFiltres = await query
+                    .OrderBy(l => l.Titre)
+                    .ToListAsync();
+
+                SuggestionsCollectionView.ItemsSource = livresFiltres;
+                SuggestionsCollectionView.IsVisible = livresFiltres.Any();
+
+                // Optionnel : afficher un message si aucun livre trouvé
+                // (vous pouvez ajouter un Label dans votre XAML nommé "NoResultsLabel")
+                // NoResultsLabel.IsVisible = !livresFiltres.Any();
+            }
+            catch (Exception ex)
+            {
+                string messageUtilisateur = "Impossible de charger les livres. Veuillez réessayer.";
+                await ErrorPopup.Show(messageUtilisateur, this);
+                SuggestionsCollectionView.IsVisible = false;
+            }
         }
 
+        private async Task OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
+            {
+                await FiltrerLivre(e.NewTextValue);
+            }
+        }
+
+        private async void OnRechercherClicked(object? sender, EventArgs e)
+        {
+            await FiltrerLivre(RechercheEntry.Text);
+        }
+
+        private async void OnLivreSuggestionSelected(object? sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Livres livre)
+            {
+                livreSelectionne = livre.Id;
+                LivreSection.IsVisible = true;
+                TitreLivre.Text = livre.Titre;
+                IsbnLivre.Text = livre.ISBN;
+                AuteurLivre.Text = $"{livre.Auteur?.Prenom} {livre.Auteur?.Nom}".Trim();
+
+                bool estDisponible = livre.Exemplaires?.Any(ex => ex.EstDisponible) ?? false;
+                DisponibiliteLivre.Text = estDisponible ? "Disponible" : "Indisponible";
+
+                SuggestionsCollectionView.IsVisible = false;
+                SuggestionsCollectionView.SelectedItem = null;
+                RechercheEntry.Unfocus();
+            }
+        }
+        
         private async void OnConfirmerClicked(object sender, EventArgs e)
         {
             // Validation
-            if (!LivreSection.IsVisible)
+            if (!livreSelectionne.HasValue)
             {
-                await DisplayAlert("Erreur", "Veuillez d'abord sélectionner un livre", "OK");
+                await ErrorPopup.Show("Veuillez sélectionner un livre.", this);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(AbonneIdEntry.Text))
             {
-                await DisplayAlert("Erreur", "Veuillez saisir l'ID de l'abonné", "OK");
+                await ErrorPopup.Show("Veuillez entrer le numero de carte de l'adhérent.", this);
                 return;
             }
 
-            if (DateFinPicker.Date <= DateDebutPicker.Date)
+            try
             {
-                await DisplayAlert("Erreur", "La date de fin doit être après la date de début", "OK");
-                return;
+                using var donnees = new BibliothequeContext();
+                // Verifier si l'abonnee existe
+                var abonne = await donnees.Adherents
+                    .FirstOrDefaultAsync(a => a.NumeroCarte == AbonneIdEntry.Text);
+
+                if (abonne == null)
+                {
+                    await ErrorPopup.Show("Adhérent introuvable.", this);
+                    return;
+                }
+                // Verifier si le livre existe
+                var livre = await donnees.Livres.FindAsync(livreSelectionne.Value);
+                if (livre == null)
+                {
+                    await ErrorPopup.Show("Livre introuvable.", this);
+                    return;
+
+                }
+
+                // Trouver un exemplaire éligible à la réservation
+                var exemplaireDisponible = await donnees.Exemplaires
+                .FirstOrDefaultAsync(e => e.LivreId == livreSelectionne.Value && e.EstDisponible);
+
+
+                // Créer la réservation
+                var newReservation = new Reservation
+                {
+                    LivreId = livreSelectionne.Value,
+                    AdherentId = abonne.Id,
+                    DateReservation = DateTime.UtcNow,
+                    BibliothecaireId = 1,
+                    ExemplaireAttribueId = exemplaireDisponible?.Id,
+                    DateRetour = DateTime.UtcNow.AddDays(14),
+                    Statut = "En Attente",
+                    Priorite = "Aucune"
+                };
+
+                donnees.Reservations.Add(newReservation);
+                await donnees.SaveChangesAsync();
+
+
+                await SuccessPopup.Show("Réservation confirmée avec succès !", this);
+
+                // Réinitialiser le formulaire
+                LivreSection.IsVisible = false;
+                RechercheEntry.Text = string.Empty;
+                AbonneIdEntry.Text = string.Empty;
+                livreSelectionne = null;
             }
-
-            // Logique de réservation
-            await DisplayAlert("Succès", "Réservation confirmée avec succès!", "OK");
-
-            // Réinitialiser le formulaire
-            LivreSection.IsVisible = false;
-            RechercheEntry.Text = string.Empty;
-            AbonneIdEntry.Text = string.Empty;
+            catch (Exception ex)
+            {   
+                var inner = ex.InnerException?.Message;
+                var message = inner != null ? $"Erreur lors de la réservation : {inner}" : $"Erreur lors de la réservation : {ex.Message}";
+                await ErrorPopup.Show(message, this);
+            }
         }
 
         private async void OnAccueilClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new HomePage());
+            await Navigation.PopAsync();
         }
 
         private async void OnMesReservationsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new GestionReservations());
+            await Navigation.PushAsync(new GestionReservations());
         }
     }
 }

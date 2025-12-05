@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibliothequeManager.Pages.Connexion"
+             x:Class="BibliothequeManager.Views.Connexion"
              Title="Connexion">
 
     <Grid>
@@ -18,7 +18,7 @@
                 <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                     <Image Source="library_icon.png"  
                            HorizontalOptions="Center"/>
-                    <Label Text="BIBLIOTECH" 
+                    <Label Text="LaNova" 
                            Style="{StaticResource MainTitleLabel}"/>
                     <Label Text="Système de gestion" 
                            Style="{StaticResource SubtitleLabel}"/>
@@ -72,7 +72,7 @@
 
                         <!-- Message d'erreur -->
                         <Border Style="{StaticResource ErrorBorder}"
-                               IsVisible="Hidden">
+                         IsVisible="{Binding EstErreurVisible}">
                             <HorizontalStackLayout>
                                 <Image Source="error_icon.png" 
                                        HeightRequest="16"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Popups.ConfirmationPopup"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
+             Title="ConfirmationPopup"
+             BackgroundColor="#00000080"
+             Padding="20">
+    
+            <Grid VerticalOptions="Center" 
+                  HorizontalOptions="Center">
+                <Border Style="{StaticResource PopBorder}">
+
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="⚠️" 
+                               FontSize="36" 
+                               HorizontalOptions="Center" />
+                        <Label x:Name="TitleLabel" 
+                               Text="Confirmer la suppression" 
+                               Style="{StaticResource PopLabel}" />
+
+                        <Label x:Name="MessageLabel" 
+                                Text="{Binding [popDelAuthor], Source={x:Static localApp:App.Localized}}" 
+                                Style="{StaticResource PopMessage}" />
+
+                        <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                    <Button  Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Clicked="OnCancelClicked" />
+
+                    <Button Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource DangerButton}"
+                                    Clicked="OnConfirmClicked" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+</ContentPage>

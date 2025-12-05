@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibliothequeManager.Pages.Views.Adherent"
+             x:Class="BibliothequeManager.Pages.Views.GestionAdherent"
+             xmlns:localApp="clr-namespace:BibliothequeManager"
              Title="Adhérents"
              NavigationPage.HasNavigationBar="False">
 
@@ -13,7 +14,7 @@
                Opacity="0.2" />
 
         <ScrollView>
-            <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <Grid RowDefinitions="Auto,Auto,*">
                 <!-- En-tête -->
 
                 <Grid Style="{StaticResource StackLayoutAcc}">
@@ -24,9 +25,9 @@
                         </Border>
 
                         <StackLayout Style="{StaticResource StackLayoutAcce}">
-                            <Label Text="Gestion des Adhérents"
+                            <Label Text="{Binding [MemberManagementTitle], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource HeaderLabel}" />
-                            <Label Text="Suivez vos membres et leurs emprunts"
+                            <Label Text="{Binding [TrackMembers], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource SubHeaderLabel}" />
                         </StackLayout>
                     </StackLayout>
@@ -42,7 +43,7 @@
                             WidthRequest="600"
                             HorizontalOptions="Center">
                         <Grid ColumnDefinitions="*,Auto">
-                            <Entry Placeholder="Rechercher par nom ou email..."
+                            <Entry  Placeholder="{Binding [SearchMembers], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TextZone}" />
                             <Button Style="{StaticResource SearchIconButton}">
                                 <Button.ImageSource>
@@ -57,17 +58,18 @@
                 </HorizontalStackLayout>
 
                 <!-- Liste des adhérents -->
-                <CollectionView Grid.Row="2"
+                <CollectionView x:Name="AdherentsCollectionView"
+                                Grid.Row="2"
                                 ItemsSource="{Binding Adherents}"
                                 Margin="20,0">
                     <CollectionView.Header>
                         <Grid ColumnDefinitions="2*,2*,2*,1.5*,1*"
                               Style="{StaticResource TabHead}">
-                            <Label Text="Nom" Style="{StaticResource TableHeader}" />
-                            <Label Text="Prenom" Style="{StaticResource TableHeader}" Grid.Column="1"  />
-                            <Label Text="Email" Style="{StaticResource TableHeader}" Grid.Column="2" />
-                            <Label Text="N° Carte" Style="{StaticResource TableHeader}" Grid.Column="3" />
-                            <Label Text="Amendes" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" />
+                            <Label Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="1"  />
+                            <Label Text="{Binding [Email], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="2" />
+                            <Label Text="{Binding [CardNumber], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3" />
+                            <Label Text="{Binding [Fines], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
                         </Grid>
                     </CollectionView.Header>
                     <CollectionView.ItemTemplate>
@@ -78,7 +80,7 @@
                                     <Label Text="{Binding Prenom}" Style="{StaticResource TableRowData}" Grid.Column="1" />
                                     <Label Text="{Binding Email}" Style="{StaticResource TableRowData}" Grid.Column="2" />
                                     <Label Text="{Binding NumeroCarte}" Style="{StaticResource TableRowData}" Grid.Column="3" />
-                                    <Label Text="{Binding SoldeAmendes, StringFormat='{}{0:F2} $CAD'}"
+                                    <Label Text="{Binding Amandes, StringFormat='{}{0:F2} $CAD'}"
                                            Style="{StaticResource TableRowData}"
                                            Grid.Column="4"
                                            HorizontalTextAlignment="Center" />
@@ -90,49 +92,45 @@
 
                 <!-- Formulaire -->
                 <Border x:Name="FormulaireAdherent"
-                        Grid.Row="3"
-                        IsVisible="False"
-                        StrokeShape="RoundRectangle 20"
-                        BackgroundColor="White"
-                        Padding="20"
-                        Margin="30,15"
-                        Stroke="{StaticResource Gray300}">
+                        Grid.Row="2"
+                        Style="{StaticResource FormulaireAdherent}">
                     <VerticalStackLayout Spacing="15">
-                        <Label Text="Ajouter / Modifier un adhérent"
+                        <Label Text="{Binding [AddEditMember], Source={x:Static localApp:App.Localized}}"
                                FontFamily="PlaypenSansSemiBold"
-                               FontSize="16"
-                               TextColor="{StaticResource PrimaryBlue}" />
+                               FontSize="20"
+                               TextColor="{StaticResource PrimaryBlue}" 
+                               HorizontalOptions="Center"/>
 
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
-                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                <Label Text="Nom *" Style="{StaticResource FormLabel}" />
+                        <Grid RowDefinitions="*,*,*,*,*" RowSpacing="15">
+                            <VerticalStackLayout Spacing="5" Grid.Row="0">
+                                <Label Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtNomAdherent" Style="{StaticResource FormEntry}" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                <Label Text="Prenom *" Style="{StaticResource FormLabel}" />
+                            <VerticalStackLayout Spacing="5" Grid.Row="1">
+                                <Label Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtPrenomAdherent" Style="{StaticResource FormEntry}" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="2">
-                                <Label Text="Email *" Style="{StaticResource FormLabel}" />
+                            <VerticalStackLayout Spacing="5" Grid.Row="2">
+                                <Label Text="{Binding [Email], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtEmailAdherent" Style="{StaticResource FormEntry}" Keyboard="Email" />
                             </VerticalStackLayout>
-                        </Grid>
-
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
-                            <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                <Label Text="N° Carte *" Style="{StaticResource FormLabel}" />
+                            <VerticalStackLayout Spacing="5" Grid.Row="3" IsVisible="False">
+                                <Label Text="{Binding [CardNumber], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
                                 <Entry x:Name="TxtNumeroCarte" Style="{StaticResource FormEntry}" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                <Label Text="Solde amendes ($)" Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="TxtSoldeAmendes" Style="{StaticResource FormEntry}" Keyboard="Numeric" />
+                            <VerticalStackLayout Spacing="5" Grid.Row="4" IsVisible="false">
+                                <Label Text="{Binding [Fines], Source={x:Static localApp:App.Localized}}" Style="{StaticResource FormLabel}" />
+                                <Entry x:Name="TxtAmande" Style="{StaticResource FormEntry} " IsReadOnly="True" />
                             </VerticalStackLayout>
+
                         </Grid>
 
-                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12">
-                            <Button Text="Enregistrer"
-                                    Style="{StaticResource PrimaryButton}" />
-                            <Button Text="Annuler"
+                        <HorizontalStackLayout HorizontalOptions="End" Spacing="12" >
+                            <Button x:Name="btnAjouter"
+                                    Text="{Binding [Save], Source={x:Static localApp:App.Localized}}"
+                                    Style="{StaticResource PrimaryButton}" 
+                                    Clicked="btnAjouter_Clicked"/>
+                            <Button Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource SecondaryButton}" />
                         </HorizontalStackLayout>
                     </VerticalStackLayout>

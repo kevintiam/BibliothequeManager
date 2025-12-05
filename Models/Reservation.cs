@@ -10,6 +10,10 @@ namespace BibliothequeManager.Models
         public int LivreId { get; set; }
         public int BibliothecaireId { get; set; }
         public DateTime DateReservation { get; set; } = DateTime.UtcNow;
+        public DateTime DateRetour { get; set; }
+
+        public string Statut { get; set; } = string.Empty;
+        public string Priorite { get; set; } = string.Empty;
 
         [ForeignKey(nameof(ExemplaireAttribue))]
         public int? ExemplaireAttribueId { get; set; } 

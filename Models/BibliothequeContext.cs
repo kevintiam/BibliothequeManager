@@ -29,7 +29,7 @@ namespace BibliothequeManager.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
+                    "Server=DESKTOP-5BALS8A;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
             }
         }
 
@@ -41,7 +41,7 @@ namespace BibliothequeManager.Models
                 .HasOne(l => l.Auteur)
                 .WithMany(a => a.Livres)
                 .HasForeignKey(l => l.AuteurId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // LivreCategorie (many-to-many)
             modelBuilder.Entity<LivreCategorie>()

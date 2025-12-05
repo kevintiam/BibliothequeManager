@@ -20,5 +20,7 @@ namespace BibliothequeManager.Models
 
         public ICollection<LivreCategorie> LivreCategories { get; } = new List<LivreCategorie>();
 
+        public int NombreLivres => LivreCategories.Count;
+
     }
 }

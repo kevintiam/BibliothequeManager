@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibliothequeManager.Pages.Views.Authors"
-             xmlns:localApp="clr-namespace:BibliothequeManager"
-             Title="Authors"
+             x:Class="BibliothequeManager.Pages.Views.CategoriePage"
+                xmlns:localApp="clr-namespace:BibliothequeManager"
+             Title="Catégories"
              NavigationPage.HasNavigationBar="False">
+
     <Grid>
-        <!-- Fond léger optionnel -->
-        <Image x:Name="BackgroundImage"
-               Source="new_background.png"
+        <!-- Fond -->
+        <Image Source="new_background.png"
                Aspect="AspectFill"
                InputTransparent="True"
                Opacity="0.2" />
 
         <ScrollView>
             <Grid RowDefinitions="Auto,Auto,*">
-                
                 <!-- ========== EN-TÊTE ========== -->
                 <Grid Style="{StaticResource StackLayoutAcc}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100">
@@ -24,102 +23,73 @@
                             <Image Source="logo.png" Style="{StaticResource Logo}" />
                         </Border>
 
-                        <StackLayout Style="{StaticResource StackLayoutAcce}"
-                                 x:Name="HeaderTextLayout">
-                            <Label x:Name="HeaderTitle"
-                               Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
-                                   
+                        <StackLayout Style="{StaticResource StackLayoutAcce}">
+                            <Label Text="{Binding [CategoryManagement], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource HeaderLabel}" />
-                            <Label x:Name="HeaderSubtitle"
-                               Text="{Binding [Knowledge], Source={x:Static localApp:App.Localized}}"
+                            <Label Text="{Binding [OrganizeCategory], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource SubHeaderLabel}" />
                         </StackLayout>
                     </StackLayout>
                 </Grid>
 
-
-                <!-- ======= Zone de recherche ===============-->
-                <HorizontalStackLayout Grid.Row="1" 
-                                       Style="{StaticResource RechercherZone}"
-                                       x:Name="SearchZone">
+                <!-- Recherche -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource RechercherZone}">
                     <Border Stroke="{StaticResource PrimaryBlue}"
                             StrokeThickness="1"
-                            StrokeShape="RoundRectangle 24,24,24,24"
+                            StrokeShape="RoundRectangle 24"
                             BackgroundColor="White"
-                            Padding="0"
                             HeightRequest="50"
                             WidthRequest="600"
-                            HorizontalOptions="Center"
-                            x:Name="SearchBorder">
-
+                            HorizontalOptions="Center">
                         <Grid ColumnDefinitions="*,Auto">
-                            <!-- Champ de saisie -->
                             <Entry x:Name="SearchEntry"
-                                   Text="{Binding SearchQuery}"
-                                   Placeholder="{Binding [SearchAuthor], Source={x:Static localApp:App.Localized}}"
-                                   Style="{StaticResource TextZone}"/>
-
-                            <!-- Bouton de recherche (icône intégrée) -->
+                                   Placeholder="Rechercher une catégorie..."
+                                   Style="{StaticResource TextZone}" />
                             <Button x:Name="SearchButton"
-                                    Grid.Column="1"
                                     Style="{StaticResource SearchIconButton}">
                                 <Button.ImageSource>
-                                    <FontImageSource
-                                        FontFamily="MaterialIcons"
-                                        Glyph="&#xe8b6;"
-                                        Color="White"
-                                        Size="22" />
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Color="White"
+                                                     Size="22" />
                                 </Button.ImageSource>
                             </Button>
                         </Grid>
                     </Border>
                 </HorizontalStackLayout>
 
-                <!-- ========== LISTE DES AUTEURS ========== -->
-                <CollectionView x:Name="AuthorsCollectionView"
+                <!-- ========== LISTE DES CATÉGORIES ========== -->
+                <CollectionView x:Name="CategoriesCollectionView"
                                 Grid.Row="2"
                                 SelectionMode="Single"
                                 Margin="50,0">
-
-                    <!-- Changer le layout pour grid avec 3 colonnes -->
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout 
                             Orientation="Vertical"
                             Span="{OnIdiom Phone=2, Tablet=4, Desktop=6, Default=3}"
-                         VerticalItemSpacing="10"/>
+                            VerticalItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <!-- Carte auteur -->
                             <Border Style="{StaticResource AuthorCard}">
-                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" 
+                                <Grid RowDefinitions="Auto,Auto,Auto" 
                                       RowSpacing="8"
                                       Padding="15">
-
-                                    <!-- Avatar/Initiales -->
-
-                                    <Border Grid.Row="0"
-                                        Style="{StaticResource AuthorAvatar}">
-                                        <Label Text="{Binding Initiales}"
-                                               Style="{StaticResource AvatarText}"/>
-                                    </Border>
-
-                                    <!-- Prénom -->
-                                    <Label Grid.Row="1"
-                                            Text="{Binding Prenom}"
-                                            Style="{StaticResource AuthorPrenom}"/>
-
+                                    <!-- Icône -->
+                                    <Label Grid.Row="0"
+                                           Text="📚"
+                                           FontSize="32"
+                                           HorizontalOptions="Center" />
                                     <!-- Nom -->
-                                    <Label Grid.Row="2"
+                                    <Label Grid.Row="1"
                                            Text="{Binding Nom}"
-                                           Style="{StaticResource AuthorNom}"/>
-
+                                           Style="{StaticResource AuthorNom}" />
                                     <!-- Nombre de livres -->
-                                    <Border Grid.Row="3"
+                                    <Border Grid.Row="2"
                                             Style="{StaticResource BookCountBadge}">
                                         <Label Text="{Binding NombreLivres, StringFormat='{0} livre(s)'}"
-                                                Style="{StaticResource BookCountText}"/>
+                                               Style="{StaticResource BookCountText}"/>
                                     </Border>
                                 </Grid>
                             </Border>
@@ -128,66 +98,74 @@
                 </CollectionView>
             </Grid>
         </ScrollView>
-        <Border Grid.Row="2"
-                x:Name="FormulaireLivres"
-                IsVisible="False"
-                Style="{StaticResource FormulaireAuteur}">
-            <VerticalStackLayout Spacing="15">
-                <Label x:Name="FormTitle"
-                       Text="{Binding [AuthorManagement], Source={x:Static localApp:App.Localized}}"
-                       Style="{StaticResource FormulaireTitle}"/>
 
+        <!-- ========== FORMULAIRE  ========== -->
+        <Border x:Name="FormulaireCategorie"
+                IsVisible="False"
+                Style="{StaticResource FormulaireAuteur}" 
+                Padding="20">
+            <VerticalStackLayout Spacing="15">
+                <!-- Titre du formulaire -->
+                <Label x:Name="FormTitle"
+                       Text="{Binding [AddCategories], Source={x:Static localApp:App.Localized}}"
+                       Style="{StaticResource FormulaireTitle}" />
+
+                <!-- Champs -->
                 <Grid RowDefinitions="*,*" RowSpacing="50">
                     <VerticalStackLayout Spacing="5" >
-                        <Label x:Name="PrenomFormLabel" Grid.Row="0"
-                               Text="{Binding [FirstName], Source={x:Static localApp:App.Localized}}"
+                        <Label x:Name="NomFormLabel" Grid.Row="0"
+                               Text="{Binding [NameRequired], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="PrenomEntry"
-                               Text="{Binding AuteurEnCours.FirstName}" 
+                        <Entry x:Name="NomCategorieEntry"
+                               Placeholder="{Binding [NameRequired], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource FormEntry}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout Spacing="5" Grid.Row="1">
-                        <Label x:Name="NomFormLabel"
-                               Text="{Binding [LastName], Source={x:Static localApp:App.Localized}}"
+                        <Label x:Name="DescriptionFormLabel"
+                               Text="{Binding [DescriptionOptional], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource FormLabel}" />
-                                <Entry x:Name="NomEntry"
-                               Text="{Binding AuteurEnCours.LastName}"
+                        <Entry x:Name="DescriptionCategorieEntry"
+                               Placeholder="{Binding [DescriptionOptional], Source={x:Static localApp:App.Localized}}"
                                Style="{StaticResource FormEntry}" />
                     </VerticalStackLayout>
                 </Grid>
-
+                
+                <!-- Boutons -->
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
                     <Button x:Name="AjouterButton"
                             Text="{Binding [Add], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource PrimaryButton}"
-                            Clicked="OnAjouterClicked">
+                            Clicked="OnAjouterCategorieClicked">
                         <Button.ImageSource>
-                            <FontImageSource FontFamily="MaterialIcons"
-                                     Glyph="&#xe145;"   
-                                     Color="White"
-                                     Size="18" />
+                            <FontImageSource 
+                                FontFamily="MaterialIcons"
+                                Glyph="&#xe145;"  
+                                Color="White"
+                                Size="18" />
                         </Button.ImageSource>
                     </Button>
 
                     <Button x:Name="ModifierButton"
                             Text="{Binding [Edit], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource WarningButton}"
-                            Clicked="OnModifierClicked">
+                            Clicked="OnModifierCategorieClicked"
+                            IsVisible="False">
                         <Button.ImageSource>
                             <FontImageSource 
-                                FontFamily="MaterialIcons"
-                                Glyph="&#xe3c9;"   
-                                Color="White"
-                                Size="18" />
+                            FontFamily="MaterialIcons"
+                            Glyph="&#xe3c9;"    
+                            Color="White"
+                            Size="18" />
                         </Button.ImageSource>
                     </Button>
-                    
+
                     <Button x:Name="SupprimerButton"
                             Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource DangerButton}"
-                            Clicked="OnSupprimerClicked">
-                    <Button.ImageSource>
-                        <FontImageSource 
+                            Clicked="OnSupprimerCategorieClicked"
+                            IsVisible="False">
+                        <Button.ImageSource>
+                            <FontImageSource 
                                 FontFamily="MaterialIcons"
                                 Glyph="&#xe872;"   
                                 Color="White"
@@ -197,12 +175,13 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>
-        
-        <!-- ========== BOUTON FLOTTANT “+” ========== -->
-        <Button x:Name="FloatingAddButton"
-                Text="+"
-                Clicked="OnFloatingAddClicked"
-                Command="{Binding ToggleFormCommand}"
-                Style="{StaticResource FloatingAddButton}"/>
+
+        <!-- Bouton flottant "+" (toujours visible, en bas à droite) -->
+        <Button Text="+"
+                Clicked="OnFloatingAddCategorieClicked"
+                Style="{StaticResource FloatingAddButton}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,20" />
     </Grid>
 </ContentPage>

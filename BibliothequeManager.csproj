@@ -72,7 +72,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="10.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
@@ -84,7 +84,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\ActionPage\Emprunt.xaml">
+	  <MauiXaml Update="Pages\ActionPage\EmpruntPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ActionPage\GestionEmprunts.xaml">
@@ -105,10 +105,19 @@
 	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Popups\ConfirmationPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Popups\ErrorPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Popups\SuccessPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Views\Accueil.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Views\Adherent.xaml">
+	  <MauiXaml Update="Pages\Views\GestionAdherent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Views\Authors.xaml">
@@ -117,7 +126,7 @@
 	  <MauiXaml Update="Pages\Views\Books.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Views\Categorie.xaml">
+	  <MauiXaml Update="Pages\Views\CategoriePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -147,6 +156,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\ActionPage\EmpruntPage.xaml.cs">
+	    <DependentUpon>EmpruntPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Views\GestionAdherent.xaml.cs">
+	    <DependentUpon>GestionAdherent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Views\CategoriePage.xaml.cs">
+	    <DependentUpon>CategoriePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Properties\AppResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
