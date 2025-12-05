@@ -1,5 +1,6 @@
 ﻿using BibliothequeManager.Models;
 using BibliothequeManager.Pages;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Controls;
 

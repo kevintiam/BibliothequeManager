@@ -43,7 +43,7 @@
                             HorizontalOptions="Center">
                         <Grid ColumnDefinitions="*,Auto">
                             <Entry x:Name="SearchEntry"
-                                   Placeholder="Rechercher une catégorie..."
+                                   Placeholder="{Binding [Category2], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TextZone}" />
                             <Button x:Name="SearchButton"
                                     Style="{StaticResource SearchIconButton}">

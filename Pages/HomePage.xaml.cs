@@ -49,7 +49,7 @@ public partial class HomePage : FlyoutPage
 
     }
 
-
+    // Gestion du changement de langue
     private void OnSwitchLanguageClicked(object sender, EventArgs e)
     {
         // Détermine la langue actuelle
@@ -69,5 +69,8 @@ public partial class HomePage : FlyoutPage
 
         // Recharge la page : on la retire, puis on la remet
         App.Localized.OnCultureChanged();
+        // Recharge la page d'accueil pour appliquer les traductions de welcome
+        Detail = new Accueil(); 
+        IsPresented = false;
     }
 }
