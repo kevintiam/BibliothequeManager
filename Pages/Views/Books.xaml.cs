@@ -1,14 +1,23 @@
 ﻿using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Popups;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliothequeManager.Pages.Views;
 
 public partial class Books : ContentPage
 {
-    public Books()
+    private readonly SessionUser session;
+    public Books(SessionUser user)
     {
         InitializeComponent();
+        session = user;
+        if (!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
 
         SearchButton.Clicked += OnSearchClicked;
         SearchEntry.TextChanged += OnSearchTextChanged;

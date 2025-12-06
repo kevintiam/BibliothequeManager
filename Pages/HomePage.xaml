@@ -19,6 +19,22 @@
                     <Label x:Name="TitleHome"
                             Text="📚 LibraNova" 
                            Style="{StaticResource TitleMenu}"/>
+                    <VerticalStackLayout>
+                        <HorizontalStackLayout Padding="15,10" Spacing="20">
+                            <Border Style="{StaticResource ProfilAvatar}">
+                                <Image Source="account.png"
+                                   Style="{StaticResource ImageUserMenu}"/>
+                            </Border>
+                            <Grid RowDefinitions="*,*">
+                                <Label Grid.Row="0"
+                                        x:Name="UserNameLabel"
+                                        Style="{StaticResource UserNameLabel}"/>
+                                <Label Grid.Row="1"
+                                    x:Name="UserEmailLabel"
+                                    Style="{StaticResource UserNameLabel}"/>
+                            </Grid>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
                 </StackLayout>
 
                 <!-- Navigation principale -->
@@ -62,7 +78,8 @@
 
                     <Button 
                             Text="{Binding [SignOut], Source={x:Static localApp:App.Localized}}"  
-                            Command="{Binding LogoutCommand}"
+                            x:Name="btnSingOut"
+                            Clicked="btnSingOut_Clicked"
                             Style="{StaticResource ButtonMenuDec}">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="MaterialIcons"
