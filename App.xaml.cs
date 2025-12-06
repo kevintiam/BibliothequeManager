@@ -14,8 +14,8 @@ namespace BibliothequeManager
         {
             InitializeComponent();
 
-             MainPage = new NavigationPage(new HomePage());
-            //MainPage = new NavigationPage(new Connexion());
+            //MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new Connexion());
         }
 
 
@@ -31,7 +31,6 @@ namespace BibliothequeManager
             }
             catch (Exception ex)
             {
-                // Log l'erreur (visible dans la sortie DEBUG)
                 System.Diagnostics.Debug.WriteLine($"Erreur SeedData : {ex}");
             }
         }

@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using BibliothequeManager.Models;
+﻿using BibliothequeManager.Models;
 using BibliothequeManager.Pages;
 using BibliothequeManager.Pages.Views;
+using BibliothequeManager.Services;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace BibliothequeManager.Views;
 
@@ -15,7 +16,8 @@ public class ConnexionViewModel : INotifyPropertyChanged
     // Contexte de base de données pour accéder aux données
     // saisies par l'utilisateur
     private readonly BibliothequeContext context = new();
-   
+    private readonly SessionUser session;
+
     private string email = "";
     private string motDePasse = "";
     private string messageErreur = "";  
@@ -48,8 +50,9 @@ public class ConnexionViewModel : INotifyPropertyChanged
     // Commande de connexion
     public ICommand LoginCommand { get; }
 
-    public ConnexionViewModel()
+    public ConnexionViewModel(SessionUser sessionUser)
     {
+        session = sessionUser;
         LoginCommand = new Command(SeConnecter);
     }
 
@@ -69,33 +72,47 @@ public class ConnexionViewModel : INotifyPropertyChanged
 
         // Nettoyer les entrées
         string email = Email.Trim();
-        string mdp = MotDePasse.Trim();
+        string motDePasseSaisi = MotDePasse.Trim();
 
         try
         {
-            // Chercher l'utilisateur dans la base
             var user = await context.Bibliothecaires
                 .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == mdp);
+                .FirstOrDefaultAsync(u => u.Email == email);
 
-            if (user != null)
+            if (user != null && !string.IsNullOrEmpty(motDePasseSaisi))
             {
-                // Connexion réussie, aller à l'accueil
-                await Application.Current.MainPage.Navigation.PushModalAsync(new HomePage());
-            }
-            else
-            {
-                // Échec, afficher erreur
-                MessageErreur = "Email ou mot de passe incorrect.";
-                EstErreurVisible = true;
+                bool motDePasseValide = BCrypt.Net.BCrypt.Verify(motDePasseSaisi, user.PasswordHash);
+
+                if(motDePasseValide) 
+                {
+                    var utilisateurConnecte = new Bibliothecaire
+                    {
+                        Id = user.Id,
+                        Nom = user.Nom,
+                        Prenom = user.Prenom,
+                        Email = user.Email
+                    };
+                    // Stocker l'utilisateur connecté dans la session
+                    session.SeConnecter(utilisateurConnecte);
+
+                    await Application.Current.MainPage.Navigation.PushModalAsync(new HomePage(session));
+                }
+                else
+                {
+                    // Échec, afficher erreur
+                    MessageErreur = "Email ou mot de passe incorrect.";
+                    EstErreurVisible = true;
+                }
             }
         }
         catch
         {
-            // Erreur de base de données
             MessageErreur = "Erreur de connexion à la base.";
             EstErreurVisible = true;
         }
+
+        MotDePasse = "";
     }
 
     // Evénement pour la notification de changement de propriété à l'interface

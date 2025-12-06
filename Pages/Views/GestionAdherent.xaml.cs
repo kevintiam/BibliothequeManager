@@ -1,5 +1,7 @@
 using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Popups;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -7,9 +9,17 @@ namespace BibliothequeManager.Pages.Views;
 
 public partial class GestionAdherent : ContentPage
 {
-	public GestionAdherent()
+    private readonly SessionUser session;
+	public GestionAdherent(SessionUser user)
 	{
-		InitializeComponent();        
+		InitializeComponent();
+        session = user;
+        if (!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
+
         AdherentsCollectionView.SelectionChanged += OnAdherentSelectionChanged;
         ChargerAdherents();
 

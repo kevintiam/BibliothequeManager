@@ -1,5 +1,7 @@
 ﻿using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Popups;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using CommunityToolkit.Maui.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
@@ -9,12 +11,20 @@ namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class GestionEmprunts : ContentPage
 {
+    private readonly SessionUser session;
     public ICommand VoirCommand { get; }
     public ICommand RetournerCommand { get; }
 
-    public GestionEmprunts()
+    public GestionEmprunts(SessionUser user)
 	{
 		InitializeComponent();
+        session = user;
+        if(!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
+
         FilterPicker.ItemsSource = StatutOptions;
 
         VoirCommand = new Command<Emprunt>(OnVoir);
@@ -89,7 +99,6 @@ public partial class GestionEmprunts : ContentPage
         EmpruntsRetournes.Text = retournee.ToString();
         TotalEmprunt.Text = totalActif.ToString();
     }
-
     private async void OnAccueilClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
