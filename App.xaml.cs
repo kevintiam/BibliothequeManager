@@ -16,8 +16,6 @@ namespace BibliothequeManager
 
              MainPage = new NavigationPage(new HomePage());
             //MainPage = new NavigationPage(new Connexion());
-            MainPage = new NavigationPage(new HomePage());
-            //MainPage = new NavigationPage(new Connexion());
         }
 
 
@@ -28,11 +26,7 @@ namespace BibliothequeManager
             {
                 using var scope = MauiProgram.CreateMauiApp().Services.CreateScope();
                 var context = scope.ServiceProvider.GetRequiredService<BibliothequeContext>();
-
-                // Mettre à jour le schéma de la base
                 await context.Database.MigrateAsync();
-
-                // Créer le compte admin
                 await SeedData.InitializeAdminAsync(context);
             }
             catch (Exception ex)

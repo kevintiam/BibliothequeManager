@@ -79,5 +79,12 @@ namespace BibliothequeManager.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public static class StatutsEmprunt
+        {
+            public const string EnCours = "En cours";
+            public const string EnRetard = "En retard";
+            public const string Retourne = "Retourné";
+        }
     }
 }
