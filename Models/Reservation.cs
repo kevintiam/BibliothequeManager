@@ -14,7 +14,7 @@ namespace BibliothequeManager.Models
         public DateTime DateReservation { get; set; } = DateTime.UtcNow;
         public DateTime DateRecuperationPrevue { get; set; }
 
-        public string Statut { get; set; } = "En attente";
+        public string Statut { get; set; } = StatutsReservation.EnAttente;
         public string Priorite { get; set; } = "Normale";
 
         [ForeignKey(nameof(ExemplaireAttribue))]
@@ -35,25 +35,19 @@ namespace BibliothequeManager.Models
         [NotMapped]
         public bool EstEnRetard => JoursRestants < 0;
 
-        [NotMapped]
-        public string StatutAffichage
+        public static class StatutsReservation
         {
-            get
-            {
-                if (EstEnRetard)
-                    return "En retard";
-                if (JoursRestants == 0)
-                    return "À récupérer aujourd’hui";
-                return $"({JoursRestants} j)";
-            }
+            public const string EnAttente = "En attente";
+            public const string Confirmee = "Confirmée";
+            public const string EnCours = "En cours";
+            public const string EnRetard = "En retard";
+            public const string Annulee = "Annulée";
         }
 
 
         public Livres? Livre { get; set; } 
-
         public Adherent? Adherent { get; set; }
         public Bibliothecaire? Bibliothecaire { get; set; }
         public Exemplaire? ExemplaireAttribue { get; set; }
-
     }
 }

@@ -54,7 +54,8 @@
                                     Title="{Binding [Status], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource ModernPicker}"
                                     Grid.Column="2"
-                                    WidthRequest="140" />
+                                    WidthRequest="140" 
+                                    SelectedIndexChanged="StatutPicker_SelectedIndexChanged"/>
 
                             <Button Grid.Column="3"
                                      Text="{Binding [New], Source={x:Static localApp:App.Localized}}"
@@ -70,7 +71,7 @@
                                    Padding="15">
 
                                 <StackLayout Grid.Column="0" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding TotalReservations}" 
+                                    <Label x:Name="TotalReservations"
                                             FontFamily="PlaypenSansBold"
                                             FontSize="20"
                                             TextColor="#1E293B"
@@ -80,7 +81,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding ReservationsEnAttente}" 
+                                    <Label  x:Name="ReservationsEnAttente" 
                                             FontFamily="PlaypenSansBold"
                                             FontSize="20"
                                             TextColor="#F59E0B"
@@ -90,7 +91,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding ReservationsConfirmees}" 
+                                    <Label x:Name="ReservationsConfirmees" 
                                         FontFamily="PlaypenSansBold"
                                         FontSize="20"
                                         TextColor="#10B981"
@@ -100,7 +101,7 @@
                                 </StackLayout>
                                 
                                 <StackLayout Grid.Column="3" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding ReservationsEnCours}" 
+                                    <Label x:Name="ReservationsEnCours" 
                                             FontFamily="PlaypenSansBold"
                                             FontSize="20"
                                             TextColor="#3B82F6"
@@ -110,7 +111,7 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="4" Spacing="5" HorizontalOptions="Center">
-                                    <Label Text="{Binding ReservationsExpirees}" 
+                                    <Label x:Name="ReservationsExpirees" 
                                             FontFamily="PlaypenSansBold"
                                             FontSize="20"
                                             TextColor="#EF4444"
@@ -131,15 +132,14 @@
                         <Border Grid.Row="0" 
                                 BackgroundColor="#F1F5F9"
                                 Padding="15,12">
-                            <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1*,1.2*"
+                            <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1.2*"
                                    ColumnSpacing="10">
                                 <Label Text="{Binding [BookAndMember], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" />
                                 <Label Text="{Binding [ReservationDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="1"/>
                                 <Label Text="{Binding [StartDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="2"/>
-                                <Label Text="{Binding [EndDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3"/>
-                                <Label Text="{Binding [DaysRemaining], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4"/>
-                                <Label Text="{Binding [Priority], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5"/>
-                                <Label Text="{Binding [Actions], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="6" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding [DaysRemaining], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3"/>
+                                <Label Text="{Binding [Priority], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4"/>
+                                <Label Text="{Binding [Actions], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center"/>
                             </Grid>
                         </Border>
 
@@ -154,7 +154,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border Style="{StaticResource TabContent}">
-                                        <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1*,1.2*" 
+                                        <Grid ColumnDefinitions="1.5*,1*,1*,1*,1*,1.2*" 
                                             Padding="15,12"
                                             ColumnSpacing="10">
 
@@ -169,19 +169,15 @@
                                             <Label Grid.Column="1"  Text="{Binding DateReservation, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Date Début -->
-                                            <Label Grid.Column="2" Text="{Binding DateReservation, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
+                                            <Label Grid.Column="2" Text="{Binding DateRecuperationPrevue, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
 
-                                            <!-- Date Fin -->
-                                            <Label Grid.Column="3"  Text="{Binding DateRetour, StringFormat='{0:dd/MM/yy}'}" Style="{StaticResource TableRowData}"/>
-
-                                            <!-- Jours restants -->
-                                            <Label Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}"/>
-
+                                                    <!-- Jours restants -->
+                                            <Label Grid.Column="3" Text="{Binding JoursRestants}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Priorité et Statut -->
-                                            <StackLayout Grid.Column="5" Spacing="2">
-                                              <Label Text="{Binding Statut}" Style="{StaticResource TableRowData}"/>
-                                              <Label Text="{Binding Priorite}" Style="{StaticResource TableRowData}"/>
+                                            <StackLayout Grid.Column="4" Spacing="2">
+                                                <Label Text="{Binding Statut}" Style="{StaticResource TableRowData}"/>
+                                                <Label Text="{Binding Priorite}" Style="{StaticResource TableRowData}"/>
                                             </StackLayout>
 
                                             <!-- Actions -->
@@ -196,7 +192,9 @@
                                              FontSize="10"
                                              CornerRadius="6"
                                              WidthRequest="28"
-                                             HeightRequest="28"/>
+                                             HeightRequest="28"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.Valider}"
+                                            CommandParameter="{Binding .}"/>
 
                                                 <Button Text="✎"
                                              BackgroundColor="#F59E0B"
@@ -204,15 +202,9 @@
                                              FontSize="10"
                                              CornerRadius="6"
                                              WidthRequest="28"
-                                             HeightRequest="28"/>
-
-                                                <Button Text="✕"
-                                             BackgroundColor="#EF4444"
-                                             TextColor="White"
-                                             FontSize="10"
-                                             CornerRadius="6"
-                                             WidthRequest="28"
-                                             HeightRequest="28"/>
+                                             HeightRequest="28"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.Modifier}"
+                                            CommandParameter="{Binding .}"/>
                                             </StackLayout>
                                         </Grid>
                                     </Border>

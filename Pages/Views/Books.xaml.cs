@@ -91,7 +91,6 @@ public partial class Books : ContentPage
         }
     }
 
-
     private void ChargerCategories()
     {
         using var context = new BibliothequeContext();

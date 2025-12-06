@@ -169,7 +169,6 @@
                                            Text="{Binding Amande}" Style="{StaticResource TableRowData}"/>
 
                                             <!-- Actions -->
-                                            <!-- Dans ton DataTemplate (CollectionView.ItemTemplate) -->
                                             <StackLayout Grid.Column="7" Orientation="Horizontal" Spacing="5" HorizontalOptions="Center">
                                                 <Button Text="👁️"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VoirCommand}"
