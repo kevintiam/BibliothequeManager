@@ -136,10 +136,9 @@
                                 Style="{StaticResource SectionLabel}"/>
                         </VerticalStackLayout>
                     </Grid>
-                    <CollectionView Grid.Row="1"
-                                    ItemsSource="{Binding Adherents}"
-                                    Margin="20,0"
-                                    >
+                    <CollectionView x:Name="EmpruntsCollectionView"
+                    Grid.Row="1"
+                    Margin="20,0">  
                         <CollectionView.Header>
                             <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*"
                                     Style="{StaticResource TabHead}">
