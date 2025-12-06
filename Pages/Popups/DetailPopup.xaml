@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BibliothequeManager.Pages.Popups.DetailPopup"
+             Title="DetailPopup"
+             BackgroundColor="Transparent"
+             Padding="20">
+    
+        <Grid VerticalOptions="Center" 
+            HorizontalOptions="Center">
+
+            <Border Style="{StaticResource PopBorder2}">
+                <VerticalStackLayout Spacing="16">
+                <Label Text="Détails de l'emprunt" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        HorizontalOptions="Center" />
+
+                <BoxView HeightRequest="1" Color="#E0E0E0" />
+
+                <Label x:Name="TitleLabel"
+                       Style="{StaticResource PopLabel}"
+                       TextColor="Red" />
+
+                <Label x:Name="LivreLabel" FontAttributes="Bold" Style="{StaticResource PopMessage}" />
+                <Label x:Name="AdherentLabel" Style="{StaticResource PopMessage}" />
+                <Label x:Name="DatesLabel" Style="{StaticResource PopMessage}" />
+                <Label x:Name="StatutLabel" Style="{StaticResource PopMessage}" />
+                <Label x:Name="AmandeLabel" Style="{StaticResource PopMessage}" />
+
+                <Button Text="Fermer"
+                        Style="{StaticResource SecondaryButton}"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        Clicked="OnCloseClicked" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+</ContentPage>
