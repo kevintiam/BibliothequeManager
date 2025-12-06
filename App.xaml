@@ -62,10 +62,10 @@
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
             <Style x:Key="FormContent" TargetType="VerticalStackLayout">
-                <Setter Property="Spacing" Value="30"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Spacing" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
                 <Setter Property="WidthRequest" Value="450"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
             </Style>
 
             <Style x:Key="FormChamp" TargetType="VerticalStackLayout">
@@ -73,10 +73,18 @@
             </Style>
 
             <Style x:Key="MainTitleLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="60"/>
+                <Setter Property="FontSize" Value="100"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontFamily" Value="PlaypenSansRegular"/>
+            </Style>
+
+            <Style x:Key="UserNameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
                 <Setter Property="FontFamily" Value="PlaypenSansRegular"/>
             </Style>
 
@@ -94,7 +102,7 @@
                 <Setter Property="Stroke" Value="Transparent"/>
                 <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
                 <Setter Property="WidthRequest" Value="500"/>
-                <Setter Property="HeightRequest" Value="500"/>
+                <Setter Property="HeightRequest" Value="550"/>
                 <Setter Property="MaximumWidthRequest" Value="500"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
@@ -110,7 +118,6 @@
                 <Setter Property="FontFamily" Value="PlaypenSansRegular"/>
             </Style>
 
-            <!-- Style InputFieldBorder SANS BORDURE comme demandé -->
             <!-- Coins légèrement arrondis -->
             <Style x:Key="InputFieldBorder" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="{StaticResource InputBorder}"/>
@@ -145,6 +152,8 @@
                 <Setter Property="StrokeShape" Value="RoundRectangle 8"/>
                 <Setter Property="Padding" Value="15,10"/>
                 <Setter Property="Margin" Value="10,5"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="ErrorLabel" TargetType="Label">
@@ -1018,7 +1027,20 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="Padding" Value="0" />
             </Style>
+            <Style x:Key="ProfilAvatar" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 25" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
 
+            <Style x:Key="ImageUserMenu" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="WidthRequest" Value="45" />
+            </Style>
             <!-- Texte avatar -->
             <Style x:Key="AvatarText" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />

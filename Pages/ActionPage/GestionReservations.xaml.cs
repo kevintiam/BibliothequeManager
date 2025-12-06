@@ -1,5 +1,7 @@
 using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Popups;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 using static BibliothequeManager.Models.Reservation;
@@ -8,12 +10,19 @@ namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class GestionReservations : ContentPage
 {
+    private readonly SessionUser session;
     public ICommand Valider { get; }
     public ICommand Modifier { get; }
 
-    public GestionReservations()
+    public GestionReservations(SessionUser user)
 	{
 		InitializeComponent();
+        session = user;
+        if(!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
         StatutPicker.ItemsSource = StatutOptions;
 
 		Valider = new Command<Reservation>(OnValider);
@@ -58,13 +67,12 @@ public partial class GestionReservations : ContentPage
             AdherentId = reservationDB.AdherentId,
             DateEmprunt = reservationDB.DateRecuperationPrevue,
             DateRetourPrevu = reservationDB.DateRecuperationPrevue.AddDays(14),
-            BibliothecaireEmpruntId = 1,
+            BibliothecaireEmpruntId = session.UtilisateurActuel.Id,
             ExemplaireId = reservationDB.ExemplaireAttribueId.Value
         };
         context.Emprunts.Add(newEmprunt);
 
-        await context.SaveChangesAsync(); 
-
+        await context.SaveChangesAsync();
         await SuccessPopup.Show("Réservation convertie en emprunt.", this);
         ChargerReservation();
         ChargerStatistique();
@@ -100,11 +108,11 @@ public partial class GestionReservations : ContentPage
     }
     private async void OnAccueilClicked(object sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new HomePage());
+		//await Navigation.PushAsync(new HomePage());
 	}
 	private async void OnNewReservation(object sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new Reserver());
+		await Navigation.PushAsync(new Reserver(session));
 	}
     public List<string> StatutOptions { get; } = new()
 	{

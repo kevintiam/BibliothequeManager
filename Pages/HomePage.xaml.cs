@@ -1,20 +1,33 @@
+using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Views;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using System.Globalization;
 
 namespace BibliothequeManager.Pages;
 
 public partial class HomePage : FlyoutPage
 {
-	public HomePage()
-	{
+	private readonly SessionUser session;
+    public HomePage(SessionUser bibliothecaire)
+    {
         InitializeComponent();
-		LoadHomePage();
-		NavigatePage();
+        session = bibliothecaire;
+
+        if (!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
+
+        InfosUser(session.UtilisateurActuel!);
+        LoadHomePage();
+        NavigatePage();
     }
 
-	private void LoadHomePage()
+    private void LoadHomePage()
 	{
-		Detail = new Accueil();
+		Detail = new NavigationPage(new Accueil(session));
 		IsPresented = false;
 
     }
@@ -22,27 +35,27 @@ public partial class HomePage : FlyoutPage
 	{
         AccueilButton.Clicked += (s, e) =>
 		{
-			Detail = new Accueil();
+			Detail = new NavigationPage(new Accueil(session));
 			IsPresented = false;
 		};
         LivresButton.Clicked += (s, e) =>
 		{
-			Detail = new Books();
+			Detail = new NavigationPage(new Books(session));
 			IsPresented = false;
 		};
 		AuthorsButton.Clicked += (s, e) =>
 		{
-			Detail = new Authors();
+			Detail = new NavigationPage(new Authors(session));
 			IsPresented = false;
 		};
 		CategorieButton.Clicked += (s, e) =>
 		{
-			Detail = new CategoriePage();
+			Detail = new NavigationPage(new CategoriePage(session));
 			IsPresented = false;
 		};
 		AdherentsButton.Clicked += (s, e) =>
 		{
-			Detail = new GestionAdherent();
+			Detail = new NavigationPage(new GestionAdherent(session));
 			IsPresented = false;
 		};
     }
@@ -50,13 +63,8 @@ public partial class HomePage : FlyoutPage
     // Gestion du changement de langue
     private void OnSwitchLanguageClicked(object sender, EventArgs e)
     {
-        // Détermine la langue actuelle
         string langueActuelle = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-
-        // Bascule vers l'autre langue
         string nouvelleLangue = langueActuelle == "fr" ? "en" : "fr";
-
-        // Crée la culture correspondante
         var culture = new CultureInfo(nouvelleLangue);
 
         // Applique cette culture partout dans l'application
@@ -67,8 +75,20 @@ public partial class HomePage : FlyoutPage
 
         // Recharge la page : on la retire, puis on la remet
         App.Localized.OnCultureChanged();
-        // Recharge la page d'accueil pour appliquer les traductions de welcome
-        Detail = new Accueil(); 
+
+        Detail = new NavigationPage(new Accueil(session));
         IsPresented = false;
     }
+
+    private async void btnSingOut_Clicked(object sender, EventArgs e)
+    {
+		session.SeDeconnecter();
+        await Application.Current.MainPage.Navigation.PushModalAsync(new Connexion());
+    }
+
+	public void InfosUser(Bibliothecaire user)
+	{
+		UserNameLabel.Text = user.Prenom;
+		UserEmailLabel.Text = user.Email;
+	}
 }

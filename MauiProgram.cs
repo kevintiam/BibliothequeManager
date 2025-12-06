@@ -1,9 +1,12 @@
 ﻿using BibliothequeManager.Models;
+using BibliothequeManager.Pages.ActionPage;
+using BibliothequeManager.Pages.Views;
+using BibliothequeManager.Services;
 using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
-using System.Globalization;
+using Windows.Media.Control;
 
 namespace BibliothequeManager
 {
@@ -36,9 +39,18 @@ namespace BibliothequeManager
                     fonts.AddFont("PlaypenSans-VariableFont_wght.ttf", "PlaypenSansVariable");
                 });
 
+            // === 🔍 CONFIGURATION DU LOGGING EN MODE DEBUG ===
+            builder.Services.AddSingleton<SessionUser>();
+            builder.Services.AddTransient<EmpruntPage>();
+            builder.Services.AddTransient<Retour>();
+            builder.Services.AddTransient<Reserver>();
+            builder.Services.AddTransient<GestionEmprunts>();
+            builder.Services.AddTransient<GestionReservations>();
+            builder.Services.AddTransient<GestionAdherent>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            builder.Logging.AddDebug();
+#endif      
 
             // === 🔑 ENREGISTRER LE CONTEXT EF CORE ===
             string connectionString = "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;";

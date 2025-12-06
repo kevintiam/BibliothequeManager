@@ -186,15 +186,16 @@
                                               Spacing="5"
                                               HorizontalOptions="Center">
 
-                                                <Button Text="✓"
-                                             BackgroundColor="#10B981"
-                                             TextColor="White"
-                                             FontSize="10"
-                                             CornerRadius="6"
+                                                <Button 
+                                                x:Name="ValiderButton"
+                                               Text="✓"
+                                             IsEnabled="{Binding EstModifiable}"
+                                             BackgroundColor="#10B981" TextColor="White" FontSize="10" CornerRadius="6"
                                              WidthRequest="28"
                                              HeightRequest="28"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.Valider}"
-                                            CommandParameter="{Binding .}"/>
+                                            CommandParameter="{Binding .}"
+                                             />
 
                                                 <Button Text="✎"
                                              BackgroundColor="#F59E0B"
