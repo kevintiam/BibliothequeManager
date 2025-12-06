@@ -26,9 +26,7 @@ namespace BibliothequeManager.Pages.ActionPage
 
             };
 
-            // Définir les dates par défaut
-            DateDebutPicker.Date = DateTime.Now;
-            DateFinPicker.Date = DateTime.Now.AddDays(14);
+
         }
         public List<string> StatutOptions { get; } = new()
         {
@@ -155,6 +153,9 @@ namespace BibliothequeManager.Pages.ActionPage
                 var exemplaireDisponible = await donnees.Exemplaires
                 .FirstOrDefaultAsync(e => e.LivreId == livreSelectionne.Value && e.EstDisponible);
 
+                // Définir les dates par défaut
+                DateTime dateDebut = DateDebutPicker.Date;
+                DateTime dateFin = DateFinPicker.Date;
 
                 // Créer la réservation
                 var newReservation = new Reservation
@@ -164,9 +165,9 @@ namespace BibliothequeManager.Pages.ActionPage
                     DateReservation = DateTime.UtcNow,
                     BibliothecaireId = 1,
                     ExemplaireAttribueId = exemplaireDisponible?.Id,
-                    DateRetour = DateTime.UtcNow.AddDays(14),
+                    DateRecuperationPrevue = dateDebut,
                     Statut = "En Attente",
-                    Priorite = "Aucune"
+                    Priorite = "Normale"
                 };
 
                 donnees.Reservations.Add(newReservation);
