@@ -1,31 +1,36 @@
 using BibliothequeManager.Models;
 using BibliothequeManager.Pages.Popups;
 using BibliothequeManager.Pages.Views;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliothequeManager.Pages.ActionPage;
 
 public partial class EmpruntPage : ContentPage
 {
+    private readonly SessionUser session;
+
     private int? livreSelectionne;
-    public EmpruntPage()
+    public EmpruntPage(SessionUser user)
 	{
 		InitializeComponent();
+        session = user;
+            
+        if(!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
+
+        ConfirmerButton.Clicked += OnConfirmerClicked;
         SearchButton.Clicked += OnRechercherClicked;
         SuggestionsCollectionView.SelectionChanged += OnLivreSuggestionSelected;
 
-        RechercheEntry.TextChanged += async (s,e) => {
-            await Task.Delay(300); 
-
-            if(e.NewTextValue == RechercheEntry.Text)
-            {
-                await OnSearchTextChanged(s, e);
-            }
-            
-        };
+        RechercheEntry.TextChanged += OnSearchTextChanged;
     }
     
-    private async void OnConfirmerClicked(object sender, EventArgs e)
+    private async void OnConfirmerClicked(object? sender, EventArgs e)
     {
         // Validation
         if (!livreSelectionne.HasValue)
@@ -74,15 +79,12 @@ public partial class EmpruntPage : ContentPage
                 AdherentId = abonne.Id,
                 DateEmprunt = DateTime.UtcNow,
                 DateRetourPrevu = DateTime.UtcNow.AddDays(14),
-                BibliothecaireEmpruntId = 1,
+                BibliothecaireEmpruntId = session.UtilisateurActuel.Id,
                 ExemplaireId = exemplaireDisponible.Id
             };
 
-
             donnees.Emprunts.Add(newEmprunt);
             await donnees.SaveChangesAsync();
-
-
             await SuccessPopup.Show("Emprunt confirmé avec succès !", this);
 
             // Réinitialiser le formulaire
@@ -142,7 +144,7 @@ public partial class EmpruntPage : ContentPage
         }
     }
 
-    private async Task OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+    private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
         {
@@ -181,7 +183,7 @@ public partial class EmpruntPage : ContentPage
 
     private async void OnListeEmpruntsClicked(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new GestionEmprunts());
+        await Navigation.PushAsync(new GestionEmprunts(session));
 
     }
 }

@@ -1,5 +1,8 @@
 ﻿using BibliothequeManager.Models;
+using BibliothequeManager.Pages.Popups;
 using BibliothequeManager.Pages.Views;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
@@ -22,12 +25,18 @@ public partial class Retour : ContentPage
         public int IdEmprunt { get; set; }
     }
 
-    public Retour()
+    private readonly SessionUser session;
+    public Retour(SessionUser user)
     {
         InitializeComponent();
+        session = user;
+        if(!session.EstConnecte)
+        {
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
     }
 
-    // → SEULE VERSION DE OnConfirmerClicked
     private async void OnConfirmerClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(AbonneIdEntry.Text))
@@ -38,13 +47,13 @@ public partial class Retour : ContentPage
 
         if (!int.TryParse(AbonneIdEntry.Text, out int idAdherent))
         {
-            await DisplayAlert("Erreur", "ID invalide.", "OK");
+            await ErrorPopup.Show("ID invalide.",this);
             return;
         }
 
         try
         {
-            Adherent adherent = await contexte.Adherents
+            var adherent = await contexte.Adherents
                 .Include(a => a.Emprunts)
                     .ThenInclude(e => e.Exemplaire)
                         .ThenInclude(ex => ex.Livre)
@@ -53,7 +62,7 @@ public partial class Retour : ContentPage
 
             if (adherent == null)
             {
-                await DisplayAlert("Erreur", "Adhérent non trouvé.", "OK");
+                await ErrorPopup.Show("Adhérent non trouvé.", this);
                 return;
             }
 
@@ -63,7 +72,7 @@ public partial class Retour : ContentPage
 
             if (listeEmprunts.Count == 0)
             {
-                await DisplayAlert("Info", "Cet adhérent n'a aucun emprunt en cours.", "OK");
+                await ErrorPopup.Show("Cet adhérent n'a aucun emprunt en cours.", this);
                 return;
             }
 
@@ -97,7 +106,7 @@ public partial class Retour : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erreur", $"Impossible de charger les données : {ex.Message}", "OK");
+            await ErrorPopup.Show($"Impossible de charger les données : {ex.Message}", this);
         }
     }
 

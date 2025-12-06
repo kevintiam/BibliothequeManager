@@ -3,30 +3,31 @@ using BibliothequeManager.Pages.Popups;
 using Microsoft.EntityFrameworkCore;
 using BibliothequeManager.Pages.Views;
 using Microsoft.Maui.Controls;
+using BibliothequeManager.Services;
+using BibliothequeManager.Views;
 
 namespace BibliothequeManager.Pages.ActionPage
 {
+
     public partial class Reserver : ContentPage
     {
+        private readonly SessionUser session;
         private int? livreSelectionne;
-        public Reserver()
+        public Reserver(SessionUser user)
         {
             InitializeComponent();
+            session = user;
 
-            SearchButton.Clicked += OnRechercherClicked;
-            StatutPicker.ItemsSource = StatutOptions;
-            SuggestionsCollectionView.SelectionChanged += OnLivreSuggestionSelected;
-            RechercheEntry.TextChanged += async (s, e) => {
-                await Task.Delay(300);
+            if (!session.EstConnecte)
+            {
+                Application.Current.MainPage = new NavigationPage(new Connexion());
+                return;
+            }
+                SearchButton.Clicked += OnRechercherClicked;
+                StatutPicker.ItemsSource = StatutOptions;
+                SuggestionsCollectionView.SelectionChanged += OnLivreSuggestionSelected;
 
-                if (e.NewTextValue == RechercheEntry.Text)
-                {
-                    await OnSearchTextChanged(s, e);
-                }
-
-            };
-
-
+                RechercheEntry.TextChanged += OnSearchTextChanged;
         }
         public List<string> StatutOptions { get; } = new()
         {
@@ -81,7 +82,7 @@ namespace BibliothequeManager.Pages.ActionPage
             }
         }
 
-        private async Task OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+        private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
             {
@@ -163,7 +164,7 @@ namespace BibliothequeManager.Pages.ActionPage
                     LivreId = livreSelectionne.Value,
                     AdherentId = abonne.Id,
                     DateReservation = DateTime.UtcNow,
-                    BibliothecaireId = 1,
+                    BibliothecaireId = session.UtilisateurActuel.Id,
                     ExemplaireAttribueId = exemplaireDisponible?.Id,
                     DateRecuperationPrevue = dateDebut,
                     Statut = "En Attente",
@@ -197,7 +198,7 @@ namespace BibliothequeManager.Pages.ActionPage
 
         private async void OnMesReservationsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GestionReservations());
+            await Navigation.PushAsync(new GestionReservations(session));
         }
     }
 }

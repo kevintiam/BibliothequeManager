@@ -34,8 +34,6 @@
                             <Label  
                             Text="{Binding [WelcomeTitle], Source={x:Static localApp:App.Localized}}"
                             Style="{StaticResource HeaderLabel}" />
-                            <!--<Label Text="{Binding [WelcomeSubtitle], Source={x:Static localApp:App.Localized}}"
-                                   Style="{StaticResource SubHeaderLabel}" />-->
 
                             <Label x:Name="WelcomeSubtitleLabel"
                                Style="{StaticResource SubHeaderLabel}" />       
@@ -129,55 +127,30 @@
                 <!-- ========== SECTION LIVRES DU JOUR ========== -->
                 <StackLayout Grid.Row="2" Style="{StaticResource FooterHome}">
                     <Label Text="{Binding [DiscoverToday], Source={x:Static localApp:App.Localized}}" 
-                           Style="{StaticResource SectionTitle}" />
+                            Style="{StaticResource SectionTitle}" />
 
                     <Border Style="{StaticResource FooterHomeContent}">
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
-                            <!-- Livre 1 -->
-                            <Grid Grid.Column="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
-                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
-                                    <Label Text="Le Petit Prince" Style="{StaticResource SectionTitleBook}" />
-                                    <Label Text="Antoine de Saint-Exupéry" Style="{StaticResource SectionAuthorsName}" />
-                                    <Label Text="Un classique sur l’amitié, l’amour et la solitude." 
-                                           Style="{StaticResource BookDescription}" />
-                                </VerticalStackLayout>
-                            </Grid>
-
-                            <!-- Livre 2 -->
-                            <Grid Grid.Column="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
-                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
-                                    <Label Text="1984" Style="{StaticResource SectionTitleBook}" />
-                                    <Label Text="George Orwell" Style="{StaticResource SectionAuthorsName}" />
-                                    <Label Text="Une dystopie visionnaire sur la surveillance et la liberté." 
-                                           Style="{StaticResource BookDescription}" />
-                                </VerticalStackLayout>
-                            </Grid>
-
-                            <!-- Livre 3 -->
-                            <Grid Grid.Column="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="book.png" Style="{StaticResource ImageCart}" />
-                                <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
-                                    <Label Text="Beloved" Style="{StaticResource SectionTitleBook}" />
-                                    <Label Text="Toni Morrison" Style="{StaticResource SectionAuthorsName}" />
-                                    <Label Text="Un roman puissant sur la mémoire de l’esclavage." 
-                                           Style="{StaticResource BookDescription}" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Grid>
+                        <HorizontalStackLayout x:Name="LivresStack"
+                               Spacing="20"
+                               BindableLayout.ItemsSource="{Binding LivresDecouverte}"
+                               HorizontalOptions="Center"  VerticalOptions="Center">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid WidthRequest="450">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="{Binding ImageUrl}" Style="{StaticResource ImageCart}" />
+                                        <VerticalStackLayout Grid.Column="1" Style="{StaticResource FooterBookText}">
+                                            <Label Text="{Binding Titre}" Style="{StaticResource SectionTitleBook}" />
+                                            <Label Text="{Binding Auteur}" Style="{StaticResource SectionAuthorsName}" />
+                                            <Label Text="{Binding Description}" Style="{StaticResource BookDescription}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
                     </Border>
                 </StackLayout>
 

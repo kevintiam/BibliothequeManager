@@ -44,7 +44,8 @@ namespace BibliothequeManager.Models
             public const string Annulee = "Annulée";
         }
 
-
+        [NotMapped]
+        public bool EstModifiable => Statut == StatutsReservation.Confirmee;
         public Livres? Livre { get; set; } 
         public Adherent? Adherent { get; set; }
         public Bibliothecaire? Bibliothecaire { get; set; }
