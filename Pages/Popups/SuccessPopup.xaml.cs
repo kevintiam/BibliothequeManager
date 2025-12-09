@@ -21,7 +21,7 @@ public partial class SuccessPopup : ContentPage
     {
         try
         {
-            await Task.Delay(5000, cts.Token);
+            await Task.Delay(2000, cts.Token);
             await CloseAsync();
         }
         catch (TaskCanceledException)

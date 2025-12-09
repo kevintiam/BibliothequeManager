@@ -539,7 +539,6 @@
   </data>
   <data name="WelcomeSubtitle_3" xml:space="preserve">
     <value> ✨ « La seule source de connaissance, c’est l’expérience. » </value>
-    <comment> </comment>
   </data>
   <data name="WelcomeSubtitle_4" xml:space="preserve">
     <value>✨ « L’imagination est plus importante que le savoir. »</value>
@@ -549,5 +548,8 @@
   </data>
   <data name="WelcomeSubtitle_6" xml:space="preserve">
     <value>✨ « L’essentiel, c’est de ne jamais cesser de se poser des questions. La curiosité a sa propre raison d’être. »</value>
+  </data>
+  <data name="publicationYear" xml:space="preserve">
+    <value>Année de Publication </value>
   </data>
 </root>

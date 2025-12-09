@@ -76,7 +76,7 @@ namespace BibliothequeManager.Pages.ActionPage
             }
             catch (Exception ex)
             {
-                string messageUtilisateur = "Impossible de charger les livres. Veuillez réessayer.";
+                string messageUtilisateur = "Impossible de charger les livres. Veuillez réessayer." + ex.Message;
                 await ErrorPopup.Show(messageUtilisateur, this);
                 SuggestionsCollectionView.IsVisible = false;
             }
