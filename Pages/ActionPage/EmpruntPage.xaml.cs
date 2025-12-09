@@ -45,10 +45,18 @@ public partial class EmpruntPage : ContentPage
             return;
         }
 
+        if (session.UtilisateurActuel is null)
+        {
+            await ErrorPopup.Show("Session expirée. Veuillez vous reconnecter.", this);
+            Application.Current.MainPage = new NavigationPage(new Connexion());
+            return;
+        }
+
         try
         {
             using var donnees = new BibliothequeContext();
-            // Verifier si l'abonnee existe
+
+            // Vérifier si l’adhérent existe
             var abonne = await donnees.Adherents
                 .FirstOrDefaultAsync(a => a.NumeroCarte == AbonneIdEntry.Text);
 
@@ -57,23 +65,35 @@ public partial class EmpruntPage : ContentPage
                 await ErrorPopup.Show("Adhérent introuvable.", this);
                 return;
             }
-            // Verifier si le livre existe
-            var livre = await donnees.Livres.FindAsync(livreSelectionne.Value);
+
+            // Charger le livre avec ses exemplaires
+            var livre = await donnees.Livres
+                .Include(l => l.Exemplaires)
+                .FirstOrDefaultAsync(l => l.Id == livreSelectionne.Value);
+
             if (livre == null)
             {
                 await ErrorPopup.Show("Livre introuvable.", this);
                 return;
-
             }
 
-            // Trouver un exemplaire éligible à l'emprunt
-            var exemplaireDisponible = await donnees.Exemplaires
-            .FirstOrDefaultAsync(e => e.LivreId == livreSelectionne.Value && e.EstDisponible);
+            // Trouver un exemplaire disponible
+            var exemplaireDisponible = livre.Exemplaires.FirstOrDefault(e => e.EstDisponible);
+            if (exemplaireDisponible == null)
+            {
+                await ErrorPopup.Show("Aucun exemplaire disponible pour ce livre.", this);
+                return;
+            }
 
-            
+            // Calculer le nombre restant (avant validation)
+            var nombreRestant = livre.Exemplaires.Count(e => e.EstDisponible);
+            if (nombreRestant <= 0)
+            {
+                await ErrorPopup.Show("Ce livre n'a plus d'exemplaires disponibles.", this);
+                return;
+            }
 
-
-            // Créer l'emprunt
+            // Créer l’emprunt
             var newEmprunt = new Emprunt
             {
                 AdherentId = abonne.Id,
@@ -83,8 +103,12 @@ public partial class EmpruntPage : ContentPage
                 ExemplaireId = exemplaireDisponible.Id
             };
 
+            // Marquer l’exemplaire comme non disponible
+            exemplaireDisponible.EstDisponible = false;
+
             donnees.Emprunts.Add(newEmprunt);
             await donnees.SaveChangesAsync();
+
             await SuccessPopup.Show("Emprunt confirmé avec succès !", this);
 
             // Réinitialiser le formulaire
@@ -96,7 +120,9 @@ public partial class EmpruntPage : ContentPage
         catch (Exception ex)
         {
             var inner = ex.InnerException?.Message;
-            var message = inner != null ? $"Erreur lors de la réservation : {inner}" : $"Erreur lors de la réservation : {ex.Message}";
+            var message = inner != null
+                ? $"Erreur lors de l'emprunt : {inner}"
+                : $"Erreur lors de l'emprunt : {ex.Message}";
             await ErrorPopup.Show(message, this);
         }
     }

@@ -86,6 +86,8 @@ public partial class GestionAdherent : ContentPage
         };
         donnees.Adherents.Add(newAdherent);
         await donnees.SaveChangesAsync();
+        FormulaireAdherent.IsVisible = !FormulaireAdherent.IsVisible;
+        ViderFormulaire();
 
         ChargerAdherents();
         await SuccessPopup.Show("Adherent ajoute avec succes", this);
@@ -96,8 +98,6 @@ public partial class GestionAdherent : ContentPage
     {
         ViderFormulaire();
         FormulaireAdherent.IsVisible = !FormulaireAdherent.IsVisible;
-        
-
     }
 
     private void ViderFormulaire()
@@ -106,8 +106,8 @@ public partial class GestionAdherent : ContentPage
         TxtPrenomAdherent.Text = string.Empty;
         TxtEmailAdherent.Text = string.Empty;
         TxtNumeroCarte.Text = string.Empty;
+        AdherentsCollectionView.SelectedItem = null;
     }
-
     private async void OnAdherentSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         var Adherent = e.CurrentSelection.FirstOrDefault() as Adherent;
@@ -171,7 +171,6 @@ public partial class GestionAdherent : ContentPage
         }
 
     }
-
     private async void SupprimerButton_Clicked(object sender, EventArgs e)
     {
         var selectedAdherent = AdherentsCollectionView.SelectedItem as Adherent;
