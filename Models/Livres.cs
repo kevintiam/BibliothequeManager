@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,9 @@ namespace BibliothequeManager.Models
         public string ISBN { get; set; } = string.Empty;
 
         public int AuteurId { get; set; }
+
+        public DateTime AnneePublication { get; set; }
+
 
         // Navigation
         [ForeignKey("AuteurId")]

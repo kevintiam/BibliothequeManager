@@ -64,7 +64,7 @@
                                 SelectionMode="Single"
                                 Margin="20,0">
                     <CollectionView.Header>
-                        <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*"
+                        <Grid ColumnDefinitions="1.5*,1.2*,1.1*,1.1*,1*,0.75*,1.1*"
                               Style="{StaticResource TabHead}">
                             <Label Text="{Binding [Title], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TableHeader}" />
@@ -72,25 +72,28 @@
                                    Style="{StaticResource TableHeader}" Grid.Column="1" />
                             <Label Text="{Binding [Categoryy], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TableHeader}" Grid.Column="2" />
-                            <Label Text="{Binding [IISBN], Source={x:Static localApp:App.Localized}}"
-                                   Style="{StaticResource TableHeader}" Grid.Column="3" />
-                            <Label Text="{Binding [Pages], Source={x:Static localApp:App.Localized}}"
+                            <Label Text="{Binding [publicationYear], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding [IISBN], Source={x:Static localApp:App.Localized}} "
                                    Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
-                            <Label Text="{Binding [ExAvailable], Source={x:Static localApp:App.Localized}}"
+                            <Label Text="{Binding [Pages], Source={x:Static localApp:App.Localized}}"
                                    Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding [ExAvailable], Source={x:Static localApp:App.Localized}}"
+                                   Style="{StaticResource TableHeader}" Grid.Column="6" HorizontalTextAlignment="Center" />
                         </Grid>
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource TabContent}">
-                                <Grid ColumnDefinitions="1.5*,1.5*,1.1*,1*,0.75*,1.1*" ColumnSpacing="10">
+                                <Grid ColumnDefinitions="1.5*,1.2*,1.1*,1.1*,1*,0.75*,1.1*" ColumnSpacing="10">
                                     <Label Text="{Binding Titre}" Style="{StaticResource TableRowData}" />
                                     <Label Text="{Binding Auteur.Prenom}" Style="{StaticResource TableRowData}" Grid.Column="1" />
                                     <Label Text="{Binding LivreCategories[0].Categorie.Nom}" Style="{StaticResource TableRowData}" Grid.Column="2" />
-                                    <Label Text="{Binding ISBN}" Style="{StaticResource TableRowData}" Grid.Column="3" />
-                                    <Label Text="{Binding Exemplaires[0].NombrePage}" Style="{StaticResource TableRowData}" Grid.Column="4" HorizontalTextAlignment="Center" />
-                                    <Label Text="{Binding Exemplaires.Count}" Style="{StaticResource TableRowData}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding AnneePublication,StringFormat='{0:yyyy/MM/dd}'}" Style="{StaticResource TableRowData}" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding ISBN}" Style="{StaticResource TableRowData}" Grid.Column="4" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Exemplaires[0].NombrePage}" Style="{StaticResource TableRowData}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Exemplaires.Count}" Style="{StaticResource TableRowData}" Grid.Column="6" HorizontalTextAlignment="Center" />
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -175,6 +178,7 @@
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Padding="0,20">
                     <Button x:Name="AjouterButton"
                     Text="{Binding [Add], Source={x:Static localApp:App.Localized}}" 
+                     Style="{StaticResource PrimaryButton}"
                     Clicked="OnAjouterClicked">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="MaterialIcons"

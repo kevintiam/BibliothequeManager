@@ -163,6 +163,7 @@ public partial class Authors : ContentPage
                 await Donnees.SaveChangesAsync();
                 ChargerAuteurs();
                 ReinitialiserFormulaire();
+                selectedAuthor = null;
                 FormulaireLivres.IsVisible = false;
             }
         }
@@ -199,6 +200,7 @@ public partial class Authors : ContentPage
 
         ChargerAuteurs();
         ReinitialiserFormulaire();
+
         FormulaireLivres.IsVisible = false;
     }
 

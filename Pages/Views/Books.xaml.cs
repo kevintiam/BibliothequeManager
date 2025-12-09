@@ -137,6 +137,8 @@ public partial class Books : ContentPage
             {
                 TxtTitre.Text = livreDetails.Titre;
                 TxtISBN.Text = livreDetails.ISBN;
+                DatePickerPublication.Date = livreDetails.AnneePublication;
+
 
                 // Sélectionner l'auteur
                 var auteurs = PickerAuthorSelect.ItemsSource as List<Auteur>;
@@ -242,20 +244,18 @@ public partial class Books : ContentPage
                 var auteur = PickerAuthorSelect.SelectedItem as Auteur;
                 var categorie = PickerCathegorieSelect.SelectedItem as Categorie;
 
+                // Mise à jour des champs principaux
                 livreToUpdate.Titre = TxtTitre.Text;
                 livreToUpdate.ISBN = TxtISBN.Text;
+                livreToUpdate.AnneePublication = DatePickerPublication.Date;
 
                 if (auteur != null)
-                {
                     livreToUpdate.AuteurId = auteur.Id;
-                }
 
-                // Mettre à jour la catégorie
+                // Mettre à jour la catégorie unique (remplace l'existante)
                 var categorieExistante = livreToUpdate.LivreCategories.FirstOrDefault();
                 if (categorieExistante != null)
-                {
                     context.LivreCategories.Remove(categorieExistante);
-                }
 
                 if (categorie != null)
                 {
@@ -268,13 +268,54 @@ public partial class Books : ContentPage
                 }
 
                 // Mettre à jour le nombre de pages des exemplaires existants
-                int nombrePages = int.Parse(TxtPages.Text);
+                if (!int.TryParse(TxtPages.Text, out var nombrePages))
+                {
+                    await ErrorPopup.Show("Nombre de pages invalide.", this);
+                    return;
+                }
                 foreach (var exemplaire in livreToUpdate.Exemplaires)
                 {
                     exemplaire.NombrePage = nombrePages;
                 }
 
+                // Mettre à jour le nombre d'exemplaires (ajouts/suppressions)
+                if (!int.TryParse(TxtExemplaires.Text, out var nombreExemplairesSouhaite) || nombreExemplairesSouhaite < 0)
+                {
+                    await ErrorPopup.Show("Nombre d'exemplaires invalide.", this);
+                    return;
+                }
+
+                var nombreActuel = livreToUpdate.Exemplaires.Count;
+
+                if (nombreExemplairesSouhaite > nombreActuel)
+                {
+                    // Ajouter les nouveaux exemplaires
+                    for (int i = nombreActuel + 1; i <= nombreExemplairesSouhaite; i++)
+                    {
+                        var exemplaire = new Exemplaire
+                        {
+                            LivreId = livreToUpdate.Id,
+                            NombrePage = nombrePages,
+                            CodeBarre = $"{livreToUpdate.ISBN}-{i:D5}",
+                            EstDisponible = true,
+                            Etat = "Neuf"
+                        };
+                        context.Exemplaires.Add(exemplaire);
+                    }
+                }
+                else if (nombreExemplairesSouhaite < nombreActuel)
+                {
+                    // Supprimer les exemplaires en surplus en partant de la fin
+                    var aSupprimer = livreToUpdate.Exemplaires
+                        .OrderByDescending(e => e.CodeBarre)
+                        .Take(nombreActuel - nombreExemplairesSouhaite)
+                        .ToList();
+
+                    context.Exemplaires.RemoveRange(aSupprimer);
+                }
+
                 await context.SaveChangesAsync();
+                await SuccessPopup.Show("Livre modifié avec succès !", this);
                 ChargerLivres();
                 ReinitialiserFormulaire();
                 FormulaireLivres.IsVisible = false;
@@ -288,10 +329,11 @@ public partial class Books : ContentPage
         using var context = new BibliothequeContext();
         var auteur = PickerAuthorSelect.SelectedItem as Auteur;
         var categorie = PickerCathegorieSelect.SelectedItem as Categorie;
+        var anneePublication = DatePickerPublication.Date;
 
         if (auteur == null)
         {
-            await DisplayAlert("Erreur", "Veuillez sélectionner un auteur", "OK");
+            await ErrorPopup.Show("Veuillez sélectionner un auteur", this);
             return;
         }
 
@@ -300,7 +342,8 @@ public partial class Books : ContentPage
         {
             Titre = TxtTitre.Text,
             ISBN = TxtISBN.Text,
-            AuteurId = auteur.Id
+            AuteurId = auteur.Id,
+            AnneePublication = anneePublication
         };
 
         context.Livres.Add(nouveauLivre);
@@ -335,9 +378,7 @@ public partial class Books : ContentPage
         }
 
         await context.SaveChangesAsync();
-
         await SuccessPopup.Show("Livre ajouté avec succès !", this);
-
         ChargerLivres();
         ReinitialiserFormulaire();
         FormulaireLivres.IsVisible = false;
@@ -361,6 +402,7 @@ public partial class Books : ContentPage
                 if (confirmed)
                 {
                     await SupprimerLivre(selectedBook.Id);
+                    await SuccessPopup.Show(App.Localized["BookDeleted"], this);
                 }
             };
 
@@ -378,13 +420,8 @@ public partial class Books : ContentPage
 
         if (livre != null)
         {
-            // Supprimer les catégories associées
             context.LivreCategories.RemoveRange(livre.LivreCategories);
-
-            // Supprimer les exemplaires
             context.Exemplaires.RemoveRange(livre.Exemplaires);
-
-            // Supprimer le livre
             context.Livres.Remove(livre);
 
             await context.SaveChangesAsync();

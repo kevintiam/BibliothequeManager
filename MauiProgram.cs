@@ -72,15 +72,15 @@ namespace BibliothequeManager
         public static async Task InitializeAdminAsync(BibliothequeContext context)
         {
             // Ne pas recréer si déjà présent
-            if (await context.Bibliothecaires.AnyAsync(b => b.Email == "admin@biblio.local"))
+            if (await context.Bibliothecaires.AnyAsync(b => b.Email == "kevintiam.local"))
                 return;
 
             var admin = new Bibliothecaire
             {
-                Nom = "Admin",
-                Prenom = "Bibliothèque",
-                Email = "admin@biblio.local",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Kevin@25!")
+                Nom = "Kevin",
+                Prenom = "Tiam",
+                Email = "kevintiam.local",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("KevinTiam@25")
             };
 
             context.Bibliothecaires.Add(admin);
