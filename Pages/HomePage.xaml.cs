@@ -76,14 +76,14 @@ public partial class HomePage : FlyoutPage
         // Recharge la page : on la retire, puis on la remet
         App.Localized.OnCultureChanged();
 
-        Detail = new NavigationPage(new Accueil(session));
+        //Detail = new NavigationPage(new Accueil(session));
         IsPresented = false;
     }
 
     private async void btnSingOut_Clicked(object sender, EventArgs e)
     {
 		session.SeDeconnecter();
-        await Application.Current.MainPage.Navigation.PushModalAsync(new Connexion());
+        Application.Current.MainPage = new NavigationPage(new Connexion());
     }
 
 	public void InfosUser(Bibliothecaire user)

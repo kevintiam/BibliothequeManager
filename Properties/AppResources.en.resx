@@ -549,4 +549,7 @@
   <data name="WelcomeSubtitle_6" xml:space="preserve">
     <value>✨ “The important thing is not to stop questioning. Curiosity has its own reason for existing.” </value>
   </data>
+  <data name="publicationYear" xml:space="preserve">
+    <value>Publication Year</value>
+  </data>
 </root>

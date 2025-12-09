@@ -30,7 +30,7 @@ namespace BibliothequeManager.Models
             {
                 optionsBuilder.UseSqlServer(
                     "Server=KEVINTIAM;Database=BibliothequeLiVraNova;Integrated Security=True;TrustServerCertificate=True;");
-            }
+            } 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
