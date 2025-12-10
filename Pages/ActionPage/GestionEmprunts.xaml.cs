@@ -4,7 +4,9 @@ using BibliothequeManager.Services;
 using BibliothequeManager.Views;
 using CommunityToolkit.Maui.Views;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI;
 using static BibliothequeManager.Models.Reservation;
 
 namespace BibliothequeManager.Pages.ActionPage;
@@ -37,46 +39,79 @@ public partial class GestionEmprunts : ContentPage
         ChargerStatistique();
     }
 
+    /// <summary>
+    /// Fonction pour afficher les détails d'un emprunt dans une popup
+    /// </summary>
+    /// <param name="emprunt"></param>
     private async void OnVoir(Emprunt emprunt)
     {
         if (emprunt != null)
         {
 
-            var livre = $" Titre du livre : {emprunt.Exemplaire.Livre.Titre}";
-            var adherent = $" Adhérent : {emprunt.Adherent.Prenom} {emprunt.Adherent.Nom}";
+            var livre = $" Titre du livre : {emprunt.Exemplaire?.Livre?.Titre}";
+            var adherent = $" Adhérent : {emprunt.Adherent?.Prenom} {emprunt.Adherent?.Nom}";
             var dates = $" Date d'emprunt : {emprunt.DateEmprunt:dd/MM/yyyy} \n Date de retour prévu : {emprunt.DateRetourPrevu:dd/MM/yyyy}";
             var statut = $" Statut : {emprunt.StatutEmprunt}";
-            var amande = $" Amende : {emprunt.Amande}";
+            var amande = $" Amende : {emprunt.Amande:C}";
             await DetailPopup.Show(livre, adherent, dates, statut, amande, this);
 
         }
     }
-
+    /// <summary>
+    /// Fonction pour retourner un emprunt
+    /// </summary>
+    /// <param name="emprunt"></param>
     private async void OnRetourner(Emprunt emprunt)
     {
-
         if(emprunt != null)
         {
             using var context = new BibliothequeContext();
-            var empruntDb = context.Emprunts.First(e => e.Id == emprunt.Id);
-            empruntDb.DateRetourReel = DateTime.UtcNow;
-            empruntDb.MettreAJourStatut();
-            context.SaveChanges();
-            await SuccessPopup.Show("Emprunt retournee avec succes.", this);
-            ChargerEmprunts();
-           
+            try
+            {
+                var popup = new ConfirmationPopup
+                {
+                    Title = App.Localized["ConfirmDelete"],
+                    Message = $"Confirmez-vous le retour de \"{emprunt.Exemplaire?.Livre?.Titre}\" ?"
+                };
+
+                popup.OnCompleted += async (confirmed) =>
+                {
+                    if (confirmed)
+                    {
+                        var empruntDb = await context.Emprunts.FirstAsync(e => e.Id == emprunt.Id);
+                        empruntDb.DateRetourReel = DateTime.UtcNow;
+                        empruntDb.MettreAJourStatut();
+                        empruntDb.BibliothecaireRetourId = session.UtilisateurActuel?.Id;
+                        var exemplaire = await context.Exemplaires.FindAsync(empruntDb.ExemplaireId);
+                        if (exemplaire != null)
+                        {
+                            exemplaire.EstDisponible = true;
+                        }
+                        await context.SaveChangesAsync();
+                        await SuccessPopup.Show("Emprunt retourné avec succès.", this);
+                        await ChargerEmprunts();
+                        await ChargerStatistique();
+                    }
+                };
+                await Navigation.PushModalAsync(popup);
+            }
+            catch (Exception ex)
+            {
+                await ErrorPopup.Show($"Erreur lors de la confirmation : {ex.Message}", this);
+            }
         }
-
     }
-
-    private void ChargerEmprunts()
+    /// <summary>
+    /// Fonction pour charger les emprunts depuis la base de données
+    /// </summary>
+    private async Task ChargerEmprunts()
     {
         using var contexte = new BibliothequeContext();
-        var emprunts = contexte.Emprunts
+        var emprunts = await contexte.Emprunts
             .Include(e => e.Adherent)
             .Include(e => e.Exemplaire)
                 .ThenInclude(ex => ex.Livre)
-            .ToList();
+            .ToListAsync();
 
         foreach (var e in emprunts)
         {
@@ -85,13 +120,15 @@ public partial class GestionEmprunts : ContentPage
 
         EmpruntsCollectionView.ItemsSource = emprunts;
     }
-
-    private void ChargerStatistique()
+    /// <summary>
+    /// Fonction pour charger les statistiques des emprunts
+    /// </summary>
+    private async Task ChargerStatistique()
     {
         using var contexte = new BibliothequeContext();
-        var enCours = contexte.Emprunts.Count(e => e.StatutEmprunt == "En cours");
-        var enRetard = contexte.Emprunts.Count(e => e.StatutEmprunt == "En retard");
-        var retournee = contexte.Emprunts.Count(e => e.StatutEmprunt == "Retourné");
+        var enCours = await contexte.Emprunts.CountAsync(e => e.StatutEmprunt == "En cours");
+        var enRetard = await contexte.Emprunts.CountAsync(e => e.StatutEmprunt == "En retard");
+        var retournee = await contexte.Emprunts.CountAsync(e => e.StatutEmprunt == "Retourné");
         var totalActif = enCours + enRetard + retournee;
 
         EmpruntsEnCours.Text = enCours.ToString();
@@ -99,10 +136,18 @@ public partial class GestionEmprunts : ContentPage
         EmpruntsRetournes.Text = retournee.ToString();
         TotalEmprunt.Text = totalActif.ToString();
     }
+    /// <summary>
+    /// Bouton pour retourner à la page d'accueil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnAccueilClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
     }
+    /// <summary>
+    /// Liste des options de statut pour le filtre
+    /// </summary>
     public List<string> StatutOptions { get; } = new()
     {
         App.Localized["All"],
@@ -110,7 +155,10 @@ public partial class GestionEmprunts : ContentPage
         App.Localized["InProgress"],
         App.Localized["Returned"]
     };
-
+    /// <summary>
+    /// Fonction pour filtrer les emprunts en fonction du texte de recherche
+    /// </summary>
+    /// <param name="searchText"></param>
     private async void FiltrerEmprunts(string searchText)
     {
         using var context = new BibliothequeContext();
@@ -140,19 +188,26 @@ public partial class GestionEmprunts : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erreur", $"Impossible de filtrer : {ex.Message}", "OK");
+            await ErrorPopup.Show($"Impossible de filtrer : {ex.Message}", this);
         }
     }
-
+    /// <summary>
+    /// Fonction déclenchée lors du changement de texte dans la barre de recherche
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnSearchBarTextChanged(object? sender, TextChangedEventArgs e)
     {
         FiltrerEmprunts(e.NewTextValue);
     }
-
+    /// <summary>
+    /// Fonction déclenchée lors du changement de sélection dans le picker de filtre
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnFilterPickerSelectedIndexChanged(object? sender, EventArgs e)
     {
         using var context = new BibliothequeContext();
-
         string? statutFiltre = null;
         if (FilterPicker.SelectedIndex > 0)
         {
@@ -179,11 +234,13 @@ public partial class GestionEmprunts : ContentPage
         var emprunts = query.ToList();
         EmpruntsCollectionView.ItemsSource = emprunts;
     }
-
-    protected override void OnAppearing()
+    /// <summary>
+    /// Fonction déclenchée lors de l'apparition de la page
+    /// </summary>
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        ChargerEmprunts(); 
-        ChargerStatistique(); 
+        await ChargerEmprunts(); 
+        await ChargerStatistique(); 
     }
 }

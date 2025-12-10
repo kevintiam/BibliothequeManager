@@ -24,13 +24,16 @@
                                 Style="{StaticResource PopMessage}" />
 
                         <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
-                    <Button  Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
+                    <Button 
+                        x:Name="btnCancel"
+                        Text="{Binding [Cancel], Source={x:Static localApp:App.Localized}}"
                                     Style="{StaticResource SecondaryButton}"
                                     Clicked="OnCancelClicked" />
 
-                    <Button Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
-                                    Style="{StaticResource DangerButton}"
-                                    Clicked="OnConfirmClicked" />
+                    <Button x:Name="btnConfirm"
+                            Text="{Binding [delete], Source={x:Static localApp:App.Localized}}"
+                            Style="{StaticResource DangerButton}"
+                            Clicked="OnConfirmClicked" />
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>

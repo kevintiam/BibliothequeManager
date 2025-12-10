@@ -11,21 +11,27 @@ namespace BibliothequeManager.Pages.ActionPage;
 public partial class GestionReservations : ContentPage
 {
     private readonly SessionUser session;
+    /// <summary>
+    /// Commande pour valider une réservation
+    /// </summary>
     public ICommand Valider { get; }
+    /// <summary>
+    /// Commande pour modifier une réservation
+    /// </summary>
     public ICommand Modifier { get; }
 
     public GestionReservations(SessionUser user)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         session = user;
-        if(!session.EstConnecte)
+        if (!session.EstConnecte)
         {
             Application.Current.MainPage = new NavigationPage(new Connexion());
             return;
         }
         StatutPicker.ItemsSource = StatutOptions;
 
-		Valider = new Command<Reservation>(OnValider);
+        Valider = new Command<Reservation>(OnValider);
         Modifier = new Command<Reservation>(OnModifier);
 
         BindingContext = this;
@@ -33,72 +39,131 @@ public partial class GestionReservations : ContentPage
         SearchEntry.TextChanged += OnSearchBarTextChanged;
 
         ChargerReservation();
-		ChargerStatistique();
-
+        ChargerStatistique();
     }
 
-	private async void OnValider (Reservation reservation)
-	{
-		if(reservation != null)
-		{
-			using var context = new BibliothequeContext();
-			var reservationDB = context.Reservations.First(r => r.Id == reservation.Id);
-			reservationDB.Statut = StatutsReservation.Confirmee;
-			context.SaveChanges();
-            await SuccessPopup.Show("Réservation confirmée avec succès.", this);
-            ChargerReservation();
-            ChargerStatistique();
+    /// <summary>
+    /// Bouton pour valider une réservation
+    /// </summary>
+    /// <param name="reservation"></param>
+    private async void OnValider(Reservation reservation)
+    {
+        if (reservation != null)
+        {
+            using var context = new BibliothequeContext();
+            using var transaction = await context.Database.BeginTransactionAsync();
 
+            try
+            {
+                var reservationDB = await context.Reservations
+                    .FirstAsync(r => r.Id == reservation.Id);
+
+                reservationDB.Statut = StatutsReservation.Confirmee;
+                await context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+
+                await SuccessPopup.Show("Réservation confirmée avec succès.", this);
+                await ChargerReservation();
+                await ChargerStatistique();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                await ErrorPopup.Show($"Erreur lors de la confirmation : {ex.Message}", this);
+            }
         }
-	}
+    }
 
+    /// <summary>
+    /// Bouton pour modifier une réservation en emprunt
+    /// </summary>
+    /// <param name="reservation"></param>
     private async void OnModifier(Reservation reservation)
     {
         if (reservation == null) return;
 
         using var context = new BibliothequeContext();
-        var reservationDB = await context.Reservations
-            .FirstAsync(r => r.Id == reservation.Id);
+        using var transaction = await context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var reservationDB = await context.Reservations
+                .Include(r => r.ExemplaireAttribue)
+                .FirstAsync(r => r.Id == reservation.Id);
+
+            if (reservationDB.Statut != StatutsReservation.Confirmee)
+            {
+                await ErrorPopup.Show("Seules les réservations confirmées peuvent être converties en emprunt.", this);
+                return;
+            }
+
+            if (!reservationDB.ExemplaireAttribueId.HasValue)
+            {
+                await ErrorPopup.Show("Aucun exemplaire attribué à cette réservation.", this);
+                return;
+            }
 
             reservationDB.Statut = StatutsReservation.EnCours;
 
-        var newEmprunt = new Emprunt
+            var newEmprunt = new Emprunt
+            {
+                AdherentId = reservationDB.AdherentId,
+                DateEmprunt = reservationDB.DateRecuperationPrevue,
+                DateRetourPrevu = reservationDB.DateRecuperationPrevue.AddDays(14),
+                BibliothecaireEmpruntId = session.UtilisateurActuel.Id,
+                ExemplaireId = reservationDB.ExemplaireAttribueId.Value,
+            };
+
+            context.Emprunts.Add(newEmprunt);
+            if (reservationDB.ExemplaireAttribue != null)
+            {
+                reservationDB.ExemplaireAttribue.EstDisponible = false;
+            }
+
+            await context.SaveChangesAsync();
+            await transaction.CommitAsync();
+
+            await SuccessPopup.Show("Réservation convertie en emprunt.", this);
+            await ChargerReservation();
+            await ChargerStatistique();
+        }
+        catch (Exception ex)
         {
-            AdherentId = reservationDB.AdherentId,
-            DateEmprunt = reservationDB.DateRecuperationPrevue,
-            DateRetourPrevu = reservationDB.DateRecuperationPrevue.AddDays(14),
-            BibliothecaireEmpruntId = session.UtilisateurActuel.Id,
-            ExemplaireId = reservationDB.ExemplaireAttribueId.Value
-        };
-        context.Emprunts.Add(newEmprunt);
-
-        await context.SaveChangesAsync();
-        await SuccessPopup.Show("Réservation convertie en emprunt.", this);
-        ChargerReservation();
-        ChargerStatistique();
+            await transaction.RollbackAsync();
+            await ErrorPopup.Show($"Erreur : {ex.Message}", this);
+        }
     }
 
-    private void ChargerReservation()
-	{
-		using var donnee = new BibliothequeContext();
+    /// <summary>
+    /// Fonction pour charger les réservations
+    /// </summary>
+    /// <returns></returns>
+    private async Task ChargerReservation()
+    {
+        using var donnee = new BibliothequeContext();
 
-		var reservations = donnee.Reservations
-			.Include(r => r.Livre)
-			.Include(r => r.Adherent)
-			.Include(r => r.ExemplaireAttribue)
-			.ToList();
+        var reservations = await donnee.Reservations
+            .Include(r => r.Livre)
+            .Include(r => r.Adherent)
+            .Include(r => r.ExemplaireAttribue)
+            .ToListAsync();
 
-		CollectionViewReservations.ItemsSource = reservations;
+        CollectionViewReservations.ItemsSource = reservations;
     }
 
-    private void ChargerStatistique()
+    /// <summary>
+    /// Fonction pour charger les statistiques des réservations
+    /// </summary>
+    /// <returns></returns>
+    private async Task ChargerStatistique()
     {
         using var contexte = new BibliothequeContext();
-        var enAttente = contexte.Reservations.Count(r => r.Statut == StatutsReservation.EnAttente);
-        var confirmee = contexte.Reservations.Count(r => r.Statut == StatutsReservation.Confirmee);
-        var enCours = contexte.Reservations.Count(r => r.Statut == StatutsReservation.EnCours);
-        var enRetard = contexte.Reservations.Count(r => r.Statut == StatutsReservation.EnRetard);
-        var annulee = contexte.Reservations.Count(r => r.Statut == StatutsReservation.Annulee);
+        var enAttente = await contexte.Reservations.CountAsync(r => r.Statut == StatutsReservation.EnAttente);
+        var confirmee = await contexte.Reservations.CountAsync(r => r.Statut == StatutsReservation.Confirmee);
+        var enCours = await contexte.Reservations.CountAsync(r => r.Statut == StatutsReservation.EnCours);
+        var enRetard = await contexte.Reservations.CountAsync(r => r.Statut == StatutsReservation.EnRetard);
+        var annulee = await contexte.Reservations.CountAsync(r => r.Statut == StatutsReservation.Annulee);
 
         ReservationsEnAttente.Text = enAttente.ToString();
         ReservationsConfirmees.Text = confirmee.ToString();
@@ -106,24 +171,39 @@ public partial class GestionReservations : ContentPage
         ReservationsExpirees.Text = enRetard.ToString();
         TotalReservations.Text = (enAttente + confirmee + enCours + enRetard + annulee).ToString();
     }
-    private async void OnAccueilClicked(object sender, EventArgs e)
-	{
-		//await Navigation.PushAsync(new HomePage());
-	}
-	private async void OnNewReservation(object sender, EventArgs e)
-	{
-		await Navigation.PushAsync(new Reserver(session));
-	}
-    public List<string> StatutOptions { get; } = new()
-	{
-		App.Localized["All"],
-		App.Localized["Pending"],
-		App.Localized["Confirmed"],
-		App.Localized["InProgress"],
-		App.Localized["Returned"],
-		App.Localized["Cancel"]
-	};
 
+    private async void OnAccueilClicked(object sender, EventArgs e)
+    {
+        //await Navigation.PushAsync(new HomePage());
+    }
+
+    /// <summary>
+    /// Bouton pour créer une nouvelle réservation
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void OnNewReservation(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Reserver(session));
+    }
+
+    /// <summary>
+    /// Liste des options de statut pour le filtre
+    /// </summary>
+    public List<string> StatutOptions { get; } = new()
+    {
+        App.Localized["All"],
+        App.Localized["Pending"],
+        App.Localized["Confirmed"],
+        App.Localized["InProgress"],
+        App.Localized["Returned"],
+        App.Localized["Cancel"]
+    };
+
+    /// <summary>
+    /// Fonction pour filtrer les réservations
+    /// </summary>
+    /// <param name="searchText"></param>
     private async void FiltrerReservations(string searchText)
     {
         using var context = new BibliothequeContext();
@@ -153,15 +233,25 @@ public partial class GestionReservations : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erreur", $"Impossible de filtrer : {ex.Message}", "OK");
+            await ErrorPopup.Show($"Impossible de filtrer : {ex.Message}", this);
         }
     }
 
+    /// <summary>
+    /// Barre de recherche en temps réel
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnSearchBarTextChanged(object? sender, TextChangedEventArgs e)
     {
         FiltrerReservations(e.NewTextValue);
     }
 
+    /// <summary>
+    /// Logique pour le filtre par statut
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void StatutPicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
         using var donnee = new BibliothequeContext();
