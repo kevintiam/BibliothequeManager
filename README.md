@@ -1,78 +1,78 @@
 # BibliothequeManager
 
-Application .NET MAUI pour la gestion d’une bibliothèque: authentification, gestion des livres/auteurs/catégories/adhérents, emprunts, réservations, et localisation FR/EN.
+Application .NET MAUI pour la gestion dÃ¢â‚¬â„¢une bibliothÃƒÂ¨que: authentification, gestion des livres/auteurs/catÃƒÂ©gories/adhÃƒÂ©rents, emprunts, rÃƒÂ©servations, et localisation FR/EN.
 
 ## Sommaire
-- Aperçu
-- Prérequis
-- Installation & exécution
+- AperÃƒÂ§u
+- PrÃƒÂ©requis
+- Installation & exÃƒÂ©cution
 - Architecture & navigation
 - Services & DI
-- Base de données (EF Core)
+- Base de donnÃƒÂ©es (EF Core)
 - Localisation
 - Tests
-- Capture d’écran
+- Capture dÃ¢â‚¬â„¢ÃƒÂ©cran
 - Contribution
 - Licence
 
-## Aperçu
-Application multi-pages avec menu latéral (`FlyoutPage`) fournissant:
+## AperÃƒÂ§u
+Application multi-pages avec menu latÃƒÂ©ral (`FlyoutPage`) fournissant:
 - Connexion et session (`SessionUser`)
-- Accueil, Livres, Auteurs, Catégories, Adhérents
-- Emprunts et Réservations
+- Accueil, Livres, Auteurs, CatÃƒÂ©gories, AdhÃƒÂ©rents
+- Emprunts et RÃƒÂ©servations
 - Multilingue FR/EN
 
-[PLACEHOLDER: Capture d’écran de l’accueil]
+<img width="1915" height="1134" alt="image" src="https://github.com/user-attachments/assets/f93e4627-8a6b-4cb8-abd3-1394f0ff9168" />
+[PLACEHOLDER: Capture dÃ¢â‚¬â„¢ÃƒÂ©cran de lÃ¢â‚¬â„¢accueil]
 
-## Prérequis
+## PrÃƒÂ©requis
 - .NET 9 SDK
 - Visual Studio 2026 avec workloads .NET MAUI
-- SQL Server (ou adapter la chaîne de connexion)
+- SQL Server (ou adapter la chaÃƒÂ®ne de connexion)
 
-## Installation & exécution
+## Installation & exÃƒÂ©cution
 1. Restaurer et compiler:
    - `dotnet restore`
    - `dotnet build`
 2. Lancer:
    - Visual Studio: F5
    - Ligne de commande: `dotlet run` depuis le projet MAUI
-
-[PLACEHOLDER: Capture d’écran de la configuration de démarrage]
 
 ## Architecture & navigation
 - `App` initialise la `MainPage`.
 # BibliothequeManager
 
-Application .NET MAUI pour la gestion d’une bibliothèque: authentification, gestion des livres/auteurs/catégories/adhérents, emprunts, réservations, et localisation FR/EN.
+Application .NET MAUI pour la gestion dÃ¢â‚¬â„¢une bibliothÃƒÂ¨que: authentification, gestion des livres/auteurs/catÃƒÂ©gories/adhÃƒÂ©rents, emprunts, rÃƒÂ©servations, et localisation FR/EN.
 
 ## Sommaire
-- Aperçu
-- Prérequis
-- Installation & exécution
+- AperÃƒÂ§u
+- PrÃƒÂ©requis
+- Installation & exÃƒÂ©cution
 - Architecture & navigation
 - Services & DI
-- Base de données (EF Core)
+- Base de donnÃƒÂ©es (EF Core)
 - Localisation
 - Tests
-- Capture d’écran
+- Capture dÃ¢â‚¬â„¢ÃƒÂ©cran
 - Contribution
 - Licence
 
-## Aperçu
-Application multi-pages avec menu latéral (`FlyoutPage`) fournissant:
+## AperÃƒÂ§u
+Application multi-pages avec menu latÃƒÂ©ral (`FlyoutPage`) fournissant:
 - Connexion et session (`SessionUser`)
-- Accueil, Livres, Auteurs, Catégories, Adhérents
-- Emprunts et Réservations
+- Accueil, Livres, Auteurs, CatÃƒÂ©gories, AdhÃƒÂ©rents
+- Emprunts et RÃƒÂ©servations
 - Multilingue FR/EN
 
-[PLACEHOLDER: Capture d’écran de l’accueil]
+<img width="1915" height="1134" alt="image" src="https://github.com/user-attachments/assets/06b730fb-90c5-4c96-a331-b72923e1d88b" />
 
-## Prérequis
+
+## PrÃƒÂ©requis
 - .NET 9 SDK
 - Visual Studio 2026 avec workloads .NET MAUI
-- SQL Server (ou adapter la chaîne de connexion)
+- SQL Server (ou adapter la chaÃƒÂ®ne de connexion)
 
-## Installation & exécution
+## Installation & exÃƒÂ©cution
 1. Restaurer et compiler:
    - `dotnet restore`
    - `dotnet build`
@@ -80,7 +80,6 @@ Application multi-pages avec menu latéral (`FlyoutPage`) fournissant:
    - Visual Studio: F5
    - Ligne de commande: `dotlet run` depuis le projet MAUI
 
-[PLACEHOLDER: Capture d’écran de la configuration de démarrage]
 
 ## Architecture & navigation
 - `App` initialise la `MainPage`.
@@ -89,72 +88,80 @@ Application multi-pages avec menu latéral (`FlyoutPage`) fournissant:
   - `Accueil`, `Books`, `Authors`, `CategoriePage`, `GestionAdherent`
   - Actions: `EmpruntPage`, `Retour`, `Reserver`, `GestionEmprunts`, `GestionReservations`
 
-[PLACEHOLDER: Capture d’écran du menu latéral]
+<img width="418" height="1030" alt="image" src="https://github.com/user-attachments/assets/aace0f2a-85c4-42d7-b464-511c3f50fbe4" />
+
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/a0d4bcc7-93c2-4b9e-8847-18cb4f29a7d6" />
+
+
 
 ## Services & DI
-- Enregistrés dans `MauiProgram`:
+- EnregistrÃƒÂ©s dans `MauiProgram`:
   - `SessionUser` (Singleton)
   - Pages action (Transient)
   - `BibliothequeContext` (EF Core)
-- Exemple d’accès:
+- Exemple dÃ¢â‚¬â„¢accÃƒÂ¨s:
   - `var services = MauiProgram.CreateMauiApp().Services;`
   - `var session = services.GetRequiredService<SessionUser>();`
 
-[PLACEHOLDER: Capture d’écran de l’injection de dépendances]
 
-## Base de données (EF Core)
+## Base de donnÃƒÂ©es (EF Core)
 - Contexte: `BibliothequeContext` (SQL Server).
-- Migration & seed d’un administrateur dans `App.OnStart` et `SeedData`.
+- Migration & seed dÃ¢â‚¬â„¢un administrateur dans `App.OnStart` et `SeedData`.
 - Chaine de connexion: `MauiProgram.cs`.
 
-[PLACEHOLDER: Capture d’écran de la DB/diagramme]
+<img width="1606" height="825" alt="image" src="https://github.com/user-attachments/assets/961d4384-7262-46eb-aee5-298b8b3f369b" />
+
 
 ## Localisation
-- FR par défaut, bascule vers EN via `HomePage.OnSwitchLanguageClicked`.
-- Mise à jour des cultures:
+- FR par dÃƒÂ©faut, bascule vers EN via `HomePage.OnSwitchLanguageClicked`.
+- Mise ÃƒÂ  jour des cultures:
   - `CultureInfo.DefaultThreadCurrentCulture`
   - `CultureInfo.DefaultThreadCurrentUICulture`
   - `Thread.CurrentThread.CurrentCulture`
   - `Thread.CurrentThread.CurrentUICulture`
-- Après changement, recharger la page courante pour appliquer les ressources.
+- AprÃƒÂ¨s changement, recharger la page courante pour appliquer les ressources.
 
-[PLACEHOLDER: Capture d’écran du changement de langue]
+<img width="1906" height="1023" alt="image" src="https://github.com/user-attachments/assets/2fda0eb3-1f85-4985-bcb6-a1319c887849" />
+
 
 ## Tests
-- Créer un projet de tests (xUnit):
+- CrÃƒÂ©er un projet de tests (xUnit):
   - `dotnet new xunit -n BibliothequeManager.Tests -o Tests/BibliothequeManager.Tests`
   - `dotnet add Tests/BibliothequeManager.Tests package Microsoft.EntityFrameworkCore.InMemory`
   - `dotnet add Tests/BibliothequeManager.Tests package xunit.runner.visualstudio`
   - `dotnet add Tests/BibliothequeManager.Tests reference BibliothequeManager/BibliothequeManager.csproj`
-- Exécuter:
+- ExÃƒÂ©cuter:
   - `dotnet test`
   - `dotnet test --filter "FullyQualifiedName~AdherentServiceTests"`
-
-[PLACEHOLDER: Capture d’écran de l’Explorateur de tests]
-
-## Flux fonctionnels clés
+## Flux fonctionnels clÃƒÂ©s
 - Connexion:
-  - Vérification des identifiants, création de session, redirection vers `HomePage`.
+  - VÃƒÂ©rification des identifiants, crÃƒÂ©ation de session, redirection vers `HomePage`.
 - Emprunt:
-  - Sélection d’un livre, vérification d’adhérent, choix d’un exemplaire disponible, création d’emprunt, mise à jour disponibilité.
-- Réservation:
-  - Validation, conversion en emprunt avec mise à jour de l’exemplaire.
+  - SÃƒÂ©lection dÃ¢â‚¬â„¢un livre, vÃƒÂ©rification dÃ¢â‚¬â„¢adhÃƒÂ©rent, choix dÃ¢â‚¬â„¢un exemplaire disponible, crÃƒÂ©ation dÃ¢â‚¬â„¢emprunt, mise ÃƒÂ  jour disponibilitÃƒÂ©.
+- RÃƒÂ©servation:
+  - Validation, conversion en emprunt avec mise ÃƒÂ  jour de lÃ¢â‚¬â„¢exemplaire.
 
-[PLACEHOLDER: Capture d’écran d’emprunt]
-[PLACEHOLDER: Capture d’écran de réservation]
+<img width="1917" height="1022" alt="image" src="https://github.com/user-attachments/assets/fdec7e2f-6306-44bb-8f2b-a97a6b4623b8" />
 
-## Bonnes pratiques intégrées
+<img width="1911" height="994" alt="image" src="https://github.com/user-attachments/assets/c3efabf5-1fa9-494b-a442-d047659538d0" />
+
+
+<img width="1919" height="998" alt="image" src="https://github.com/user-attachments/assets/13b826ce-c75f-4965-8db2-b4988248ec78" />
+
+
+
+## Bonnes pratiques intÃƒÂ©grÃƒÂ©es
 - Navigation avec `NavigationPage` pour conserver la pile.
-- `SessionUser` injecté pour éviter les `NullReferenceException`.
+- `SessionUser` injectÃƒÂ© pour ÃƒÂ©viter les `NullReferenceException`.
 - `Include` EF pour charger les relations (Livres, Exemplaires, Auteurs, etc.).
-- Validation d’entrées et feedback utilisateur via popups.
+- Validation dÃ¢â‚¬â„¢entrÃƒÂ©es et feedback utilisateur via popups.
 
-[PLACEHOLDER: Capture d’écran de popups]
+<img width="1019" height="650" alt="image" src="https://github.com/user-attachments/assets/9eddffe1-860a-46b5-a2df-4e64ad549048" />
+
 
 ## Contribution
 - Fork, branche de feature, PR.
 - Respecter le style C# et conventions du projet.
-- Exécuter les tests avant PR.
+- ExÃƒÂ©cuter les tests avant PR.
 
-[PLACEHOLDER: Capture d’écran du workflow Git/PR]
 # BibliothequeManager
