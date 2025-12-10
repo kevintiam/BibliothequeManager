@@ -9,35 +9,49 @@ namespace BibliothequeManager.Pages.Views;
 public partial class Books : ContentPage
 {
     private readonly SessionUser session;
+
+    /// <summary>
+    /// Constructeur de la page de gestion des livres
+    /// </summary>
+    /// <param name="user">Session utilisateur actuelle</param>
     public Books(SessionUser user)
     {
         InitializeComponent();
         session = user;
+
+        // Vérifier si l'utilisateur est connecté
         if (!session.EstConnecte)
         {
             Application.Current.MainPage = new NavigationPage(new Connexion());
             return;
         }
 
+        // Attacher les gestionnaires d'événements
         SearchButton.Clicked += OnSearchClicked;
         SearchEntry.TextChanged += OnSearchTextChanged;
         BooksCollectionView.SelectionChanged += OnBookSelectionChanged;
 
+        // Charger les données initiales
         ChargerLivres();
         ChargerAuteurs();
         ChargerCategories();
     }
 
+    /// <summary>
+    /// Gère le clic sur le bouton flottant d'ajout/modification
+    /// </summary>
     private void OnFloatingAddClicked(object sender, EventArgs e)
     {
+        // Basculer la visibilité du formulaire
         if (FormulaireLivres.IsVisible)
         {
             FormulaireLivres.IsVisible = false;
         }
         else
         {
+            // Réinitialiser et configurer le formulaire pour l'ajout
             ReinitialiserFormulaire();
-            FormTitle.Text = App.Localized["AddBook"] ;
+            FormTitle.Text = App.Localized["AddBook"];
             ModifierButton.IsVisible = false;
             AjouterButton.IsVisible = true;
             SupprimerButton.IsVisible = false;
@@ -45,6 +59,9 @@ public partial class Books : ContentPage
         }
     }
 
+    /// <summary>
+    /// Réinitialise les champs du formulaire à leurs valeurs par défaut
+    /// </summary>
     private void ReinitialiserFormulaire()
     {
         TxtTitre.Text = "";
@@ -56,16 +73,20 @@ public partial class Books : ContentPage
         DatePickerPublication.Date = DateTime.Now;
     }
 
+    /// <summary>
+    /// Charge la liste des livres depuis la base de données
+    /// </summary>
     private void ChargerLivres()
     {
         using var context = new BibliothequeContext();
         try
         {
+            // Récupérer les livres avec leurs relations
             var livres = context.Livres
-                .Include(l => l.Auteur)
-                .Include(l => l.LivreCategories)
+                .Include(l => l.Auteur) 
+                .Include(l => l.LivreCategories) 
                     .ThenInclude(lc => lc.Categorie)
-                .Include(l => l.Exemplaires)
+                .Include(l => l.Exemplaires) 
                 .OrderBy(l => l.Titre)
                 .AsNoTracking()
                 .ToList();
@@ -78,11 +99,15 @@ public partial class Books : ContentPage
         }
     }
 
+    /// <summary>
+    /// Charge la liste des auteurs pour le formulaire
+    /// </summary>
     private void ChargerAuteurs()
     {
         using var context = new BibliothequeContext();
         try
         {
+            // Récupérer tous les auteurs
             var auteurs = context.Auteurs
                 .OrderBy(a => a.Nom)
                 .ThenBy(a => a.Prenom)
@@ -91,7 +116,6 @@ public partial class Books : ContentPage
 
             PickerAuthorSelect.ItemsSource = auteurs;
 
-            // ✅ UTILISER LA PROPRIÉTÉ NomComplet
             PickerAuthorSelect.ItemDisplayBinding = new Binding("NomComplet");
         }
         catch (Exception ex)
@@ -100,6 +124,9 @@ public partial class Books : ContentPage
         }
     }
 
+    /// <summary>
+    /// Charge la liste des catégories pour le formulaire
+    /// </summary>
     private void ChargerCategories()
     {
         using var context = new BibliothequeContext();
@@ -119,12 +146,19 @@ public partial class Books : ContentPage
         }
     }
 
+    /// <summary>
+    /// Gère la sélection d'un livre dans la liste
+    /// </summary>
     private async void OnBookSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        // Récupérer le livre sélectionné
         var selectedBook = e.CurrentSelection.FirstOrDefault() as Livres;
+
         if (selectedBook != null)
         {
             int bookId = selectedBook.Id;
+
+            // Charger les détails complets du livre
             using var context = new BibliothequeContext();
             var livreDetails = await context.Livres
                 .Include(l => l.Auteur)
@@ -134,13 +168,12 @@ public partial class Books : ContentPage
                 .FirstOrDefaultAsync(l => l.Id == bookId);
 
             if (livreDetails != null)
-            {
+            {              
                 TxtTitre.Text = livreDetails.Titre;
                 TxtISBN.Text = livreDetails.ISBN;
                 DatePickerPublication.Date = livreDetails.AnneePublication;
 
-
-                // Sélectionner l'auteur
+                // Sélectionner l'auteur dans le Picker
                 var auteurs = PickerAuthorSelect.ItemsSource as List<Auteur>;
                 if (auteurs != null)
                 {
@@ -148,7 +181,7 @@ public partial class Books : ContentPage
                     PickerAuthorSelect.SelectedIndex = auteurIndex;
                 }
 
-                // Sélectionner la catégorie
+                // Sélectionner la catégorie dans le Picker
                 var categorie = livreDetails.LivreCategories.FirstOrDefault()?.Categorie;
                 if (categorie != null)
                 {
@@ -160,7 +193,6 @@ public partial class Books : ContentPage
                     }
                 }
 
-                // Remplir les exemplaires
                 var premierExemplaire = livreDetails.Exemplaires.FirstOrDefault();
                 if (premierExemplaire != null)
                 {
@@ -177,7 +209,10 @@ public partial class Books : ContentPage
         }
     }
 
-    // Filtrage des livres
+    /// <summary>
+    /// Filtre les livres en fonction du texte de recherche
+    /// </summary>
+    /// <param name="searchText">Texte à rechercher</param>
     private async void FiltrerLivres(string searchText)
     {
         using var context = new BibliothequeContext();
@@ -190,6 +225,7 @@ public partial class Books : ContentPage
                 .Include(l => l.Exemplaires)
                 .AsQueryable();
 
+            // Appliquer le filtre si un texte est fourni
             if (!string.IsNullOrWhiteSpace(searchText))
             {
                 query = query.Where(l =>
@@ -212,27 +248,37 @@ public partial class Books : ContentPage
         }
     }
 
+    /// <summary>
+    /// Gère le clic sur le bouton de recherche
+    /// </summary>
     private void OnSearchClicked(object? sender, EventArgs e)
     {
         FiltrerLivres(SearchEntry.Text);
     }
 
-    // Recherche en temps réel
+    /// <summary>
+    /// Gère la recherche en temps réel lors de la saisie
+    /// </summary>
     private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
+        if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 2)
         {
             FiltrerLivres(e.NewTextValue);
         }
     }
 
-    // Bouton Modifier
+    /// <summary>
+    /// Gère la modification d'un livre existant
+    /// </summary>
     private async void OnModifierClicked(object sender, EventArgs e)
     {
+        // Récupérer le livre sélectionné
         var selectedBook = BooksCollectionView.SelectedItem as Livres;
+
         if (selectedBook != null)
         {
             int bookId = selectedBook.Id;
+
             using var context = new BibliothequeContext();
             var livreToUpdate = await context.Livres
                 .Include(l => l.LivreCategories)
@@ -244,7 +290,7 @@ public partial class Books : ContentPage
                 var auteur = PickerAuthorSelect.SelectedItem as Auteur;
                 var categorie = PickerCathegorieSelect.SelectedItem as Categorie;
 
-                // Mise à jour des champs principaux
+                // Mise à jour des champs principaux du livre
                 livreToUpdate.Titre = TxtTitre.Text;
                 livreToUpdate.ISBN = TxtISBN.Text;
                 livreToUpdate.AnneePublication = DatePickerPublication.Date;
@@ -252,7 +298,6 @@ public partial class Books : ContentPage
                 if (auteur != null)
                     livreToUpdate.AuteurId = auteur.Id;
 
-                // Mettre à jour la catégorie unique (remplace l'existante)
                 var categorieExistante = livreToUpdate.LivreCategories.FirstOrDefault();
                 if (categorieExistante != null)
                     context.LivreCategories.Remove(categorieExistante);
@@ -267,18 +312,19 @@ public partial class Books : ContentPage
                     context.LivreCategories.Add(nouvelleLivreCategorie);
                 }
 
-                // Mettre à jour le nombre de pages des exemplaires existants
+                // Valider et mettre à jour le nombre de pages
                 if (!int.TryParse(TxtPages.Text, out var nombrePages))
                 {
                     await ErrorPopup.Show("Nombre de pages invalide.", this);
                     return;
                 }
+
                 foreach (var exemplaire in livreToUpdate.Exemplaires)
                 {
                     exemplaire.NombrePage = nombrePages;
                 }
 
-                // Mettre à jour le nombre d'exemplaires (ajouts/suppressions)
+                // Gérer le nombre d'exemplaires
                 if (!int.TryParse(TxtExemplaires.Text, out var nombreExemplairesSouhaite) || nombreExemplairesSouhaite < 0)
                 {
                     await ErrorPopup.Show("Nombre d'exemplaires invalide.", this);
@@ -305,7 +351,7 @@ public partial class Books : ContentPage
                 }
                 else if (nombreExemplairesSouhaite < nombreActuel)
                 {
-                    // Supprimer les exemplaires en surplus en partant de la fin
+                    // Supprimer les exemplaires en surplus (les plus récents)
                     var aSupprimer = livreToUpdate.Exemplaires
                         .OrderByDescending(e => e.CodeBarre)
                         .Take(nombreActuel - nombreExemplairesSouhaite)
@@ -316,6 +362,7 @@ public partial class Books : ContentPage
 
                 await context.SaveChangesAsync();
                 await SuccessPopup.Show("Livre modifié avec succès !", this);
+
                 ChargerLivres();
                 ReinitialiserFormulaire();
                 FormulaireLivres.IsVisible = false;
@@ -323,7 +370,9 @@ public partial class Books : ContentPage
         }
     }
 
-    // Bouton Ajouter
+    /// <summary>
+    /// Gère l'ajout d'un nouveau livre
+    /// </summary>
     private async void OnAjouterClicked(object sender, EventArgs e)
     {
         using var context = new BibliothequeContext();
@@ -331,13 +380,27 @@ public partial class Books : ContentPage
         var categorie = PickerCathegorieSelect.SelectedItem as Categorie;
         var anneePublication = DatePickerPublication.Date;
 
+        // Validation des données obligatoires
         if (auteur == null)
         {
             await ErrorPopup.Show("Veuillez sélectionner un auteur", this);
             return;
         }
 
-        // Créer le livre
+        // Validation des champs numériques
+        if (!int.TryParse(TxtExemplaires.Text, out int nombreExemplaires) || nombreExemplaires < 1)
+        {
+            await ErrorPopup.Show("Nombre d'exemplaires invalide", this);
+            return;
+        }
+
+        if (!int.TryParse(TxtPages.Text, out int nombrePages) || nombrePages < 1)
+        {
+            await ErrorPopup.Show("Nombre de pages invalide", this);
+            return;
+        }
+
+        // Créer le livre principal
         var nouveauLivre = new Livres
         {
             Titre = TxtTitre.Text,
@@ -347,9 +410,9 @@ public partial class Books : ContentPage
         };
 
         context.Livres.Add(nouveauLivre);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(); // Sauvegarder pour obtenir l'ID
 
-        // Ajouter la catégorie
+        // Ajouter la catégorie si sélectionnée
         if (categorie != null)
         {
             var livreCategorie = new LivreCategorie
@@ -361,9 +424,6 @@ public partial class Books : ContentPage
         }
 
         // Créer les exemplaires
-        int nombreExemplaires = int.Parse(TxtExemplaires.Text);
-        int nombrePages = int.Parse(TxtPages.Text);
-
         for (int i = 1; i <= nombreExemplaires; i++)
         {
             var exemplaire = new Exemplaire
@@ -377,26 +437,36 @@ public partial class Books : ContentPage
             context.Exemplaires.Add(exemplaire);
         }
 
+        // Sauvegarder les exemplaires et la catégorie
         await context.SaveChangesAsync();
+
+        // Afficher un message de succès
         await SuccessPopup.Show("Livre ajouté avec succès !", this);
+
+        // Rafraîchir l'affichage
         ChargerLivres();
         ReinitialiserFormulaire();
         FormulaireLivres.IsVisible = false;
     }
 
-    // Bouton Supprimer
+    /// <summary>
+    /// Gère la suppression d'un livre
+    /// </summary>
     private async void OnSupprimerClicked(object sender, EventArgs e)
     {
+        // Récupérer le livre sélectionné
         var selectedBook = BooksCollectionView.SelectedItem as Livres;
 
         if (selectedBook != null)
         {
+            // Créer et afficher un popup de confirmation
             var popup = new ConfirmationPopup
             {
                 Title = App.Localized["ConfirmDelete"],
                 Message = App.Localized["ReallydeleteBook"]
             };
 
+            // Gérer la réponse de l'utilisateur
             popup.OnCompleted += async (confirmed) =>
             {
                 if (confirmed)
@@ -406,13 +476,20 @@ public partial class Books : ContentPage
                 }
             };
 
+            // Afficher le popup
             await Navigation.PushModalAsync(popup);
         }
     }
 
+    /// <summary>
+    /// Supprime un livre de la base de données
+    /// </summary>
+    /// <param name="id">Identifiant du livre à supprimer</param>
     private async Task SupprimerLivre(int id)
     {
         using var context = new BibliothequeContext();
+
+        // Charger le livre avec toutes ses relations
         var livre = await context.Livres
             .Include(l => l.Exemplaires)
             .Include(l => l.LivreCategories)
@@ -420,13 +497,21 @@ public partial class Books : ContentPage
 
         if (livre != null)
         {
+            // Supprimer d'abord les relations (catégories, exemplaires)
             context.LivreCategories.RemoveRange(livre.LivreCategories);
             context.Exemplaires.RemoveRange(livre.Exemplaires);
+
+            // Puis supprimer le livre lui-même
             context.Livres.Remove(livre);
 
+            // Sauvegarder les modifications
             await context.SaveChangesAsync();
+
+            // Rafraîchir l'affichage
             ChargerLivres();
             ReinitialiserFormulaire();
+
+            // Masquer le formulaire et réinitialiser la sélection
             FormulaireLivres.IsVisible = false;
             BooksCollectionView.SelectedItem = null;
         }
