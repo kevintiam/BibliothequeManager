@@ -140,7 +140,7 @@
                     Grid.Row="1"
                     Margin="20,0">  
                         <CollectionView.Header>
-                            <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*"
+                            <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*,1,1,5"
                                     Style="{StaticResource TabHead}">
                                 <Label Text="{Binding [BookTitle], Source={x:Static localApp:App.Localized}}"  Style="{StaticResource TableHeader}" />
                                 <Label Text="{Binding [Author], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="1"  />
@@ -148,13 +148,15 @@
                                 <Label Text="{Binding [LoanDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="3" />
                                 <Label Text="{Binding [ReturnDate], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="4" HorizontalTextAlignment="Center" />
                                 <Label Text="{Binding [IDOfTheLoan], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="5" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding [Late], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="6" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding [Fine], Source={x:Static localApp:App.Localized}}" Style="{StaticResource TableHeader}" Grid.Column="7" HorizontalTextAlignment="Center" />
 
                             </Grid>
                         </CollectionView.Header>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Border Style="{StaticResource TabContent}">
-                                    <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*" 
+                                    <Grid ColumnDefinitions="2*,2*,2*,1.5*,1.5*,1.5*,1,1,5"
                                           ColumnSpacing="10" 
                                           Padding="12">
                                         <Label Text="{Binding TitreLivre}" Style="{StaticResource TableRowData}" />
@@ -163,6 +165,8 @@
                                         <Label Text="{Binding DateEmprunt}" Style="{StaticResource TableRowData}" Grid.Column="3" />
                                         <Label Text="{Binding DateRetour}" Style="{StaticResource TableRowData}" Grid.Column="4" />
                                         <Label Text="{Binding IdEmprunt}" Style="{StaticResource TableRowData}" Grid.Column="5" />
+                                        <Label Text="{Binding EstEnRetard, Converter={StaticResource BoolToYesNoConverter}}" Style="{StaticResource TableRowData}" Grid.Column="6" />
+                                        <Label Text="{Binding Amende}" Style="{StaticResource TableRowData}" Grid.Column="7" />
                                     </Grid>
                                 </Border>
                             </DataTemplate>

@@ -15,6 +15,24 @@ public partial class ConfirmationPopup : ContentPage
         get => MessageLabel.Text;
         set => MessageLabel.Text = value;
     }
+   public string Confirm
+    {
+        get
+        {
+            string text = btnConfirm.Text;
+            return text;
+        }
+        set => btnConfirm.Text = value;
+    }
+    public string Cancel
+    {
+        get
+        {
+            string text = btnCancel.Text;
+            return text;
+        }
+        set => btnCancel.Text = value;
+    }
 
     public ConfirmationPopup()
     {

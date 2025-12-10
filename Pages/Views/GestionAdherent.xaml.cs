@@ -3,14 +3,14 @@ using BibliothequeManager.Pages.Popups;
 using BibliothequeManager.Services;
 using BibliothequeManager.Views;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace BibliothequeManager.Pages.Views;
 
 public partial class GestionAdherent : ContentPage
 {
     private readonly SessionUser session;
-	public GestionAdherent(SessionUser user)
+    public GestionAdherent(SessionUser user)
 	{
 		InitializeComponent();
         session = user;
@@ -22,16 +22,20 @@ public partial class GestionAdherent : ContentPage
 
         AdherentsCollectionView.SelectionChanged += OnAdherentSelectionChanged;
         ChargerAdherents();
-
-
     }
-
+    /// <summary>
+    /// Gestionnaire de l'événement de clic sur le bouton d'ajout d'un nouvel adhérent.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnFloatingAddAdherentClicked(object sender, EventArgs e)
     {
         ViderFormulaire();
         FormulaireAdherent.IsVisible = !FormulaireAdherent.IsVisible;
     }
-    
+    /// <summary>
+    /// fonction pour charger les adherents depuis la base de donnees
+    /// </summary>
     public void ChargerAdherents()
     {
         using var donnees = new BibliothequeContext();
@@ -49,6 +53,11 @@ public partial class GestionAdherent : ContentPage
             Console.WriteLine($"Erreur : {ex.Message}");
         }
     }
+    /// <summary>
+    /// Fonction pour ajouter un nouvel adhérent à la base de données.
+    /// </summary>
+    /// <param name="sender">The source of the event, typically the 'Ajouter' button.</param>
+    /// <param name="e">An <see cref="EventArgs"/> instance containing the event data.</param>
     private async void btnAjouter_Clicked(object sender, EventArgs e)
     {
         var nom = TxtNomAdherent.Text.Trim();
@@ -93,13 +102,19 @@ public partial class GestionAdherent : ContentPage
         await SuccessPopup.Show("Adherent ajoute avec succes", this);
 
     }
-
+    /// <summary>
+    /// Fonction pour annuler l'ajout ou la modification d'un adhérent
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btnAnnuler_Clicked(object sender, EventArgs e)
     {
         ViderFormulaire();
         FormulaireAdherent.IsVisible = !FormulaireAdherent.IsVisible;
     }
-
+    /// <summary>
+    /// Fonction pour vider le formulaire d'ajout/modification d'un adhérent
+    /// </summary>
     private void ViderFormulaire()
     {
         TxtNomAdherent.Text = string.Empty;
@@ -108,6 +123,11 @@ public partial class GestionAdherent : ContentPage
         TxtNumeroCarte.Text = string.Empty;
         AdherentsCollectionView.SelectedItem = null;
     }
+    /// <summary>
+    /// Fonction pour gérer la sélection d'un adhérent dans la CollectionView
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnAdherentSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         var Adherent = e.CurrentSelection.FirstOrDefault() as Adherent;
@@ -136,6 +156,11 @@ public partial class GestionAdherent : ContentPage
             }
         }
     }
+    /// <summary>
+    /// Fonction pour modifier un adhérent existant dans la base de données.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void ModifierButton_Clicked(object sender, EventArgs e)
     {
         var selectedAdherent = AdherentsCollectionView.SelectedItem as Adherent;
@@ -171,6 +196,11 @@ public partial class GestionAdherent : ContentPage
         }
 
     }
+    /// <summary>
+    /// Fonction pour supprimer un adhérent existant de la base de données.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void SupprimerButton_Clicked(object sender, EventArgs e)
     {
         var selectedAdherent = AdherentsCollectionView.SelectedItem as Adherent;
