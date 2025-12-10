@@ -29,7 +29,11 @@ public partial class EmpruntPage : ContentPage
 
         RechercheEntry.TextChanged += OnSearchTextChanged;
     }
-    
+    /// <summary>
+    /// Fonction appelée lors du clic sur le bouton "Confirmer" pour valider un emprunt.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnConfirmerClicked(object? sender, EventArgs e)
     {
         // Validation
@@ -105,10 +109,8 @@ public partial class EmpruntPage : ContentPage
 
             // Marquer l’exemplaire comme non disponible
             exemplaireDisponible.EstDisponible = false;
-
             donnees.Emprunts.Add(newEmprunt);
             await donnees.SaveChangesAsync();
-
             await SuccessPopup.Show("Emprunt confirmé avec succès !", this);
 
             // Réinitialiser le formulaire
@@ -126,7 +128,11 @@ public partial class EmpruntPage : ContentPage
             await ErrorPopup.Show(message, this);
         }
     }
-
+    /// <summary>
+    /// Filtre les livres en fonction du texte de recherche saisi.
+    /// </summary>
+    /// <param name="searchText"></param>
+    /// <returns></returns>
     private async Task FiltrerLivre(string searchText)
     {
         using var donnees = new BibliothequeContext();
@@ -157,10 +163,6 @@ public partial class EmpruntPage : ContentPage
 
             SuggestionsCollectionView.ItemsSource = livresFiltres;
             SuggestionsCollectionView.IsVisible = livresFiltres.Any();
-
-            // Optionnel : afficher un message si aucun livre trouvé
-            // (vous pouvez ajouter un Label dans votre XAML nommé "NoResultsLabel")
-            // NoResultsLabel.IsVisible = !livresFiltres.Any();
         }
         catch (Exception ex)
         {
@@ -169,7 +171,11 @@ public partial class EmpruntPage : ContentPage
             SuggestionsCollectionView.IsVisible = false;
         }
     }
-
+    /// <summary>
+    /// Fonction appelée lors du changement de texte dans le champ de recherche.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.NewTextValue) || e.NewTextValue.Length >= 3)
@@ -177,12 +183,20 @@ public partial class EmpruntPage : ContentPage
             await FiltrerLivre(e.NewTextValue);
         }
     }
-
+    /// <summary>
+    /// Fonction appelée lors du clic sur le bouton de recherche.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnRechercherClicked(object? sender, EventArgs e)
     {
         await FiltrerLivre(RechercheEntry.Text);
     }
-
+    /// <summary>
+    /// Fonction appelée lors de la sélection d'un livre dans les suggestions.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnLivreSuggestionSelected(object? sender, SelectionChangedEventArgs e)
     {
         if( e.CurrentSelection.FirstOrDefault() is Livres livre)
@@ -201,15 +215,22 @@ public partial class EmpruntPage : ContentPage
             RechercheEntry.Unfocus();
         }
     }
+    /// <summary>
+    /// Fonction appelée lors du clic sur le bouton "Accueil" pour revenir à la page d'accueil.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnAccueilClicked(object sender, EventArgs e)
     {
-        // Navigation vers la page d'accueil
         await Navigation.PopAsync();
     }
-
+    /// <summary>
+    /// Fonction appelée lors du clic sur le bouton "Liste des emprunts" pour naviguer vers la page de gestion des emprunts.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnListeEmpruntsClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new GestionEmprunts(session));
-
     }
 }
